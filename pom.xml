@@ -40,6 +40,6 @@
     </dependencyManagement>
 
     <modules>
-        <module>rocket-mission-persistance</module>
+        <module>rocket-mission-persistence</module>
     </modules>
 </project>
