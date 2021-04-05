@@ -1,4 +1,4 @@
-package cz.fi.muni.enums;
+package cz.muni.fi.enums;
 
 enum ComponentType {
 
