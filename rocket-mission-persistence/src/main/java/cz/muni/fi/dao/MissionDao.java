@@ -11,9 +11,8 @@ public interface MissionDao {
     /**
      *
      * @param mission mission to add
-     * @return added mission
      */
-    Mission addMission(Mission mission);
+    void addMission(Mission mission);
 
     /**
      *
@@ -31,14 +30,12 @@ public interface MissionDao {
     /**
      *
      * @param mission mission to update
-     * @return updated mission
      */
-    Mission updateMission(Mission mission);
+    void updateMission(Mission mission);
 
     /**
      *
      * @param mission mission to delete
-     * @return deleted mission
      */
-    Mission deleteMission(Mission mission);
+    void deleteMission(Mission mission);
 }
