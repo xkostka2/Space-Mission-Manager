@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -122,5 +123,33 @@ public class Mission{
 
     public void setStartedDate(ZonedDateTime startedDate) {
         this.startedDate = startedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Mission)) return false;
+        Mission mission = (Mission) o;
+        return getName().equals(mission.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "name='" + name + '\'' +
+                ", destination='" + destination + '\'' +
+                ", missionProgress=" + missionProgress +
+                ", users=" + users +
+                ", rockets=" + rockets +
+                ", components=" + components +
+                ", eta=" + eta +
+                ", finishedDate=" + finishedDate +
+                ", startedDate=" + startedDate +
+                '}';
     }
 }
