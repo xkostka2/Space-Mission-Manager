@@ -1,10 +1,13 @@
 package cz.muni.fi;
 
-import cz.muni.fi.dao.UserDao;
+import cz.muni.fi.dao.ComponentDao;
+import cz.muni.fi.entity.Component;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -19,21 +22,21 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackageClasses = {UserDao.class}, basePackages = "cz.muni.fi")
-public class ApplicationContext {
+@EnableJpaRepositories
+@ComponentScan(basePackageClasses = {Component.class}, basePackages = "cz.muni.fi")
+public class InMemoryDatabaseSpring {
 
     @Bean
-    public JpaTransactionManager transactionManager(){
-        return  new JpaTransactionManager(entityManagerFactory().getObject());
+    public JpaTransactionManager transactionManager() {
+        return new JpaTransactionManager(entityManagerFactory().getObject());
     }
 
     /**
      * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
-     * @return
      */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
-        LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean ();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
         jpaFactoryBean.setDataSource(db());
         jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
         jpaFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
@@ -41,16 +44,17 @@ public class ApplicationContext {
     }
 
     @Bean
-    public LocalValidatorFactoryBean localValidatorFactoryBean(){
+    public LocalValidatorFactoryBean localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
     }
+
     @Bean
     public LoadTimeWeaver instrumentationLoadTimeWeaver() {
         return new InstrumentationLoadTimeWeaver();
     }
 
     @Bean
-    public DataSource db(){
+    public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).build();
         return db;

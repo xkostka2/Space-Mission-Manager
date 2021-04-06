@@ -1,7 +1,8 @@
 package cz.muni.fi.entity;
 
 import com.sun.istack.NotNull;
-import org.hibernate.type.ComponentType;
+import cz.muni.fi.enums.ComponentType;
+
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
