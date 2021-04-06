@@ -22,6 +22,15 @@ public class MissionDaoImpl implements MissionDao {
 
     @Override
     public void addMission(Mission mission) {
+        if (mission == null) {
+            throw new IllegalArgumentException("Mission is null");
+        }
+        if (mission.getName() == null) {
+            throw new IllegalArgumentException("Mission name is null");
+        }
+        if (mission.getId() != null) {
+            throw new IllegalArgumentException("Mission id is not null");
+        }
         entityManager.persist(mission);
     }
 
@@ -32,16 +41,38 @@ public class MissionDaoImpl implements MissionDao {
 
     @Override
     public Mission findMissionById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Mission id is null");
+        }
         return entityManager.find(Mission.class, id);
     }
 
     @Override
     public void updateMission(Mission mission) {
+        if (mission == null) {
+            throw new IllegalArgumentException("Mission is null");
+        }
+        if (mission.getName() == null) {
+            throw new IllegalArgumentException("Mission name is null");
+        }
+        if (mission.getId() != null) {
+            throw new IllegalArgumentException("Mission id is not null");
+        }
         entityManager.merge(mission);
     }
 
     @Override
-    public void deleteMission(Mission mission) {
+    public void removeMission(Mission mission) {
+        if (mission == null) {
+            throw new IllegalArgumentException("Mission is null");
+        }
+        if (mission.getId() == null) {
+            throw new IllegalArgumentException("Mission id is null");
+        }
+        Mission del = findMissionById(mission.getId());
+        if (del == null) {
+            throw new IllegalArgumentException("Mission does not exist");
+        }
         entityManager.remove(mission);
     }
 }

@@ -37,7 +37,7 @@ public interface MissionDao {
 
     /**
      *
-     * @param mission mission to delete
+     * @param mission mission to remove
      */
-    void deleteMission(Mission mission);
+    void removeMission(Mission mission);
 }

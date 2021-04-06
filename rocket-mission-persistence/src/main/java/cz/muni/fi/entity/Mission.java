@@ -42,7 +42,7 @@ public class Mission{
     @OneToMany
     private Set<Rocket> rockets = new HashSet<>();
 
-    @ManyToMany
+    @OneToMany
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;
