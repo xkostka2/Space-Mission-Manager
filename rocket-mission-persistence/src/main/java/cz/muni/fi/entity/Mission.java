@@ -18,6 +18,8 @@ import java.util.Set;
 
 
 /**
+ * Class representing mission entity.
+ *
  * @author Martin Kazimir
  */
 

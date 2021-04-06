@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
+ * Data Access Object implementation for Mission entity.
+ *
  * @author Martin Kazimir
  */
 @Repository

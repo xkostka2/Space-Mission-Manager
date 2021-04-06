@@ -5,6 +5,8 @@ import cz.muni.fi.entity.Mission;
 import java.util.List;
 
 /**
+ * Data Access Object interface for Mission entity.
+ *
  * @author Martin Kazimir
  */
 public interface MissionDao {
