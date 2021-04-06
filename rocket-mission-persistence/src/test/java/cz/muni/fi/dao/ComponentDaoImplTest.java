@@ -168,4 +168,12 @@ public class ComponentDaoImplTest extends AbstractTestNGSpringContextTests {
         foodSupplies.setId(null);
         componentDao.removeComponent(foodSupplies);
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeNonExistingComponent() {
+        Component shield = new Component();
+        shield.setName("shield");
+        shield.setId(1000L);
+        componentDao.removeComponent(shield);
+    }
 }
