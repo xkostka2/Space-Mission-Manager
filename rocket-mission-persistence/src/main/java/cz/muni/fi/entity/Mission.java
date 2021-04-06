@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.ZonedDateTime;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,13 +35,13 @@ public class Mission{
     private MissionProgress missionProgress;
 
     @ManyToMany
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     @OneToMany
-    private Set<Rocket> rockets;
+    private Set<Rocket> rockets = new HashSet<>();
 
     @ManyToMany
-    private Set<Component> components;
+    private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;
     private ZonedDateTime finishedDate;
@@ -78,7 +80,7 @@ public class Mission{
     }
 
     public Set<User> getUsers() {
-        return users;
+        return Collections.unmodifiableSet(users);
     }
 
     public void setUsers(Set<User> users) {
@@ -86,7 +88,7 @@ public class Mission{
     }
 
     public Set<Rocket> getRockets() {
-        return rockets;
+        return Collections.unmodifiableSet(rockets);
     }
 
     public void setRockets(Set<Rocket> rockets) {
@@ -94,7 +96,7 @@ public class Mission{
     }
 
     public Set<Component> getComponents() {
-        return components;
+        return Collections.unmodifiableSet(components);
     }
 
     public void setComponents(Set<Component> components) {
