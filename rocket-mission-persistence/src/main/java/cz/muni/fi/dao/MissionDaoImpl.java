@@ -55,8 +55,8 @@ public class MissionDaoImpl implements MissionDao {
         if (mission.getName() == null) {
             throw new IllegalArgumentException("Mission name is null");
         }
-        if (mission.getId() != null) {
-            throw new IllegalArgumentException("Mission id is not null");
+        if (mission.getId() == null) {
+            throw new IllegalArgumentException("Mission id is null");
         }
         entityManager.merge(mission);
     }
@@ -73,6 +73,6 @@ public class MissionDaoImpl implements MissionDao {
         if (del == null) {
             throw new IllegalArgumentException("Mission does not exist");
         }
-        entityManager.remove(mission);
+        entityManager.remove(del);
     }
 }
