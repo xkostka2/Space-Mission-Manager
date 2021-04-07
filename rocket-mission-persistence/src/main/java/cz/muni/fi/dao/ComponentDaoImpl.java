@@ -1,6 +1,7 @@
 package cz.muni.fi.dao;
 
 import cz.muni.fi.entity.Component;
+import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -23,15 +24,10 @@ public class ComponentDaoImpl implements ComponentDao {
 
     @Override
     public void addComponent(Component component) {
-        if (component == null) {
-            throw new IllegalArgumentException("Component is null");
-        }
-        if (component.getName() == null) {
-            throw new IllegalArgumentException("name is null");
-        }
-        if (component.getId() != null) {
-            throw new IllegalArgumentException("id is not null");
-        }
+        Guard.requireNotNull(component, "Component is null");
+        Guard.requireNotNull(component.getName(), "name is null");
+        Guard.requireNull(component.getId(), "id is not null");
+
         this.entityManager.persist(component);
     }
 
@@ -42,9 +38,8 @@ public class ComponentDaoImpl implements ComponentDao {
 
     @Override
     public Component findComponentById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("id is null");
-        }
+        Guard.requireNotNull(id, "id is null");
+
         try {
             return entityManager.createQuery("select cc from Component cc fetch all properties where id = :id", Component.class)
                     .setParameter("id", id)
@@ -56,31 +51,21 @@ public class ComponentDaoImpl implements ComponentDao {
 
     @Override
     public void updateComponent(Component component) {
-        if (component == null) {
-            throw new IllegalArgumentException("Component is null");
-        }
-        if (component.getName() == null) {
-            throw new IllegalArgumentException("name is null");
-        }
-        if (component.getId() == null) {
-            throw new IllegalArgumentException("id is null");
-        }
+        Guard.requireNotNull(component, "Component is null");
+        Guard.requireNotNull(component.getName(), "name is null");
+        Guard.requireNotNull(component.getId(), "id is null");
+
         this.entityManager.merge(component);
-        this.entityManager.flush();
     }
 
     @Override
     public void removeComponent(Component component) {
-        if (component == null) {
-            throw new IllegalArgumentException("Component is null");
-        }
-        if (component.getId() == null) {
-            throw new IllegalArgumentException("id is null");
-        }
+        Guard.requireNotNull(component, "Component is null");
+        Guard.requireNotNull(component.getId(), "id is null");
+
         Component del = findComponentById(component.getId());
-        if (del == null) {
-            throw new IllegalArgumentException("Component does not exist");
-        }
+
+        Guard.requireNotNull(del, "Component does not exist");
 
         entityManager.remove(del);
     }
