@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by tdtom167
@@ -97,16 +98,14 @@ public class Component {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof Component)) return false;
-
-        Component that = (Component) o;
-
-        return getName().equals(that.getName());
+        if (!(o instanceof Component)) return false;
+        Component other = (Component) o;
+        return getName().equals(other.getName());
     }
 
     @Override
     public int hashCode() {
-        return getName() != null ? getName().hashCode() : 0;
+        return Objects.hashCode(getName());
     }
 
 

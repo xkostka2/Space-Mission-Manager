@@ -133,13 +133,13 @@ public class Mission{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Mission)) return false;
-        Mission mission = (Mission) o;
-        return getName().equals(mission.getName());
+        Mission other = (Mission) o;
+        return getName().equals(other.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
+        return Objects.hashCode(getName());
     }
 
     @Override

@@ -102,13 +102,13 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return getId().equals(user.getId()) && getName().equals(user.getName()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword()) && getRole() == user.getRole() && getLevelOfExperience() == user.getLevelOfExperience() && getMission().equals(user.getMission());
+        if (!(o instanceof User)) return false;
+        User other = (User) o;
+        return getName().equals(other.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getPassword(), getRole(), getLevelOfExperience(), getMission());
+        return Objects.hashCode(getName());
     }
 }

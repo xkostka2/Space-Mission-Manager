@@ -52,14 +52,14 @@ public class Rocket {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rocket that = (Rocket) o;
-        return getName().equals(that.getName());
+        if (!(o instanceof Rocket)) return false;
+        Rocket other = (Rocket) o;
+        return getName().equals(other.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
+        return Objects.hashCode(getName());
     }
 
     @Override
