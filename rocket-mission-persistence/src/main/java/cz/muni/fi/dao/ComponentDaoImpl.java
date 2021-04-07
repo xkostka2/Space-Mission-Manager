@@ -10,9 +10,9 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Created by tdtom167
+ * Created by Tomas Bouma
  *
- * @author tdtom167
+ * @author Tomas Bouma
  */
 @Repository
 @Transactional
@@ -22,7 +22,7 @@ public class ComponentDaoImpl implements ComponentDao {
     private EntityManager entityManager;
 
     @Override
-    public Component addComponent(Component component) {
+    public void addComponent(Component component) {
         if (component == null) {
             throw new IllegalArgumentException("Component is null");
         }
@@ -33,7 +33,6 @@ public class ComponentDaoImpl implements ComponentDao {
             throw new IllegalArgumentException("id is not null");
         }
         this.entityManager.persist(component);
-        return component;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class ComponentDaoImpl implements ComponentDao {
     }
 
     @Override
-    public Component updateComponent(Component component) {
+    public void updateComponent(Component component) {
         if (component == null) {
             throw new IllegalArgumentException("Component is null");
         }
@@ -68,11 +67,10 @@ public class ComponentDaoImpl implements ComponentDao {
         }
         this.entityManager.merge(component);
         this.entityManager.flush();
-        return component;
     }
 
     @Override
-    public Component removeComponent(Component component) {
+    public void removeComponent(Component component) {
         if (component == null) {
             throw new IllegalArgumentException("Component is null");
         }
@@ -85,6 +83,5 @@ public class ComponentDaoImpl implements ComponentDao {
         }
 
         entityManager.remove(del);
-        return component;
     }
 }

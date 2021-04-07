@@ -10,7 +10,7 @@ public interface ComponentDao {
          *
          * @param component componnent to add
          */
-        Component addComponent(Component component);
+        void addComponent(Component component);
 
         List<Component> findAllComponents();
 
@@ -24,11 +24,11 @@ public interface ComponentDao {
          *
          * @param component component to update
          */
-        Component updateComponent(Component component);
+        void updateComponent(Component component);
 
         /**
          *
          * @param component component to remove
          */
-        Component removeComponent(Component component);
+        void removeComponent(Component component);
 }
