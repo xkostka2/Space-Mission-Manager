@@ -138,10 +138,9 @@ public class MissionDaoImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testUpdateMissionIdNotNull() {
+    public void testUpdateMissionIdNull() {
         Mission mission = new Mission();
         mission.setName("Jakarta");
-        mission.setId(20L);
         missionDao.updateMission(mission);
     }
 
