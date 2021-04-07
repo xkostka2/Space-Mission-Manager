@@ -1,10 +1,10 @@
 package cz.muni.fi.entity;
 
-import com.sun.istack.NotNull;
 import cz.muni.fi.enums.ComponentType;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package cz.muni.fi.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;

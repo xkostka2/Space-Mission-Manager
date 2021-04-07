@@ -1,6 +1,5 @@
 package cz.muni.fi.entity;
 
-import com.sun.istack.NotNull;
 import cz.muni.fi.enums.MissionProgress;
 
 import javax.persistence.Column;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.HashSet;
