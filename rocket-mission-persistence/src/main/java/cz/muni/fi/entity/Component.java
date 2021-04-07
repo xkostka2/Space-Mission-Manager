@@ -1,7 +1,8 @@
 package cz.muni.fi.entity;
 
 import com.sun.istack.NotNull;
-import org.hibernate.type.ComponentType;
+import cz.muni.fi.enums.ComponentType;
+
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -33,9 +34,9 @@ public class Component {
     @JoinColumn(name = "mission_id")
     private List<Mission> missions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rocket_id")
-    private List<Rocket> rockets;
+    @ManyToOne
+    @JoinColumn(name="rocket_id")
+    private Rocket rocket;
 
     public Long getId() {
         return id;
@@ -77,12 +78,12 @@ public class Component {
         this.readyDate = readyDate;
     }
 
-    public List<Rocket> getRockets() {
-        return rockets;
+    public Rocket getRocket() {
+        return rocket;
     }
 
-    public void setRocket(List<Rocket> rockets) {
-        this.rockets = rockets;
+    public void setRocket(Rocket rocket) {
+        this.rocket = rocket;
     }
 
     public List<Mission> getMissions() {

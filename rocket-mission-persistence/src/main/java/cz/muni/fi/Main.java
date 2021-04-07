@@ -10,7 +10,7 @@ public class Main {
     private static EntityManagerFactory emf;
 
     public static void main(String[] args) throws SQLException {
-        new AnnotationConfigApplicationContext(InMemoryDBSpring.class);
+        new AnnotationConfigApplicationContext(InMemoryDatabaseSpring.class);
 
         emf = Persistence.createEntityManagerFactory("default");
 

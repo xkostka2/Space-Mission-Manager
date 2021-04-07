@@ -1,6 +1,5 @@
 package cz.muni.fi.enums;
 
-enum ComponentType {
-
+public enum ComponentType {
     ROCKET, MISSION
 }
