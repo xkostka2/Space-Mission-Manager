@@ -156,7 +156,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testUpdateNullComponent() {
+    public void testUpdateNullUser() {
         userDao.updateUser(null);
     }
 
