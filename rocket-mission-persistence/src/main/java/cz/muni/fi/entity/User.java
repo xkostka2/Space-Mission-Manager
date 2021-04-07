@@ -1,12 +1,12 @@
 package cz.muni.fi.entity;
 
-import com.sun.istack.NotNull;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
+
 
 @Entity
 public class User {
