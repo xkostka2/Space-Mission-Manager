@@ -29,6 +29,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
 
     private User manager;
     private User astronaut;
+    private User jimmy;
 
     @BeforeClass
     public void beforeClass() {
@@ -47,6 +48,14 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
         astronaut.setEmail("astronaut@space-mission.com");
         astronaut.setPassword("AstrOnAUt");
         userDao.addUser(astronaut);
+
+        jimmy = new User();
+        jimmy.setName("Jimmy");
+        jimmy.setRole(Role.ASTRONAUT);
+        jimmy.setLevelOfExperience(LevelOfExperience.VETERAN);
+        jimmy.setEmail("jimmy@space-mission.com");
+        jimmy.setPassword("jImmy");
+        userDao.addUser(jimmy);
     }
 
     @AfterClass
@@ -192,7 +201,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
         List<User> allUsers = userDao.findAllUsers();
 
         assertThat(allUsers.contains(manager)).isTrue();
-        assertThat(allUsers.contains(astronaut)).isTrue();
+        assertThat(allUsers.contains(jimmy)).isTrue();
     }
 
     @Test
@@ -200,7 +209,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
         List<User> allAstronauts = userDao.findAllAstronauts();
 
         assertThat(allAstronauts.contains(manager)).isFalse();
-        assertThat(allAstronauts.contains(astronaut)).isTrue();
+        assertThat(allAstronauts.contains(jimmy)).isTrue();
     }
 
     @Test
@@ -208,7 +217,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
         List<User> allAvailableAstronauts = userDao.findAllAvailableAstronauts();
 
         assertThat(allAvailableAstronauts.contains(manager)).isFalse();
-        assertThat(allAvailableAstronauts.contains(astronaut)).isTrue();
+        assertThat(allAvailableAstronauts.contains(jimmy)).isTrue();
     }
 
     @Test
