@@ -1,6 +1,7 @@
 package cz.muni.fi.dao;
 
 import cz.muni.fi.entity.User;
+import cz.muni.fi.enums.Role;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,9 +12,9 @@ import java.util.List;
 
 
 /**
- * Created by xkostka2
+ * User DAO interface implementation.
  *
- * @author xkostka2
+ * @author Martin Kostka
  */
 @Repository
 @Transactional
@@ -46,7 +47,11 @@ public class UserDaoImpl implements UserDao{
         if (user == null){
             throw new IllegalArgumentException(User.class.getName());
         }
-        em.remove(em.merge(user));
+        User delUser = findUserById(user.getId());
+        if(delUser == null || !delUser.equals(user)){
+            throw new IllegalArgumentException("Trying to delete nonexistent user");
+        }
+        em.remove(delUser);
     }
 
     @Override
@@ -57,7 +62,8 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> findAllAstronauts() {
-        return em.createQuery("select u from User u where u.role = 'ASTRONAUT'", User.class).getResultList();
+        return em.createQuery("select u from User u where u.role = :role", User.class)
+                .setParameter("role", Role.ASTRONAUT).getResultList();
     }
 
     @Override
@@ -76,8 +82,8 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> findAllAvailableAstronauts() {
-        return em.createQuery("select u from User u where u.mission is null", User.class)
-                .getResultList();
+        return em.createQuery("select u from User u where u.mission is null and u.role=:role", User.class)
+                .setParameter("role", Role.ASTRONAUT).getResultList();
     }
 
     @Override

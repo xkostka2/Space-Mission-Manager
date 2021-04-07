@@ -4,6 +4,11 @@ import cz.muni.fi.entity.User;
 
 import java.util.List;
 
+/**
+ * User DAO interface.
+ *
+ * @author Martin Kostka
+ */
 public interface UserDao {
 
     /**

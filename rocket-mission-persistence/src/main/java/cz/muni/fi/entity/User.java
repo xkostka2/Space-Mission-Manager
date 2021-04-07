@@ -8,8 +8,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
-
+/**
+ * User entity
+ *
+ * @author Martin Kostka
+ */
 @Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +24,7 @@ public class User {
     @NotNull
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     @Pattern(regexp = ".+@.+\\....?")
     @NotNull
     private String email;
@@ -28,6 +33,7 @@ public class User {
     private String password;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @NotNull

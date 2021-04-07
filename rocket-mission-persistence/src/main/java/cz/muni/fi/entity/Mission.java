@@ -36,7 +36,7 @@ public class Mission{
     private String destination;
     private MissionProgress missionProgress;
 
-    @ManyToMany
+    @OneToMany
     private Set<User> users = new HashSet<>();
 
     @OneToMany
