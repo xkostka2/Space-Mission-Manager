@@ -1,6 +1,7 @@
 package cz.muni.fi.dao;
 
 import cz.muni.fi.entity.Mission;
+import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,15 +23,10 @@ public class MissionDaoImpl implements MissionDao {
 
     @Override
     public void addMission(Mission mission) {
-        if (mission == null) {
-            throw new IllegalArgumentException("Mission is null");
-        }
-        if (mission.getName() == null) {
-            throw new IllegalArgumentException("Mission name is null");
-        }
-        if (mission.getId() != null) {
-            throw new IllegalArgumentException("Mission id is not null");
-        }
+        Guard.requireNotNull(mission, "Mission is null");
+        Guard.requireNotNull(mission.getName(), "Mission name is null");
+        Guard.requireNull(mission.getId(), "Mission id is not null");
+
         entityManager.persist(mission);
     }
 
@@ -41,38 +37,29 @@ public class MissionDaoImpl implements MissionDao {
 
     @Override
     public Mission findMissionById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Mission id is null");
-        }
+        Guard.requireNotNull(id, "Mission id is null");
+
         return entityManager.find(Mission.class, id);
     }
 
     @Override
     public void updateMission(Mission mission) {
-        if (mission == null) {
-            throw new IllegalArgumentException("Mission is null");
-        }
-        if (mission.getName() == null) {
-            throw new IllegalArgumentException("Mission name is null");
-        }
-        if (mission.getId() == null) {
-            throw new IllegalArgumentException("Mission id is null");
-        }
+        Guard.requireNotNull(mission, "Mission is null");
+        Guard.requireNotNull(mission.getName(), "Mission name is null");
+        Guard.requireNotNull(mission.getId(), "Mission id is null");
+
         entityManager.merge(mission);
     }
 
     @Override
     public void removeMission(Mission mission) {
-        if (mission == null) {
-            throw new IllegalArgumentException("Mission is null");
-        }
-        if (mission.getId() == null) {
-            throw new IllegalArgumentException("Mission id is null");
-        }
+        Guard.requireNotNull(mission, "Mission is null");
+        Guard.requireNotNull(mission.getId(), "Mission id is null");
+
         Mission del = findMissionById(mission.getId());
-        if (del == null) {
-            throw new IllegalArgumentException("Mission does not exist");
-        }
+
+        Guard.requireNotNull(del, "Mission does not exist");
+
         entityManager.remove(del);
     }
 }

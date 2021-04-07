@@ -1,6 +1,7 @@
 package cz.muni.fi.dao;
 
 import cz.muni.fi.entity.Rocket;
+import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,15 +25,10 @@ public class RocketDaoImpl implements RocketDao {
 
     @Override
     public void addRocket(Rocket rocket) {
-        if (rocket == null) {
-            throw new IllegalArgumentException("Rocket is null");
-        }
-        if (rocket.getName() == null) {
-            throw new IllegalArgumentException("Rocket name is null");
-        }
-        if (rocket.getId() != null) {
-            throw new IllegalArgumentException("Rocket id is not null");
-        }
+        Guard.requireNotNull(rocket, "Rocket is null");
+        Guard.requireNotNull(rocket.getName(), "Rocket name is null");
+        Guard.requireNull(rocket.getId(), "Rocket id is not null");
+
         this.entityManager.persist(rocket);
     }
 
@@ -43,9 +39,8 @@ public class RocketDaoImpl implements RocketDao {
 
     @Override
     public Rocket findRocketById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Rocket id is null");
-        }
+        Guard.requireNotNull(id, "Rocket id is null");
+
         try {
             return entityManager.createQuery("select r from Rocket r fetch all properties where id = :id", Rocket.class)
                     .setParameter("id", id)
@@ -57,30 +52,22 @@ public class RocketDaoImpl implements RocketDao {
 
     @Override
     public void updateRocket(Rocket rocket) {
-        if (rocket == null) {
-            throw new IllegalArgumentException("Rocket is null");
-        }
-        if (rocket.getName() == null) {
-            throw new IllegalArgumentException("Rocket name is null");
-        }
-        if (rocket.getId() == null) {
-            throw new IllegalArgumentException("Rocket id is null");
-        }
+        Guard.requireNotNull(rocket, "Rocket is null");
+        Guard.requireNotNull(rocket.getName(), "Rocket name is null");
+        Guard.requireNotNull(rocket.getId(), "Rocket id is null");
+
         this.entityManager.merge(rocket);
     }
 
     @Override
     public void removeRocket(Rocket rocket) {
-        if (rocket == null) {
-            throw new IllegalArgumentException("Rocket is null");
-        }
-        if (rocket.getId() == null) {
-            throw new IllegalArgumentException("Rocket id is null");
-        }
+        Guard.requireNotNull(rocket, "Rocket is null");
+        Guard.requireNotNull(rocket.getId(), "Rocket id is null");
+
         Rocket del = findRocketById(rocket.getId());
-        if (del == null) {
-            throw new IllegalArgumentException("Rocket does not exist");
-        }
+
+        Guard.requireNotNull(del, "Rocket does not exist");
+
         entityManager.remove(del);
     }
 }

@@ -192,7 +192,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
     public void testDeleteNonExistingUser() {
         User jack = new User();
         jack.setName("shield");
-        jack.setId(1L);
+        jack.setId(100L);
         userDao.deleteUser(jack);
     }
 
