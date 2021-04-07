@@ -30,9 +30,9 @@ public class Component {
 
     private ZonedDateTime readyDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
-    private List<Mission> missions;
+    private Mission mission;
 
     @ManyToOne
     @JoinColumn(name="rocket_id")
@@ -86,12 +86,12 @@ public class Component {
         this.rocket = rocket;
     }
 
-    public List<Mission> getMissions() {
-        return missions;
+    public Mission getMission() {
+        return mission;
     }
 
-    public void setMissions(List<Mission> missions) {
-        this.missions = missions;
+    public void setMission(Mission mission) {
+        this.mission = mission;
     }
 
     @Override
