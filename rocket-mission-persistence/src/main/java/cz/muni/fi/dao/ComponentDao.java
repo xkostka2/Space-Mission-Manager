@@ -4,6 +4,11 @@ import cz.muni.fi.entity.Component;
 
 import java.util.List;
 
+/**
+ * Created by Tomas Bouma
+ *
+ * @author Tomas Bouma
+ */
 public interface ComponentDao {
 
         /**

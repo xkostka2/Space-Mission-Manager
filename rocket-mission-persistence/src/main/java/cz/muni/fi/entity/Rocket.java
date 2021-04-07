@@ -3,6 +3,7 @@ package cz.muni.fi.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,8 +23,12 @@ public class Rocket {
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "rocket")
-    private Set<Component> requiredComponents;
+    @ManyToOne
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
+
+    @OneToMany
+    private Set<Component> requiredComponents = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -39,6 +44,14 @@ public class Rocket {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Mission getMission() {
+        return mission;
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
     }
 
     public Set<Component> getRequiredComponents() {
@@ -67,6 +80,7 @@ public class Rocket {
         return "Rocket{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", mission=" + mission +
                 ", requiredComponents=" + requiredComponents +
                 '}';
     }

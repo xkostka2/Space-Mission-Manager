@@ -6,7 +6,6 @@ import cz.muni.fi.enums.ComponentType;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -111,7 +110,14 @@ public class Component {
 
     @Override
     public String toString() {
-        return '\n' + "Component:" +
-                "Name-" + name;
+        return "Component{" +
+                "id=" + id +
+                ", readyToUse=" + readyToUse +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", readyDate=" + readyDate +
+                ", mission=" + mission +
+                ", rocket=" + rocket +
+                '}';
     }
 }
