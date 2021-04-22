@@ -25,6 +25,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+
                 </configuration>
             </plugin>
             <plugin>
@@ -34,19 +35,9 @@
             </plugin>
         </plugins>
     </build>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>1.0.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <modules>
         <module>rocket-mission-persistence</module>
+        <module>rocket-mission-service</module>
+        <module>rocket-mission-api</module>
     </modules>
 </project>
