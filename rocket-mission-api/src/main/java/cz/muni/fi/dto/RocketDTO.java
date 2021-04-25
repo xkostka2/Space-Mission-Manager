@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Rocket entity.
+ * Rocket DTO.
  *
  * @author Tomas Bouma (469275)
  */
