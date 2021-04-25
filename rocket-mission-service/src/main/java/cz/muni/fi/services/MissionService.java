@@ -5,6 +5,7 @@ import cz.muni.fi.enums.MissionProgress;
 import org.springframework.dao.DataAccessException;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -63,5 +64,5 @@ public interface MissionService {
      * @param mission mission to archive
      * @param endDate end date of the mission
      */
-    void archive(Mission mission, LocalDate endDate);
+    void archive(Mission mission, ZonedDateTime endDate);
 }
