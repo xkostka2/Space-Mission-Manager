@@ -63,6 +63,7 @@ public interface MissionService {
      *
      * @param mission mission to archive
      * @param endDate end date of the mission
+     * @param archiveComment final comment of the mission
      */
-    void archive(Mission mission, ZonedDateTime endDate);
+    void archive(Mission mission, ZonedDateTime endDate, String archiveComment);
 }
