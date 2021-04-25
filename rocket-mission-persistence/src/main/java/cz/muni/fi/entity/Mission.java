@@ -4,6 +4,8 @@ import cz.muni.fi.enums.MissionProgress;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,8 @@ public class Mission{
     private String name;
 
     private String destination;
+
+    @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
     @OneToMany

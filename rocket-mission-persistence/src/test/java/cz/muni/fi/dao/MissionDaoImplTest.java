@@ -83,12 +83,20 @@ public class MissionDaoImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testFindAllComponents() {
+    public void testFindAllMissions() {
         List<Mission> allMissions = missionDao.findAllMissions();
 
         assertThat(allMissions.size()).isGreaterThanOrEqualTo(2);
         assertThat(allMissions.contains(marsMission)).isTrue();
         assertThat(allMissions.contains(jupyterMission)).isTrue();
+    }
+
+    @Test
+    public void testFindAllMissionsByProgress() {
+        List<Mission> plannedMissions = missionDao.findAllMissions(MissionProgress.PLANNED);
+
+        assertThat(plannedMissions.size()).isEqualTo(1);
+        assertThat(plannedMissions.contains(marsMission)).isTrue();
     }
 
     @Test

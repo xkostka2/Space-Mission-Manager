@@ -1,6 +1,7 @@
 package cz.muni.fi.dao;
 
 import cz.muni.fi.entity.Mission;
+import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,14 @@ public class MissionDaoImpl implements MissionDao {
     @Override
     public List<Mission> findAllMissions() {
         return entityManager.createQuery("select mission from Mission mission", Mission.class).getResultList();
+    }
+
+    @Override
+    public List<Mission> findAllMissions(MissionProgress progress) {
+        return entityManager.createQuery("select mission from Mission mission " +
+                        "where mission.missionProgress = :progress", Mission.class).
+                setParameter("progress", progress).
+                getResultList();
     }
 
     @Override
