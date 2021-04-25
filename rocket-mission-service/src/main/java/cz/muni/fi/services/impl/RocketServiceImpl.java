@@ -2,11 +2,10 @@ package cz.muni.fi.services.impl;
 
 import cz.muni.fi.dao.RocketDao;
 import cz.muni.fi.entity.Rocket;
+import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.RocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.NonTransientDataAccessException;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
  * service module of the application that provides the implementation of the
  * business logic (main logic of the application).
  *
- * @author Vojtech Bruza
+ * @author Tomas Bouma
  */
 
 public class RocketServiceImpl implements RocketService {
@@ -25,9 +24,6 @@ public class RocketServiceImpl implements RocketService {
 
     @Override
     public void addRocket(Rocket rocket) throws DataAccessException {
-        if(rocket == null){
-            throw new IllegalArgumentException("Rocket must not be null.");
-        }
         try {
             rocketDao.addRocket(rocket);
         } catch (Throwable e) {
@@ -46,9 +42,6 @@ public class RocketServiceImpl implements RocketService {
 
     @Override
     public Rocket findRocketById(Long id) throws DataAccessException {
-        if(id == null){
-            throw new IllegalArgumentException("Id must not be null.");
-        }
         try{
             return rocketDao.findRocketById(id);
         } catch (Throwable e) {
@@ -59,9 +52,6 @@ public class RocketServiceImpl implements RocketService {
 
     @Override
     public void updateRocket(Rocket rocket) throws DataAccessException {
-        if(rocket == null){
-            throw new IllegalArgumentException("Rocket must not be null.");
-        }
         try {
             rocketDao.updateRocket(rocket);
         }  catch (Throwable e) {
@@ -71,9 +61,6 @@ public class RocketServiceImpl implements RocketService {
 
     @Override
     public void removeRocket(Rocket rocket) throws DataAccessException {
-        if(rocket == null){
-            throw new IllegalArgumentException("Rocket must not be null.");
-        }
         try {
             rocketDao.removeRocket(rocket);
         }  catch (Throwable e) {
