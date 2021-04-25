@@ -67,7 +67,7 @@ public class RocketDTO {
 
     @Override
     public String toString() {
-        return "Rocket{" +
+        return "RocketDTO {" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mission=" + mission +
