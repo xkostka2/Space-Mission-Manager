@@ -4,7 +4,6 @@ import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import org.springframework.dao.DataAccessException;
 
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 

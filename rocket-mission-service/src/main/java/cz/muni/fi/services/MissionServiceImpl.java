@@ -95,7 +95,7 @@ public class MissionServiceImpl implements MissionService {
 
         sb.append("\nMembers: ");
         mission.getUsers().forEach(u -> {
-            sb.append("\n").append(u.getName()).append(u.getRole());
+            sb.append("\n").append(u.getName()).append(": ").append(u.getRole());
             mission.removeUser(u);
         });
 
@@ -118,7 +118,7 @@ public class MissionServiceImpl implements MissionService {
         try {
             missionDao.updateMission(mission);
         } catch (Throwable e) {
-            throw new ServiceDataAccessException("Could not archive mission.", e);
+            throw new ServiceDataAccessException("Could not archive mission " + mission, e);
         }
     }
 }
