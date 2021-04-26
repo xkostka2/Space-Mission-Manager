@@ -1,5 +1,6 @@
 package cz.muni.fi.facade;
 
+import cz.muni.fi.dto.CreateRocketDTO;
 import cz.muni.fi.dto.RocketDTO;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface RocketFacade {
      *
      * @param rocket Rocket to add
      */
-    void addRocket(RocketDTO rocket);
+    void addRocket(CreateRocketDTO rocket);
 
     /**
      * Finds all entities of type Rocket
