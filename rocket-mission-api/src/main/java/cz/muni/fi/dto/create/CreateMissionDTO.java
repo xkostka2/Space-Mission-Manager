@@ -1,5 +1,8 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.create;
 
+import cz.muni.fi.dto.ComponentDTO;
+import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.UserDTO;
 import cz.muni.fi.enums.MissionProgress;
 
 import javax.validation.constraints.Future;
@@ -12,11 +15,11 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * DTO for creating of mission
+ * DTO for creating of the mission
  *
  * @author Martin Kazimir
  */
-public class MissionCreateDTO {
+public class CreateMissionDTO {
 
     @NotNull
     @Size(min = 2, max = 60)
@@ -41,11 +44,8 @@ public class MissionCreateDTO {
     private ZonedDateTime eta;
 
     private MissionProgress missionProgress;
-
     private ZonedDateTime finishedDate;
-
     private ZonedDateTime startedDate;
-
     private String result;
 
     public String getName() {
@@ -131,8 +131,8 @@ public class MissionCreateDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MissionCreateDTO)) return false;
-        MissionCreateDTO that = (MissionCreateDTO) o;
+        if (!(o instanceof CreateMissionDTO)) return false;
+        CreateMissionDTO that = (CreateMissionDTO) o;
         return Objects.equals(getName(), that.getName());
     }
 
