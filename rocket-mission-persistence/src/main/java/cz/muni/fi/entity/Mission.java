@@ -4,6 +4,8 @@ import cz.muni.fi.enums.MissionProgress;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,8 @@ public class Mission{
     private String name;
 
     private String destination;
+
+    @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
     @OneToMany
@@ -48,6 +52,15 @@ public class Mission{
     private ZonedDateTime eta;
     private ZonedDateTime finishedDate;
     private ZonedDateTime startedDate;
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public Long getId() {
         return id;
@@ -85,24 +98,48 @@ public class Mission{
         return Collections.unmodifiableSet(users);
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void addUser(User user) {
+        if (!users.contains(user)) {
+            users.add(user);
+            user.setMission(this);
+        }
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
+        user.setMission(null);
     }
 
     public Set<Rocket> getRockets() {
         return Collections.unmodifiableSet(rockets);
     }
 
-    public void setRockets(Set<Rocket> rockets) {
-        this.rockets = rockets;
+    public void addRocket(Rocket rocket) {
+        if (!rockets.contains(rocket)) {
+            rockets.add(rocket);
+            rocket.setMission(this);
+        }
+    }
+
+    public void removeRocket(Rocket rocket) {
+        rockets.remove(rocket);
+        rocket.setMission(null);
     }
 
     public Set<Component> getComponents() {
         return Collections.unmodifiableSet(components);
     }
 
-    public void setComponents(Set<Component> components) {
-        this.components = components;
+    public void addComponent(Component component) {
+        if (!components.contains(component)) {
+            components.add(component);
+            component.setMission(this);
+        }
+    }
+
+    public void removeComponent(Component component) {
+        components.remove(component);
+        component.setMission(null);
     }
 
     public ZonedDateTime getEta() {
@@ -154,6 +191,7 @@ public class Mission{
                 ", eta=" + eta +
                 ", finishedDate=" + finishedDate +
                 ", startedDate=" + startedDate +
+                ", result='" + result + '\'' +
                 '}';
     }
 }
