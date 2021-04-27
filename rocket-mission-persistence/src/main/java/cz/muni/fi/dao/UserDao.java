@@ -32,7 +32,7 @@ public interface UserDao {
      *
      * @param user instance of user
      */
-    User deleteUser(User user);
+    void deleteUser(User user);
 
     /**
      * Find all users

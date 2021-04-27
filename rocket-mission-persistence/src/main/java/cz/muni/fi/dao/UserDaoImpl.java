@@ -43,14 +43,12 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User deleteUser(User user) {
+    public void deleteUser(User user) {
         Guard.requireNotNull(user, User.class.getName());
         User delUser = findUserById(user.getId());
         Guard.requireNotNull(delUser, "Trying to delete nonexistent user");
 
         em.remove(delUser);
-
-        return user;
     }
 
     @Override

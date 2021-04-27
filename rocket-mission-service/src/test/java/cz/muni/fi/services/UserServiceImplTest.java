@@ -72,7 +72,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
             return user;
         });
 
-        when(userDao.deleteUser(any(User.class))).then(invoke -> {
+        doAnswer(invoke -> {
             User user = invoke.getArgumentAt(0, User.class);
 
             if (!users.keySet().contains(user.getId()) || user.getId() == null) {
@@ -80,7 +80,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
             }
             users.remove(user.getId(), user);
             return user;
-        });
+        }).when(userDao).deleteUser(any(User.class));
 
         when(userDao.findAllUsers())
                 .then(invoke -> Collections.unmodifiableList(new ArrayList<>(users.values())));
