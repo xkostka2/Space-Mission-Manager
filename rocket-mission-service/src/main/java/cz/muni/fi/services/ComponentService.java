@@ -14,8 +14,9 @@ public interface ComponentService {
     /**
      * Create new Component in the database
      * @param component Component to add
+     * @return Newly added Component
      */
-    void addComponent(Component component) throws DataAccessException;
+    Component addComponent(Component component) throws DataAccessException;
 
     List<Component> findAllComponents() throws DataAccessException;
 
@@ -28,8 +29,9 @@ public interface ComponentService {
     /**
      * Update Component in the database
      * @param component component to update
+     * @return Updated Component
      */
-    void updateComponent(Component component) throws DataAccessException;
+    Component updateComponent(Component component) throws DataAccessException;
 
     /**
      * Delete Component from the database
