@@ -15,15 +15,17 @@ public interface UserDao {
      * Persist user into database
      *
      * @param user instance of user
+     * @return added user
      */
-    void addUser(User user);
+    User addUser(User user);
 
     /**
      * Update user in database
      *
      * @param user Instance of user
+     * @return updated user
      */
-    void updateUser(User user);
+    User updateUser(User user);
 
     /**
      * Delete user from database

@@ -23,18 +23,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         try {
-            userDao.addUser(user);
+            return userDao.addUser(user);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not create a user", e);
         }
     }
 
     @Override
-    public void updateUser(User user) {
+    public User updateUser(User user) {
         try {
-            userDao.updateUser(user);
+            return userDao.updateUser(user);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not update a user", e);
         }

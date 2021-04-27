@@ -1,5 +1,7 @@
 package cz.muni.fi.facade;
 
+import cz.muni.fi.dto.CreateUserDTO;
+import cz.muni.fi.dto.UpdateUserDTO;
 import cz.muni.fi.dto.UserDTO;
 
 import java.util.List;
@@ -15,15 +17,17 @@ public interface UserFacade {
      * Persist user into DB
      *
      * @param user instance of user
+     * @return added user
      */
-    void addUser(UserDTO user);
+    UserDTO addUser(CreateUserDTO user);
 
     /**
      * Update user in DB
      *
      * @param user instance of user
+     * @return updated user
      */
-    void updateUser(UserDTO user);
+    UserDTO updateUser(UpdateUserDTO user);
 
     /**
      * Delete user from DB

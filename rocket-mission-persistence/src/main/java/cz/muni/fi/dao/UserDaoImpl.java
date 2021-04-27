@@ -25,19 +25,21 @@ public class UserDaoImpl implements UserDao{
 
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         validateUser(user);
         Guard.requireNull(user.getId(), "User id is not null");
 
         em.persist(user);
+        return user;
     }
 
     @Override
-    public void updateUser(User user) {
+    public User updateUser(User user) {
         validateUser(user);
         Guard.requireNotNull(user.getId(), "User id should not be null");
 
         em.merge(user);
+        return user;
     }
 
     @Override

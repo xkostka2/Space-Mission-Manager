@@ -16,15 +16,17 @@ public interface UserService {
      * Persist user into database.
      *
      * @param user instance of user
+     * @return added user
      */
-    void addUser(User user) throws DataAccessException;
+    User addUser(User user) throws DataAccessException;
 
     /**
      * Update user in database
      *
      * @param user instance of user
+     * @return updated user
      */
-    void updateUser(User user) throws DataAccessException;
+    User updateUser(User user) throws DataAccessException;
 
     /**
      * Delete user from database
