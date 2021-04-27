@@ -23,9 +23,9 @@ public class ComponentServiceImpl implements ComponentService {
     private ComponentDao componentDao;
 
     @Override
-    public void addComponent(Component component) throws DataAccessException {
+    public Component addComponent(Component component) throws DataAccessException {
         try {
-            componentDao.addComponent(component);
+            return componentDao.addComponent(component);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Error when adding component.", e);
         }
@@ -53,9 +53,9 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public void updateComponent(Component component) throws DataAccessException {
+    public Component updateComponent(Component component) throws DataAccessException {
         try {
-            componentDao.updateComponent(component);
+            return componentDao.updateComponent(component);
         }  catch (Throwable e) {
             throw new ServiceDataAccessException("Error when updating component.", e);
         }

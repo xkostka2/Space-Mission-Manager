@@ -23,12 +23,13 @@ public class ComponentDaoImpl implements ComponentDao {
     private EntityManager entityManager;
 
     @Override
-    public void addComponent(Component component) {
+    public Component addComponent(Component component) {
         Guard.requireNotNull(component, "Component is null");
         Guard.requireNotNull(component.getName(), "name is null");
         Guard.requireNull(component.getId(), "id is not null");
 
         this.entityManager.persist(component);
+        return component;
     }
 
     @Override
@@ -50,12 +51,13 @@ public class ComponentDaoImpl implements ComponentDao {
     }
 
     @Override
-    public void updateComponent(Component component) {
+    public Component updateComponent(Component component) {
         Guard.requireNotNull(component, "Component is null");
         Guard.requireNotNull(component.getName(), "name is null");
         Guard.requireNotNull(component.getId(), "id is null");
 
         this.entityManager.merge(component);
+        return component;
     }
 
     @Override
