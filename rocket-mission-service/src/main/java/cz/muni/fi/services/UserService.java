@@ -71,4 +71,20 @@ public interface UserService {
      * @return user instance of user
      */
     User findUserByEmail(String email) throws DataAccessException;
+
+    /**
+     * Confirm mission for given user, set missionAccepted to true
+     * @param user user which is accepting assigned mission
+     */
+    void acceptAssignedMission(User user) throws DataAccessException;
+
+    /**
+     * Reject mission for given user and add explanation why,
+     * leave missionAccepted to false and add explanation,
+     * also removes the astronaut from the mission's list of astronauts.
+     * @param user user which is rejecting assigned mission
+     * @param explanation explanation why user did not accept mission
+     */
+    void rejectAssignedMission(User user, String explanation)
+        throws DataAccessException, IllegalArgumentException;
 }

@@ -93,4 +93,36 @@ public class UserServiceImpl implements UserService {
             throw new ServiceDataAccessException("Can not find user by email", e);
         }
     }
+
+    @Override
+    public void acceptAssignedMission(User user) {
+        if (user.missionStatusPending()) {
+            user.setMissionAccepted(true);
+        } else {
+            throw new IllegalArgumentException("User does not have pending mission status");
+        }
+        try {
+            userDao.updateUser(user);
+        } catch (Throwable e) {
+            throw new ServiceDataAccessException("Can not update a user", e);
+        }
+    }
+
+    @Override
+    public void rejectAssignedMission(User user, String explanation) {
+        if (explanation == null) {
+            throw new IllegalArgumentException("Explanation must not be null");
+        }
+        if (user.missionStatusPending()) {
+            user.setMissionRejectedExplanation(explanation);
+            user.setMission(null);
+        } else {
+            throw new IllegalArgumentException("User does not have pending mission status");
+        }
+        try {
+            userDao.updateUser(user);
+        } catch (Throwable e) {
+            throw new ServiceDataAccessException("Can not update a user", e);
+        }
+    }
 }
