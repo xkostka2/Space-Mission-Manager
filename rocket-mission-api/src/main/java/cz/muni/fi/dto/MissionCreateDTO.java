@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -26,7 +27,6 @@ public class MissionCreateDTO {
     private String destination;
 
     @NotNull
-    @Size(min = 1)
     private Set<UserDTO> users = new HashSet<>();
 
     @NotNull
@@ -126,5 +126,18 @@ public class MissionCreateDTO {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MissionCreateDTO)) return false;
+        MissionCreateDTO that = (MissionCreateDTO) o;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }
