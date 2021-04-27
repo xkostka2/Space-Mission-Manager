@@ -1,5 +1,6 @@
-package cz.muni.fi.services;
+package cz.muni.fi.services.impl;
 
+import cz.muni.fi.services.BeanMappingService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
