@@ -15,8 +15,9 @@ public interface MissionDao {
      * Persists mission into database
      *
      * @param mission mission to add
+     * @return added mission
      */
-    void addMission(Mission mission);
+    Mission addMission(Mission mission);
 
     /**
      * Returns all missions
@@ -45,8 +46,9 @@ public interface MissionDao {
      * Updates mission in database
      *
      * @param mission mission to update
+     * @return updated mission
      */
-    void updateMission(Mission mission);
+    Mission updateMission(Mission mission);
 
     /**
      * Deletes mission from database

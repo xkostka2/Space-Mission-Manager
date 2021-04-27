@@ -3,8 +3,10 @@ package cz.muni.fi.services;
 
 import cz.muni.fi.InMemoryDatabaseSpring;
 import cz.muni.fi.dto.CreateRocketDTO;
+import cz.muni.fi.dto.MissionDTO;
 import cz.muni.fi.dto.RocketDTO;
 import cz.muni.fi.dto.UserDTO;
+import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.entity.User;
 import org.dozer.DozerBeanMapper;
@@ -36,6 +38,8 @@ public class ServiceConfiguration {
             mapping(User.class, UserDTO.class);
             mapping(Rocket.class, RocketDTO.class);
             mapping(Rocket.class, CreateRocketDTO.class);
+            mapping(Mission.class, MissionDTO.class);
+
         }
     }
 }

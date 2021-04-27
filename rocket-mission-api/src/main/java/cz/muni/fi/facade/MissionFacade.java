@@ -16,16 +16,17 @@ public interface MissionFacade {
      * Save given mission
      *
      * @param mission instance of mission
-     * @return id of created mission
+     * @return added mission
      */
-    Long addMission(MissionDTO mission);
+    MissionDTO addMission(MissionDTO mission);
 
     /**
      * Update given mission
      *
      * @param mission instance of mission
+     * @return updated mission
      */
-    void updateMission(MissionDTO mission);
+    MissionDTO updateMission(MissionDTO mission);
 
     /**
      * Delete given mission

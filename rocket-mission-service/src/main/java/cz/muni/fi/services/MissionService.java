@@ -17,15 +17,17 @@ public interface MissionService {
      * Persist mission into database.
      *
      * @param mission instance of mission
+     * @return added mission
      */
-    void addMission(Mission mission) throws DataAccessException;
+    Mission addMission(Mission mission) throws DataAccessException;
 
     /**
      * Update mission in database
      *
      * @param mission instance of mission
+     * @return updated mission
      */
-    void updateMission(Mission mission) throws DataAccessException;
+    Mission updateMission(Mission mission) throws DataAccessException;
 
     /**
      * Delete mission from database

@@ -23,12 +23,13 @@ public class MissionDaoImpl implements MissionDao {
     private EntityManager entityManager;
 
     @Override
-    public void addMission(Mission mission) {
+    public Mission addMission(Mission mission) {
         Guard.requireNotNull(mission, "Mission is null");
         Guard.requireNotNull(mission.getName(), "Mission name is null");
         Guard.requireNull(mission.getId(), "Mission id is not null");
 
         entityManager.persist(mission);
+        return mission;
     }
 
     @Override
@@ -52,12 +53,13 @@ public class MissionDaoImpl implements MissionDao {
     }
 
     @Override
-    public void updateMission(Mission mission) {
+    public Mission updateMission(Mission mission) {
         Guard.requireNotNull(mission, "Mission is null");
         Guard.requireNotNull(mission.getName(), "Mission name is null");
         Guard.requireNotNull(mission.getId(), "Mission id is null");
 
         entityManager.merge(mission);
+        return mission;
     }
 
     @Override
