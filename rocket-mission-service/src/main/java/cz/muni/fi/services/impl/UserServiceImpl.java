@@ -1,8 +1,9 @@
-package cz.muni.fi.services;
+package cz.muni.fi.services.impl;
 
 import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.helpers.ServiceDataAccessException;
+import cz.muni.fi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

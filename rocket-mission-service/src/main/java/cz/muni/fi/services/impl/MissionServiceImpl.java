@@ -1,9 +1,10 @@
-package cz.muni.fi.services;
+package cz.muni.fi.services.impl;
 
 import cz.muni.fi.dao.MissionDao;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.helpers.ServiceDataAccessException;
+import cz.muni.fi.services.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
