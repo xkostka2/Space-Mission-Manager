@@ -16,8 +16,9 @@ public interface MissionFacade {
      * Save given mission
      *
      * @param mission instance of mission
+     * @return id of created mission
      */
-    void addMission(MissionDTO mission);
+    Long addMission(MissionDTO mission);
 
     /**
      * Update given mission
