@@ -58,10 +58,10 @@ public interface MissionService {
 
     /**
      * Archive given mission
-     * Set the end date and result pof the mission
+     * Set the end date and result of the mission
      *
      * @param mission mission to archive
-     * @param endDate end date of the mission
+     * @param endDate end date of the mission, must be in past
      * @param archiveComment final comment of the mission
      */
     void archive(Mission mission, ZonedDateTime endDate, String archiveComment);
