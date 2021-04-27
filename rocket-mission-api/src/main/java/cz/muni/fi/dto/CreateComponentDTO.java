@@ -3,32 +3,25 @@ package cz.muni.fi.dto;
 import cz.muni.fi.enums.ComponentType;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
- * Component used in missions
+ * Object used when creating a Component
  *
  * @author Martin Kostka
  */
-public class ComponentDTO {
+public class CreateComponentDTO {
 
     @NotNull
+    @Size(min = 3, max = 50)
     private String name;
-    private Long id;
     private boolean readyToUse;
     private ComponentType type;
     private ZonedDateTime readyDate;
     private MissionDTO mission;
     private RocketDTO rocket;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public boolean isReadyToUse() {
         return readyToUse;
@@ -82,12 +75,12 @@ public class ComponentDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComponentDTO that = (ComponentDTO) o;
-        return getName().equals(that.getName()) && getReadyDate().equals(that.getReadyDate()) && Objects.equals(getMission(), that.getMission()) && Objects.equals(getRocket(), that.getRocket());
+        CreateComponentDTO that = (CreateComponentDTO) o;
+        return getName().equals(that.getName()) && getType() == that.getType() && getReadyDate().equals(that.getReadyDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getReadyDate(), getMission(), getRocket());
+        return Objects.hash(getName(), getType(), getReadyDate());
     }
 }

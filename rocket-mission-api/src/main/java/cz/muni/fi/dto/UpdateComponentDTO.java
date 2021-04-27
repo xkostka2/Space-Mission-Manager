@@ -7,11 +7,11 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
- * Component used in missions
+ * Object used while updating Components
  *
  * @author Martin Kostka
  */
-public class ComponentDTO {
+public class UpdateComponentDTO {
 
     @NotNull
     private String name;
@@ -82,7 +82,7 @@ public class ComponentDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComponentDTO that = (ComponentDTO) o;
+        UpdateComponentDTO that = (UpdateComponentDTO) o;
         return getName().equals(that.getName()) && getReadyDate().equals(that.getReadyDate()) && Objects.equals(getMission(), that.getMission()) && Objects.equals(getRocket(), that.getRocket());
     }
 
