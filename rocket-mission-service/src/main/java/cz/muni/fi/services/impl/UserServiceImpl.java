@@ -96,6 +96,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void acceptAssignedMission(User user) {
+        if (user.getMission() == null) {
+            throw new IllegalArgumentException("User does not have pending mission status");
+        }
         if (user.missionStatusPending()) {
             user.setMissionAccepted(true);
         } else {

@@ -43,12 +43,14 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void deleteUser(User user) {
+    public User deleteUser(User user) {
         Guard.requireNotNull(user, User.class.getName());
         User delUser = findUserById(user.getId());
         Guard.requireNotNull(delUser, "Trying to delete nonexistent user");
 
         em.remove(delUser);
+
+        return user;
     }
 
     @Override
@@ -109,7 +111,6 @@ public class UserDaoImpl implements UserDao{
         Guard.requireNotNull(user.getPassword(), "User password should not be null");
         Guard.requireNotNull(user.getRole(), "Role should not be null");
         Guard.requireNotNull(user.getLevelOfExperience(), "Level of experience should not be null");
-
         if(!user.getEmail().matches(".+@.+\\....?")){
             throw new IllegalArgumentException("User email has wrong format");
         }
