@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author Martin Hořelka (469003)
  */
-public class UserCreateDTO {
+public class CreateUserDTO {
 
     private String name;
     private String email;
@@ -70,8 +70,8 @@ public class UserCreateDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserCreateDTO)) return false;
-        UserCreateDTO other = (UserCreateDTO) o;
+        if (!(o instanceof CreateUserDTO)) return false;
+        CreateUserDTO other = (CreateUserDTO) o;
         return getName().equals(other.getName());
     }
 
@@ -82,7 +82,7 @@ public class UserCreateDTO {
 
     @Override
     public String toString() {
-        return "UserCreateDTO{" +
+        return "CreateUserDTO{" +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
