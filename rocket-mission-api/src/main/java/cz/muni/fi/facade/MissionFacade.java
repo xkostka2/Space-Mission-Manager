@@ -1,6 +1,8 @@
 package cz.muni.fi.facade;
 
+import cz.muni.fi.dto.CreateMissionDTO;
 import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.UpdateMissionDTO;
 import cz.muni.fi.enums.MissionProgress;
 
 import java.time.ZonedDateTime;
@@ -18,7 +20,7 @@ public interface MissionFacade {
      * @param mission instance of mission
      * @return added mission
      */
-    MissionDTO addMission(MissionDTO mission);
+    MissionDTO addMission(CreateMissionDTO mission);
 
     /**
      * Update given mission
@@ -26,7 +28,7 @@ public interface MissionFacade {
      * @param mission instance of mission
      * @return updated mission
      */
-    MissionDTO updateMission(MissionDTO mission);
+    MissionDTO updateMission(UpdateMissionDTO mission);
 
     /**
      * Delete given mission

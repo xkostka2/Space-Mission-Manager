@@ -1,6 +1,8 @@
 package cz.muni.fi.facades;
 
+import cz.muni.fi.dto.CreateMissionDTO;
 import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.UpdateMissionDTO;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.facade.MissionFacade;
@@ -28,14 +30,14 @@ public class MissionFacadeImpl implements MissionFacade {
     MissionService missionService;
 
     @Override
-    public MissionDTO addMission(MissionDTO mission) {
+    public MissionDTO addMission(CreateMissionDTO mission) {
         Mission mappedMission = beanMappingService.mapTo(mission, Mission.class);
         return beanMappingService.mapTo(missionService.addMission(mappedMission), MissionDTO.class);
 
     }
 
     @Override
-    public MissionDTO updateMission(MissionDTO mission) {
+    public MissionDTO updateMission(UpdateMissionDTO mission) {
         Mission mappedMission = beanMappingService.mapTo(mission, Mission.class);
         return beanMappingService.mapTo(missionService.updateMission(mappedMission), MissionDTO.class);
     }
