@@ -1,7 +1,7 @@
 package cz.muni.fi.facade;
 
-import cz.muni.fi.dto.CreateUserDTO;
-import cz.muni.fi.dto.UpdateUserDTO;
+import cz.muni.fi.dto.create.CreateUserDTO;
+import cz.muni.fi.dto.update.UpdateUserDTO;
 import cz.muni.fi.dto.UserDTO;
 
 import java.util.List;
