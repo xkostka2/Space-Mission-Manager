@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  * @author Martin Kazimir
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class ComponentServiceTest extends AbstractTestNGSpringContextTests {
+public class ComponentServiceImplTest extends AbstractTestNGSpringContextTests {
     @Mock
     private ComponentDao componentDao;
 
@@ -90,7 +90,7 @@ public class ComponentServiceTest extends AbstractTestNGSpringContextTests {
         doAnswer(invoke -> {
             Component mockedComponent = invoke.getArgumentAt(0, Component.class);
             if (mockedComponent.getId() == null || !components.containsKey(mockedComponent.getId())) {
-                throw new IllegalArgumentException("User was not created yet");
+                throw new IllegalArgumentException("Component was not created yet");
             }
             components.remove(mockedComponent.getId(), mockedComponent);
             return mockedComponent;
@@ -167,9 +167,7 @@ public class ComponentServiceTest extends AbstractTestNGSpringContextTests {
     public void updateComponent() {
         component1.setName("updated component");
         componentService.updateComponent(component1);
-
         Component updated = components.get(component1.getId());
-
         assertThat(updated.getName()).isEqualTo("updated component");
         assertThat(updated).isEqualToComparingFieldByField(component1);
     }
@@ -229,21 +227,22 @@ public class ComponentServiceTest extends AbstractTestNGSpringContextTests {
                 .containsExactlyInAnyOrder(component1, component2);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
-    public void findComponentsByNullId() {
-        componentService.findComponentById(null);
-    }
-
     @Test
     public void findComponentById() {
         Component component = componentService.findComponentById(component1.getId());
         assertThat(component).isEqualToComparingFieldByField(component1);
     }
 
+    @Test(expectedExceptions = DataAccessException.class)
+    public void findComponentsByNullId() {
+        componentService.findComponentById(null);
+    }
+
     @Test
     public void findComponentByIdNotInDB() {
         assertThat(componentService.findComponentById(100000L)).isNull();
     }
+
 
     private Component createComponent(String name) {
         Component component = new Component();
