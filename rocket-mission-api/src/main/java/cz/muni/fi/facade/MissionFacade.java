@@ -1,8 +1,8 @@
 package cz.muni.fi.facade;
 
-import cz.muni.fi.dto.CreateMissionDTO;
 import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.UpdateMissionDTO;
+import cz.muni.fi.dto.create.CreateMissionDTO;
+import cz.muni.fi.dto.update.UpdateMissionDTO;
 import cz.muni.fi.enums.MissionProgress;
 
 import java.time.ZonedDateTime;
