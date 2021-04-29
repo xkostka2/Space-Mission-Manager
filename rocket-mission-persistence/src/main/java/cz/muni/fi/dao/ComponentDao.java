@@ -14,8 +14,9 @@ public interface ComponentDao {
         /**
          *
          * @param component componnent to add
+         * @return Updated Component
          */
-        void addComponent(Component component);
+        Component addComponent(Component component);
 
         List<Component> findAllComponents();
 
@@ -28,8 +29,9 @@ public interface ComponentDao {
         /**
          *
          * @param component component to update
+         * @return Updated Component
          */
-        void updateComponent(Component component);
+        Component updateComponent(Component component);
 
         /**
          *

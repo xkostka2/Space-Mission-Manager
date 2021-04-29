@@ -23,18 +23,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         try {
-            userDao.addUser(user);
+            return userDao.addUser(user);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not create a user", e);
         }
     }
 
     @Override
-    public void updateUser(User user) {
+    public User updateUser(User user) {
         try {
-            userDao.updateUser(user);
+            return userDao.updateUser(user);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not update a user", e);
         }
@@ -91,6 +91,38 @@ public class UserServiceImpl implements UserService {
             return userDao.findUserByEmail(email);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not find user by email", e);
+        }
+    }
+
+    @Override
+    public void acceptAssignedMission(User user) {
+        if (user.missionStatusPending()) {
+            user.setMissionAccepted(true);
+        } else {
+            throw new IllegalArgumentException("User does not have pending mission status");
+        }
+        try {
+            userDao.updateUser(user);
+        } catch (Throwable e) {
+            throw new ServiceDataAccessException("Can not update a user", e);
+        }
+    }
+
+    @Override
+    public void rejectAssignedMission(User user, String explanation) {
+        if (explanation == null) {
+            throw new IllegalArgumentException("Explanation must not be null");
+        }
+        if (user.missionStatusPending()) {
+            user.setMissionRejectedExplanation(explanation);
+            user.setMission(null);
+        } else {
+            throw new IllegalArgumentException("User does not have pending mission status");
+        }
+        try {
+            userDao.updateUser(user);
+        } catch (Throwable e) {
+            throw new ServiceDataAccessException("Can not update a user", e);
         }
     }
 }

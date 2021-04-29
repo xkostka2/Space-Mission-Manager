@@ -1,32 +1,24 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.create;
 
+import cz.muni.fi.dto.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
 
 import java.util.Objects;
 
 /**
- * User DTO.
+ * User create DTO.
  *
  * @author Martin Hořelka (469003)
  */
-public class UserDTO {
+public class CreateUserDTO {
 
-    private Long id;
     private String name;
     private String email;
     private String password;
     private Role role;
     private LevelOfExperience levelOfExperience;
     private MissionDTO mission;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -79,8 +71,8 @@ public class UserDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO other = (UserDTO) o;
+        if (!(o instanceof CreateUserDTO)) return false;
+        CreateUserDTO other = (CreateUserDTO) o;
         return getName().equals(other.getName());
     }
 
@@ -91,8 +83,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "id=" + id +
+        return "CreateUserDTO{" +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

@@ -1,5 +1,7 @@
 package cz.muni.fi.facades;
 
+import cz.muni.fi.dto.create.CreateUserDTO;
+import cz.muni.fi.dto.update.UpdateUserDTO;
 import cz.muni.fi.dto.UserDTO;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.facade.UserFacade;
@@ -26,15 +28,15 @@ public class UserFacadeImpl implements UserFacade {
     UserService userService;
 
     @Override
-    public void addUser(UserDTO user) {
+    public UserDTO addUser(CreateUserDTO user) {
         User mappedUser = beanMappingService.mapTo(user, User.class);
-        userService.addUser(mappedUser);
+        return beanMappingService.mapTo(userService.addUser(mappedUser), UserDTO.class);
     }
 
     @Override
-    public void updateUser(UserDTO user) {
+    public UserDTO updateUser(UpdateUserDTO user) {
         User mappedUser = beanMappingService.mapTo(user, User.class);
-        userService.updateUser(mappedUser);
+        return beanMappingService.mapTo(userService.updateUser(mappedUser), UserDTO.class);
     }
 
     @Override

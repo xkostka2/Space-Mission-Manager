@@ -2,6 +2,7 @@ package cz.muni.fi.services;
 
 
 import cz.muni.fi.InMemoryDatabaseSpring;
+
 import cz.muni.fi.dto.CreateMissionDTO;
 import cz.muni.fi.dto.CreateRocketDTO;
 import cz.muni.fi.dto.MissionDTO;
@@ -9,6 +10,11 @@ import cz.muni.fi.dto.RocketDTO;
 import cz.muni.fi.dto.UpdateMissionDTO;
 import cz.muni.fi.dto.UserDTO;
 import cz.muni.fi.entity.Mission;
+import cz.muni.fi.dto.*;
+import cz.muni.fi.dto.create.CreateRocketDTO;
+import cz.muni.fi.dto.create.CreateUserDTO;
+import cz.muni.fi.dto.update.UpdateUserDTO;
+
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.entity.User;
 import org.dozer.DozerBeanMapper;
@@ -37,6 +43,8 @@ public class ServiceConfiguration {
         @Override
         protected void configure() {
             mapping(User.class, UserDTO.class);
+            mapping(User.class, CreateUserDTO.class);
+            mapping(User.class, UpdateUserDTO.class);
             mapping(Rocket.class, RocketDTO.class);
             mapping(Rocket.class, CreateRocketDTO.class);
             mapping(Mission.class, MissionDTO.class);

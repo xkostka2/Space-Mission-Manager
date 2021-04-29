@@ -43,6 +43,9 @@ public class User {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
+    private boolean missionAccepted;
+    private String missionRejectedExplanation;
+
     public Long getId() {
         return id;
     }
@@ -97,6 +100,26 @@ public class User {
 
     public void setLevelOfExperience(LevelOfExperience levelOfExperience) {
         this.levelOfExperience = levelOfExperience;
+    }
+
+    public boolean getMissionAccepted() {
+        return missionAccepted;
+    }
+
+    public void setMissionAccepted(boolean missionAccepted) {
+        this.missionAccepted = missionAccepted;
+    }
+
+    public String getMissionRejectedExplanation() {
+        return missionRejectedExplanation;
+    }
+
+    public void setMissionRejectedExplanation(String missionRejectedExplanation) {
+        this.missionRejectedExplanation = missionRejectedExplanation;
+    }
+
+    public boolean missionStatusPending() {
+        return getMission() != null && !getMissionAccepted();
     }
 
     @Override
