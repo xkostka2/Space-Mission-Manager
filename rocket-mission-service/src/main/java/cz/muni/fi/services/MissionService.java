@@ -17,15 +17,17 @@ public interface MissionService {
      * Persist mission into database.
      *
      * @param mission instance of mission
+     * @return added mission
      */
-    void addMission(Mission mission) throws DataAccessException;
+    Mission addMission(Mission mission) throws DataAccessException;
 
     /**
      * Update mission in database
      *
      * @param mission instance of mission
+     * @return updated mission
      */
-    void updateMission(Mission mission) throws DataAccessException;
+    Mission updateMission(Mission mission) throws DataAccessException;
 
     /**
      * Delete mission from database
@@ -58,10 +60,10 @@ public interface MissionService {
 
     /**
      * Archive given mission
-     * Set the end date and result pof the mission
+     * Set the end date and result of the mission
      *
      * @param mission mission to archive
-     * @param endDate end date of the mission
+     * @param endDate end date of the mission, must be in past
      * @param archiveComment final comment of the mission
      */
     void archive(Mission mission, ZonedDateTime endDate, String archiveComment);
