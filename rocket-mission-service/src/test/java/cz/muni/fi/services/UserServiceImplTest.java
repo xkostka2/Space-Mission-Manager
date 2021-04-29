@@ -6,6 +6,7 @@ import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.Role;
+import cz.muni.fi.helpers.ServiceDataAccessException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -163,12 +164,12 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(users.values()).hasSize(sizeBefore + 1)
                 .contains(user);
     }
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void addNullUser() {
         userService.addUser(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void addExistingUser(){
         User user = createUser("user");
         User anotherUser = createUser("user");
@@ -191,7 +192,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         userService.acceptAssignedMission(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void acceptMissionNonExistingUser(){
         User u = createUser("DoesnoTexist");
         Mission m = MissionServiceImplTest.createMission("mission1");
@@ -248,12 +249,12 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(userDao.findUserById(u1.getId()).getName()).isEqualTo(updatedUser.getName());
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void updateNullUser(){
         userService.updateUser(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void updateNonExistingUser(){
         User u = createUser("NotinDB");
         userService.updateUser(u);
@@ -269,12 +270,12 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(userDao.findAllUsers()).doesNotContain(u).hasSize(sizeBefore - 1);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void deleteNullUser(){
         userService.deleteUser(null);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void deleteNonExistingUser(){
         User u = createUser("NotinDB");
         userService.deleteUser(u);
@@ -301,12 +302,12 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(userService.findUserById(1L)).isEqualTo(users.get(1L));
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void findNonExistingUserById(){
         userService.findUserById(idCounter + 10);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void findUserByNullId(){
         userService.findUserById(null);
     }

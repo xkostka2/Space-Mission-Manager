@@ -96,6 +96,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void acceptAssignedMission(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User must not be null");
+        }
         if (user.getMission() == null) {
             throw new IllegalArgumentException("User does not have pending mission status");
         }
@@ -113,7 +116,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void rejectAssignedMission(User user, String explanation) {
-        if (explanation == null) {
+        if (user == null) {
+            throw new IllegalArgumentException("User must not be null");
+        }
+        if (explanation == null || explanation.isEmpty()) {
             throw new IllegalArgumentException("Explanation must not be null");
         }
         if (user.missionStatusPending()) {
