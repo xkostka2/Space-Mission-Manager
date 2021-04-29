@@ -1,4 +1,8 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.update;
+
+import cz.muni.fi.dto.ComponentDTO;
+import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.RocketDTO;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

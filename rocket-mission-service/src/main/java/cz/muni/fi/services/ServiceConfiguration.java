@@ -3,11 +3,16 @@ package cz.muni.fi.services;
 
 import cz.muni.fi.InMemoryDatabaseSpring;
 
+import cz.muni.fi.dto.ComponentDTO;
 import cz.muni.fi.dto.MissionDTO;
 import cz.muni.fi.dto.RocketDTO;
 import cz.muni.fi.dto.UserDTO;
+import cz.muni.fi.dto.create.CreateComponentDTO;
 import cz.muni.fi.dto.create.CreateMissionDTO;
+import cz.muni.fi.dto.update.UpdateComponentDTO;
 import cz.muni.fi.dto.update.UpdateMissionDTO;
+import cz.muni.fi.dto.update.UpdateRocketDTO;
+import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.create.CreateUserDTO;
@@ -49,6 +54,9 @@ public class ServiceConfiguration {
             mapping(Mission.class, MissionDTO.class);
             mapping(Mission.class, CreateMissionDTO.class);
             mapping(Mission.class, UpdateMissionDTO.class);
+            mapping(Component.class, ComponentDTO.class);
+            mapping(Component.class, CreateComponentDTO.class);
+            mapping(Component.class, UpdateComponentDTO.class);
         }
     }
 }
