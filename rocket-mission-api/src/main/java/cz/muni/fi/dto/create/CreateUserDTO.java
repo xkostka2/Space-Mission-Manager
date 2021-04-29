@@ -1,16 +1,17 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.create;
 
+import cz.muni.fi.dto.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
 
 import java.util.Objects;
 
 /**
- * User update DTO.
+ * User create DTO.
  *
  * @author Martin Hořelka (469003)
  */
-public class UpdateUserDTO {
+public class CreateUserDTO {
 
     private String name;
     private String email;
@@ -70,8 +71,8 @@ public class UpdateUserDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UpdateUserDTO)) return false;
-        UpdateUserDTO other = (UpdateUserDTO) o;
+        if (!(o instanceof CreateUserDTO)) return false;
+        CreateUserDTO other = (CreateUserDTO) o;
         return getName().equals(other.getName());
     }
 
@@ -82,7 +83,7 @@ public class UpdateUserDTO {
 
     @Override
     public String toString() {
-        return "UpdateUserDTO{" +
+        return "CreateUserDTO{" +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

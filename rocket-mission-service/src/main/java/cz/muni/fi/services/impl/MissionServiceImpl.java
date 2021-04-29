@@ -26,18 +26,18 @@ public class MissionServiceImpl implements MissionService {
     MissionDao missionDao;
 
     @Override
-    public void addMission(Mission mission) throws DataAccessException {
+    public Mission addMission(Mission mission) throws DataAccessException {
         try {
-            missionDao.addMission(mission);
+            return missionDao.addMission(mission);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not create a mission ", e);
         }
     }
 
     @Override
-    public void updateMission(Mission mission) throws DataAccessException {
+    public Mission updateMission(Mission mission) throws DataAccessException {
         try {
-            missionDao.updateMission(mission);
+            return missionDao.updateMission(mission);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not update a mission ", e);
         }

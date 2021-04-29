@@ -29,7 +29,6 @@ public class MissionDaoImpl implements MissionDao {
         Guard.requireNull(mission.getId(), "Mission id is not null");
 
         entityManager.persist(mission);
-
         return mission;
     }
 
@@ -60,7 +59,6 @@ public class MissionDaoImpl implements MissionDao {
         Guard.requireNotNull(mission.getId(), "Mission id is null");
 
         entityManager.merge(mission);
-
         return mission;
     }
 
