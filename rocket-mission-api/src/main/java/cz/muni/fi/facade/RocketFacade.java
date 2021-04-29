@@ -2,6 +2,7 @@ package cz.muni.fi.facade;
 
 import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.UpdateRocketDTO;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface RocketFacade {
      *
      * @param rocket rocket to update
      */
-    void updateRocket(RocketDTO rocket);
+    void updateRocket(UpdateRocketDTO rocket);
 
     /**
      * Delete entity from the database

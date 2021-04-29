@@ -109,7 +109,6 @@ public class UserDaoImpl implements UserDao{
         Guard.requireNotNull(user.getPassword(), "User password should not be null");
         Guard.requireNotNull(user.getRole(), "Role should not be null");
         Guard.requireNotNull(user.getLevelOfExperience(), "Level of experience should not be null");
-
         if(!user.getEmail().matches(".+@.+\\....?")){
             throw new IllegalArgumentException("User email has wrong format");
         }

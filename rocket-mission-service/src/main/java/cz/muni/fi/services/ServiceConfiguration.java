@@ -45,6 +45,7 @@ public class ServiceConfiguration {
             mapping(User.class, UpdateUserDTO.class);
             mapping(Rocket.class, RocketDTO.class);
             mapping(Rocket.class, CreateRocketDTO.class);
+            mapping(Rocket.class, UpdateRocketDTO.class);
             mapping(Mission.class, MissionDTO.class);
             mapping(Mission.class, CreateMissionDTO.class);
             mapping(Mission.class, UpdateMissionDTO.class);

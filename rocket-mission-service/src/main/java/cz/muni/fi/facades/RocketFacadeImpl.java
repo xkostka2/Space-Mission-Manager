@@ -2,6 +2,7 @@ package cz.muni.fi.facades;
 
 import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.BeanMappingService;
@@ -48,7 +49,7 @@ public class RocketFacadeImpl implements RocketFacade {
     }
 
     @Override
-    public void updateRocket(RocketDTO rocket) {
+    public void updateRocket(UpdateRocketDTO rocket) {
         Rocket mappedRocket = beanMappingService.mapTo(rocket, Rocket.class);
         rocketService.updateRocket(mappedRocket);
     }

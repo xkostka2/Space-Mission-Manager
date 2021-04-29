@@ -6,6 +6,7 @@ import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.RocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author Tomas Bouma
  */
 
+@Service
 public class RocketServiceImpl implements RocketService {
     @Autowired
     private RocketDao rocketDao;

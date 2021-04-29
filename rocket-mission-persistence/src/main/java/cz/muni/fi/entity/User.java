@@ -44,7 +44,7 @@ public class User {
     private Mission mission;
 
     private boolean missionAccepted;
-    private String missionRejectedExplanation;
+    private String missionExplanation;
 
     public Long getId() {
         return id;
@@ -110,12 +110,12 @@ public class User {
         this.missionAccepted = missionAccepted;
     }
 
-    public String getMissionRejectedExplanation() {
-        return missionRejectedExplanation;
+    public String getMissionExplanation() {
+        return missionExplanation;
     }
 
     public void setMissionRejectedExplanation(String missionRejectedExplanation) {
-        this.missionRejectedExplanation = missionRejectedExplanation;
+        this.missionExplanation = missionRejectedExplanation;
     }
 
     public boolean missionStatusPending() {
