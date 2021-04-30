@@ -72,4 +72,19 @@ public interface UserFacade {
      * @return found UserDTO
      */
     UserDTO findUserByEmail(String email);
+
+    /**
+     * Confirm mission for given user, set missionAccepted to true
+     * @param user user which is accepting assigned mission
+     */
+    void acceptAssignedMission(UserDTO user);
+
+    /**
+     * Reject mission for given user and add explanation why,
+     * leave missionAccepted to false and add explanation,
+     * also removes the astronaut from the mission's list of astronauts.
+     * @param user user which is rejecting assigned mission
+     * @param explanation explanation why user did not accept mission
+     */
+    void rejectAssignedMission(UserDTO user, String explanation);
 }

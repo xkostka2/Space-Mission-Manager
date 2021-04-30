@@ -51,6 +51,14 @@ public class UpdateRocketDTO {
         return Collections.unmodifiableSet(requiredComponents);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setRequiredComponents(Set<ComponentDTO> requiredComponents) {
         this.requiredComponents = requiredComponents;
     }
