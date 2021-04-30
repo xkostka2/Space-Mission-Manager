@@ -81,13 +81,13 @@ public class ComponentDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ComponentDTO)) return false;
         ComponentDTO that = (ComponentDTO) o;
-        return getName().equals(that.getName()) && getReadyDate().equals(that.getReadyDate()) && Objects.equals(getMission(), that.getMission()) && Objects.equals(getRocket(), that.getRocket());
+        return Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getReadyDate(), getMission(), getRocket());
+        return Objects.hash(getName());
     }
 }

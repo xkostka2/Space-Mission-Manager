@@ -42,9 +42,6 @@ public class ComponentServiceImpl implements ComponentService {
 
     @Override
     public Component findComponentById(Long id) throws DataAccessException {
-        if(id == null){
-            throw new IllegalArgumentException("Id must not be null.");
-        }
         try{
             return componentDao.findComponentById(id);
         } catch (Throwable e) {
