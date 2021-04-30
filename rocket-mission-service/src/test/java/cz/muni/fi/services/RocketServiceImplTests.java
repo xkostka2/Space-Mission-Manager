@@ -2,7 +2,6 @@ package cz.muni.fi.services;
 
 import cz.muni.fi.dao.RocketDao;
 import cz.muni.fi.entity.Rocket;
-import cz.muni.fi.entity.User;
 import cz.muni.fi.services.impl.RocketServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -73,7 +72,7 @@ public class RocketServiceImplTests {
             Rocket mockedRocket = invoke.getArgumentAt(0, Rocket.class);
 
             if (!rockets.keySet().contains(mockedRocket.getId()) || mockedRocket.getId() == null) {
-                throw new IllegalArgumentException("User was not created yet");
+                throw new IllegalArgumentException("Rocket is not in DB");
             }
             rockets.remove(mockedRocket.getId(), mockedRocket);
             return mockedRocket;
@@ -97,7 +96,7 @@ public class RocketServiceImplTests {
             return mockedRocket;
         });
 
-        when(rocketDao.findRocketById(anyLong())).then(invoke -> {
+        when(rocketDao.findRocketById(any())).then(invoke -> {
             Long id = invoke.getArgumentAt(0, Long.class);
             if (id == null) {
                 throw new IllegalArgumentException("id is null");
@@ -205,7 +204,7 @@ public class RocketServiceImplTests {
         assertThat(rockets.values()).doesNotContain(rocket1).hasSize(sizeBefore - 1);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void deleteNullRocket() {
         rocketService.removeRocket(null);
     }
@@ -216,16 +215,12 @@ public class RocketServiceImplTests {
         rocketService.removeRocket(rocket);
     }
 
-    @Test
+    @Test(expectedExceptions = DataAccessException.class)
     public void deleteRocketNotInDB() {
-        int sizeBefore = rockets.values().size();
         Rocket rocket = new Rocket();
         rocket.setName("rocket");
         rocket.setId(counter * 2L);
         rocketService.removeRocket(rocket);
-
-        assertThat(rockets.values()).hasSize(sizeBefore)
-                .doesNotContain(rocket);
     }
 
     @Test(expectedExceptions = DataAccessException.class)
