@@ -2,8 +2,11 @@ package cz.muni.fi.facades;
 
 import cz.muni.fi.dto.MissionDTO;
 import cz.muni.fi.dto.create.CreateMissionDTO;
+import cz.muni.fi.dto.create.CreateUserDTO;
 import cz.muni.fi.dto.update.UpdateMissionDTO;
+import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.MissionProgress;
+import cz.muni.fi.enums.Role;
 import cz.muni.fi.facade.MissionFacade;
 import cz.muni.fi.services.ServiceConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +47,7 @@ public class MissionFacadeImplTest extends AbstractTestNGSpringContextTests {
                 .addMission(getCreateMissionDTO("apollo 2", MissionProgress.FINISHED)).getId());
     }
 
-    private CreateMissionDTO getCreateMissionDTO(String name, MissionProgress progress) {
+    static public CreateMissionDTO getCreateMissionDTO(String name, MissionProgress progress) {
         CreateMissionDTO createMissionDTO = new CreateMissionDTO();
         createMissionDTO.setName(name);
         createMissionDTO.setMissionProgress(progress);

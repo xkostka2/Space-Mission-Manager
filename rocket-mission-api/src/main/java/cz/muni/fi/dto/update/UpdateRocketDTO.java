@@ -18,6 +18,9 @@ import java.util.Set;
  */
 
 public class UpdateRocketDTO {
+
+    private long id;
+
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
@@ -46,6 +49,14 @@ public class UpdateRocketDTO {
 
     public Set<ComponentDTO> getRequiredComponents() {
         return Collections.unmodifiableSet(requiredComponents);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setRequiredComponents(Set<ComponentDTO> requiredComponents) {

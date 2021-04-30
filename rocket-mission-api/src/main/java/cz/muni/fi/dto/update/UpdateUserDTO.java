@@ -13,12 +13,15 @@ import java.util.Objects;
  */
 public class UpdateUserDTO {
 
+    private long id;
     private String name;
     private String email;
     private String password;
     private Role role;
     private LevelOfExperience levelOfExperience;
     private MissionDTO mission;
+    private boolean missionAccepted;
+    private String missionExplanation;
 
     public String getName() {
         return name;
@@ -60,12 +63,36 @@ public class UpdateUserDTO {
         this.levelOfExperience = levelOfExperience;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public MissionDTO getMission() {
         return mission;
     }
 
     public void setMission(MissionDTO mission) {
         this.mission = mission;
+    }
+
+    public boolean getMissionAccepted() {
+        return missionAccepted;
+    }
+
+    public void setMissionAccepted(boolean missionAccepted) {
+        this.missionAccepted = missionAccepted;
+    }
+
+    public String getMissionExplanation() {
+        return missionExplanation;
+    }
+
+    public void setMissionRejectedExplanation(String missionRejectedExplanation) {
+        this.missionExplanation = missionRejectedExplanation;
     }
 
     @Override
