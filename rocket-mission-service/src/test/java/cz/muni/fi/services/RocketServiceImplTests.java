@@ -2,6 +2,7 @@ package cz.muni.fi.services;
 
 import cz.muni.fi.dao.RocketDao;
 import cz.muni.fi.entity.Rocket;
+import cz.muni.fi.entity.User;
 import cz.muni.fi.services.impl.RocketServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
@@ -66,6 +68,16 @@ public class RocketServiceImplTests {
             rockets.put(index, mockedRocket);
             return mockedRocket;
         });
+
+        doAnswer(invoke -> {
+            Rocket mockedRocket = invoke.getArgumentAt(0, Rocket.class);
+
+            if (!rockets.keySet().contains(mockedRocket.getId()) || mockedRocket.getId() == null) {
+                throw new IllegalArgumentException("User was not created yet");
+            }
+            rockets.remove(mockedRocket.getId(), mockedRocket);
+            return mockedRocket;
+        }).when(rocketDao).removeRocket(any(Rocket.class));
 
         when(rocketDao.updateRocket(any(Rocket.class))).then(invoke -> {
             Rocket mockedRocket = invoke.getArgumentAt(0, Rocket.class);
