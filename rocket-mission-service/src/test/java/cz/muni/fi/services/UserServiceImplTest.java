@@ -187,7 +187,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(u.getMissionExplanation()).isNullOrEmpty();
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void acceptMissionNullUser(){
         userService.acceptAssignedMission(null);
     }
@@ -201,7 +201,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         userService.acceptAssignedMission(u);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void acceptNotAssignedMission(){
         userService.acceptAssignedMission(users.get(4L));
     }
@@ -215,24 +215,24 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(u.getMissionExplanation()).isNotNull().isNotEmpty().isEqualTo("Because cake is a lie");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void rejectMissionNullUser(){
         userService.rejectAssignedMission(null,"");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void rejectMissionNullExplanation(){
         User u = prepareAstronautWithMission();
         userService.rejectAssignedMission(u,null);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void rejectMissionEmptyExplanation(){
         User u = prepareAstronautWithMission();
         userService.rejectAssignedMission(u,"");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = ServiceDataAccessException.class)
     public void rejectNotAssignedMission(){
         userService.rejectAssignedMission(users.get(4L),"I have no mission assigned, but still...");
     }

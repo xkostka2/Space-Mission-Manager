@@ -19,7 +19,7 @@ public interface RocketFacade {
      *
      * @param rocket Rocket to add
      */
-    void addRocket(CreateRocketDTO rocket);
+    RocketDTO addRocket(CreateRocketDTO rocket);
 
     /**
      * Finds all entities of type Rocket
@@ -38,7 +38,7 @@ public interface RocketFacade {
      *
      * @param rocket rocket to update
      */
-    void updateRocket(UpdateRocketDTO rocket);
+    RocketDTO updateRocket(UpdateRocketDTO rocket);
 
     /**
      * Delete entity from the database

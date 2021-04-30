@@ -25,12 +25,14 @@ public class RocketServiceImpl implements RocketService {
     private RocketDao rocketDao;
 
     @Override
-    public void addRocket(Rocket rocket) throws DataAccessException {
+    public Rocket addRocket(Rocket rocket) throws DataAccessException {
         try {
             rocketDao.addRocket(rocket);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Error when adding rocket.", e);
         }
+
+        return rocket;
     }
 
     @Override
@@ -53,12 +55,14 @@ public class RocketServiceImpl implements RocketService {
     }
 
     @Override
-    public void updateRocket(Rocket rocket) throws DataAccessException {
+    public Rocket updateRocket(Rocket rocket) throws DataAccessException {
         try {
             rocketDao.updateRocket(rocket);
         }  catch (Throwable e) {
             throw new ServiceDataAccessException("Error when updating rocket.", e);
         }
+
+        return rocket;
     }
 
     @Override
