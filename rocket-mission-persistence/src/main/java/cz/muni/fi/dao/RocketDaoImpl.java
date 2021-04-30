@@ -24,12 +24,13 @@ public class RocketDaoImpl implements RocketDao {
 
 
     @Override
-    public void addRocket(Rocket rocket) {
+    public Rocket addRocket(Rocket rocket) {
         Guard.requireNotNull(rocket, "Rocket is null");
         Guard.requireNotNull(rocket.getName(), "Rocket name is null");
         Guard.requireNull(rocket.getId(), "Rocket id is not null");
 
         this.entityManager.persist(rocket);
+        return rocket;
     }
 
     @Override
@@ -51,12 +52,13 @@ public class RocketDaoImpl implements RocketDao {
     }
 
     @Override
-    public void updateRocket(Rocket rocket) {
+    public Rocket updateRocket(Rocket rocket) {
         Guard.requireNotNull(rocket, "Rocket is null");
         Guard.requireNotNull(rocket.getName(), "Rocket name is null");
         Guard.requireNotNull(rocket.getId(), "Rocket id is null");
 
         this.entityManager.merge(rocket);
+        return rocket;
     }
 
     @Override
