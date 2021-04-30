@@ -24,6 +24,11 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
+/**
+ * Created by Martin Kostka
+ *
+ * @author Martin Kostka
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class RocketServiceImplTests {
     @Mock

@@ -32,8 +32,6 @@ public class RocketFacadeImpl implements RocketFacade {
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {
         Rocket mappedRocket = beanMappingService.mapTo(rocket, Rocket.class);
-        rocketService.addRocket(mappedRocket);
-
         return beanMappingService.mapTo(rocketService.addRocket(mappedRocket), RocketDTO.class);
     }
 
