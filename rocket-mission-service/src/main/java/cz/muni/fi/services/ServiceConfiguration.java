@@ -23,6 +23,7 @@ import cz.muni.fi.entity.User;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
+import org.dozer.loader.api.TypeMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -45,17 +46,44 @@ public class ServiceConfiguration {
         @Override
         protected void configure() {
             mapping(User.class, UserDTO.class);
-            mapping(User.class, CreateUserDTO.class);
-            mapping(User.class, UpdateUserDTO.class);
-            mapping(Rocket.class, RocketDTO.class);
-            mapping(Rocket.class, CreateRocketDTO.class);
-            mapping(Rocket.class, UpdateRocketDTO.class);
-            mapping(Mission.class, MissionDTO.class);
-            mapping(Mission.class, CreateMissionDTO.class);
-            mapping(Mission.class, UpdateMissionDTO.class);
+            mapping(CreateUserDTO.class, User.class);
+            mapping(UpdateUserDTO.class, User.class);
+
+            mapping(Rocket.class, RocketDTO.class, TypeMappingOptions.mapNull(false))
+                    .fields(field("requiredComponents").accessible(true),
+                            field("requiredComponents").accessible(true));
+            mapping(CreateRocketDTO.class, Rocket.class, TypeMappingOptions.mapNull(false))
+                    .fields(field("requiredComponents").accessible(true),
+                            field("requiredComponents").accessible(true));
+            mapping(UpdateRocketDTO.class, Rocket.class)
+                    .fields(field("requiredComponents").accessible(true),
+                            field("requiredComponents").accessible(true));
+
+            mapping(Mission.class, MissionDTO.class)
+                    .fields(field("users").accessible(true),
+                            field("users").accessible(true))
+                    .fields(field("rockets").accessible(true),
+                            field("rockets").accessible(true))
+                    .fields(field("components").accessible(true),
+                            field("components").accessible(true));
+            mapping(CreateMissionDTO.class, Mission.class)
+                    .fields(field("users").accessible(true),
+                            field("users").accessible(true))
+                    .fields(field("rockets").accessible(true),
+                            field("rockets").accessible(true))
+                    .fields(field("components").accessible(true),
+                            field("components").accessible(true));
+            mapping(UpdateMissionDTO.class, Mission.class)
+                    .fields(field("users").accessible(true),
+                            field("users").accessible(true))
+                    .fields(field("rockets").accessible(true),
+                            field("rockets").accessible(true))
+                    .fields(field("components").accessible(true),
+                            field("components").accessible(true));
+
             mapping(Component.class, ComponentDTO.class);
-            mapping(Component.class, CreateComponentDTO.class);
-            mapping(Component.class, UpdateComponentDTO.class);
+            mapping(CreateComponentDTO.class, Component.class);
+            mapping(UpdateComponentDTO.class, Component.class);
         }
     }
 }

@@ -15,7 +15,7 @@ public interface RocketService {
      * Create new entity in the database
      * @param rocket Rocket to add
      */
-    void addRocket(Rocket rocket) throws DataAccessException;
+    Rocket addRocket(Rocket rocket) throws DataAccessException;
 
     /**
      * Finds all entities of type Rocket
@@ -32,7 +32,7 @@ public interface RocketService {
      * Update entity in the database
      * @param rocket rocket to update
      */
-    void updateRocket(Rocket rocket) throws DataAccessException;
+    Rocket updateRocket(Rocket rocket) throws DataAccessException;
 
     /**
      * Delete entity from the database
