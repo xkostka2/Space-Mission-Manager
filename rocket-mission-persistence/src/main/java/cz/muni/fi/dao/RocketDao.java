@@ -14,7 +14,7 @@ public interface RocketDao {
     /**
      * @param rocket rocket to add
      */
-    void addRocket(Rocket rocket);
+    Rocket addRocket(Rocket rocket);
 
     /**
      * @return list of all rockets
@@ -30,7 +30,7 @@ public interface RocketDao {
     /**
      * @param rocket rocket to update
      */
-    void updateRocket(Rocket rocket);
+    Rocket updateRocket(Rocket rocket);
 
     /**
      * @param rocket rocket to remove

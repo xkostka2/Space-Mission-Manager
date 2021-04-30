@@ -12,7 +12,6 @@ import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.entity.User;
-import cz.muni.fi.facades.TestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
