@@ -18,6 +18,9 @@ import java.util.Set;
  */
 
 public class UpdateRocketDTO {
+
+    private long id;
+
     @NotNull
     @Size(min = 3, max = 50)
     private String name;

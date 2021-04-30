@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 public class UpdateUserDTO {
 
+    private long id;
     private String name;
     private String email;
     private String password;
