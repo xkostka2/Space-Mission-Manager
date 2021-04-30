@@ -77,4 +77,15 @@ public class UserFacadeImpl implements UserFacade {
         }
         return beanMappingService.mapTo(user, UserDTO.class);
     }
+
+    @Override
+    public void acceptAssignedMission(UserDTO user) {
+        userService.acceptAssignedMission(beanMappingService.mapTo(user, User.class));
+    }
+
+    @Override
+    public void rejectAssignedMission(UserDTO user, String explanation) {
+        userService.rejectAssignedMission(beanMappingService.mapTo(user, User.class), explanation);
+    }
+
 }
