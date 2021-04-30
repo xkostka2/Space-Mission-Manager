@@ -81,6 +81,12 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
     public void archive(Mission mission, ZonedDateTime endDate, String archiveComment) {
+        if (mission == null) {
+            throw new IllegalArgumentException("Mission can not be null");
+        }
+        if (endDate == null) {
+            throw new IllegalArgumentException("Mission end date can not be null");
+        }
         if (endDate.isAfter(ZonedDateTime.now())) {
             throw new IllegalArgumentException("Mission end date must be in the past.");
         }

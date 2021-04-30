@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
@@ -187,7 +186,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(u.getMissionExplanation()).isNullOrEmpty();
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void acceptMissionNullUser(){
         userService.acceptAssignedMission(null);
     }
@@ -201,7 +200,7 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         userService.acceptAssignedMission(u);
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void acceptNotAssignedMission(){
         userService.acceptAssignedMission(users.get(4L));
     }
@@ -215,24 +214,24 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(u.getMissionExplanation()).isNotNull().isNotEmpty().isEqualTo("Because cake is a lie");
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void rejectMissionNullUser(){
         userService.rejectAssignedMission(null,"");
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void rejectMissionNullExplanation(){
         User u = prepareAstronautWithMission();
         userService.rejectAssignedMission(u,null);
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void rejectMissionEmptyExplanation(){
         User u = prepareAstronautWithMission();
         userService.rejectAssignedMission(u,"");
     }
 
-    @Test(expectedExceptions = ServiceDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void rejectNotAssignedMission(){
         userService.rejectAssignedMission(users.get(4L),"I have no mission assigned, but still...");
     }

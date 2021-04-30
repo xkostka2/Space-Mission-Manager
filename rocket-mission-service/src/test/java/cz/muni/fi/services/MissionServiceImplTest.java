@@ -97,12 +97,12 @@ public class MissionServiceImplTest extends AbstractTestNGSpringContextTests {
         when(missionDao.findAllMissions())
                 .then(invoke -> Collections.unmodifiableList(new ArrayList<>(missions.values())));
 
-        when(missionDao.findMissionById(anyLong())).then(invoke -> {
-            Long index = invoke.getArgumentAt(0, Long.class);
-            if (index == null) {
+        when(missionDao.findMissionById(any())).then(invoke -> {
+            Long id = invoke.getArgumentAt(0, Long.class);
+            if (id == null) {
                 throw new IllegalArgumentException("id is null");
             }
-            return missions.get(index);
+            return missions.get(id);
         });
 
         when(missionDao.findAllMissions(any(MissionProgress.class))).then(invoke -> {
@@ -282,13 +282,7 @@ public class MissionServiceImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void updateArchivedMission() {
-        missionService.archive(mission3, ZonedDateTime.now().minusDays(10), "It's over!");
-        missionService.updateMission(mission3);
-    }
-
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void archiveMissionWithNullIdArgument() {
+    public void archiveMissionWithNullMissionArgument() {
         missionService.archive(null, ZonedDateTime.now().minusDays(10), "It's over!");
     }
 
