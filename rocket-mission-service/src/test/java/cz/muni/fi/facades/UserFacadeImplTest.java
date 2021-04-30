@@ -9,6 +9,8 @@ import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.create.CreateUserDTO;
 import cz.muni.fi.dto.update.UpdateUserDTO;
 import cz.muni.fi.entity.User;
+import cz.muni.fi.enums.LevelOfExperience;
+import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.enums.Role;
 import cz.muni.fi.facade.ComponentFacade;
 import cz.muni.fi.facade.MissionFacade;
@@ -50,14 +52,18 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
         CreateUserDTO userCreateDTO = new CreateUserDTO();
         userCreateDTO.setName("name");
         userCreateDTO.setEmail("name@mail.com");
+        userCreateDTO.setRole(Role.ASTRONAUT);
         userCreateDTO.setPassword("pass");
+        userCreateDTO.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
         return userCreateDTO;
     }
 
     public UpdateUserDTO updateUser() {
         UpdateUserDTO userUpdateDTO = new UpdateUserDTO();
-        userUpdateDTO.setName("name");
+        userUpdateDTO.setName("namasdase");
         userUpdateDTO.setEmail("updated@mail.com");
+        userUpdateDTO.setRole(Role.ASTRONAUT);
+        userUpdateDTO.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
         userUpdateDTO.setPassword("pass");
         return userUpdateDTO;
     }
@@ -89,6 +95,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
         int sizeBefore = userFacade.findAllUsers().size();
         CreateUserDTO user = createUser();
         user.setEmail("sfdljsdfl@mail.cz");
+        user.setName("aseq2we");
         UserDTO userDto = userFacade.addUser(user);
         assertThat(userFacade.findAllUsers()).hasSize(sizeBefore + 1);
         assertThat(userFacade.findAllUsers()).contains(userDto);
@@ -96,8 +103,10 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testUpdateUser() throws Exception {
-        UserDTO updatedUser = userFacade.updateUser(updateUser());
-        assertThat(updatedUser.getEmail()).isEqualTo(user.getEmail());
+        UpdateUserDTO userForUpdate = updateUser();
+        userForUpdate.setId(user.getId());
+        UserDTO updatedUser = userFacade.updateUser(userForUpdate);
+        assertThat(updatedUser.getEmail()).isEqualTo(updateUser().getEmail());
     }
 
     @Test
@@ -113,9 +122,11 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
         int sizeBefore = userFacade.findAllUsers().size();
         CreateUserDTO user1 = createUser();
         user1.setEmail("1@users.com");
+        user1.setName("aseq2123we");
         UserDTO addedUser1 = userFacade.addUser(user1);
         CreateUserDTO user2 = createUser();
         user2.setEmail("2@users.com");
+        user2.setName("asdaseq2we");
         UserDTO addedUser2 = userFacade.addUser(user2);
         assertThat(userFacade.findAllUsers()).hasSize(sizeBefore + 2);
         assertThat(userFacade.findAllUsers()).contains(addedUser1);
@@ -127,9 +138,11 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
         int sizeBefore = userFacade.findAllAstronauts().size();
         CreateUserDTO user1 = createUser();
         user1.setEmail("1@users.com");
+        user1.setName("321aseq2we");
         userFacade.addUser(user1);
         CreateUserDTO user2 = createUser();
         user2.setEmail("2@users.com");
+        user2.setName("asyrteq2we");
         user2.setRole(Role.MANAGER);
         userFacade.addUser(user2);
         assertThat(userFacade.findAllAstronauts()).hasSize(sizeBefore + 1);
@@ -140,41 +153,34 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
         assertThat(userFacade.findUserById(user.getId())).isEqualTo(user);
     }
 
-//    @Test
-//    public void testAcceptMission() throws Exception {
-//        CreateMissionDTO missionCreateDTO = TestUtils.getMissionCreateDTO("Enterprise");
-//        CreateComponentDTO craftComponentCreateDTO = TestUtils.getCraftComponentCreateDTO("Enterprise");
-//        Long componentId = craftComponentFacade.addComponent(craftComponentCreateDTO);
-//        CreateRocketDTO rocketCreateDTO = TestUtils.getSpacecraftCreateDTO("Enterprise");
-//        spacecraftCreateDTO.setComponents(Collections.singleton(craftComponentFacade.findComponentById(componentId)));
-//        missionCreateDTO.setSpacecrafts(Collections.singleton(spacecraftFacade.findSpacecraftById(spacecraftFacade.addSpacecraft(spacecraftCreateDTO))));
-//        Long id = missionFacade.createMission(missionCreateDTO);
-//        UserCreateDTO userCreateDTO = createUser();
-//        userCreateDTO.setEmail("ASH@mail.com");
-//        userCreateDTO.setMission(missionFacade.findMissionById(id));
-//        Long us = userFacade.addUser(userCreateDTO);
-//        userFacade.acceptAssignedMission(userFacade.findUserById(us));
-//        assertThat(userFacade.findUserById(us).getMission()).isNotNull();
-//        assertThat(userFacade.findUserById(us).getAcceptedMission()).isTrue();
-//
-//    }
-//
-//    @Test
-//    public void testRejectMission() throws Exception {
-//        CreateMissionDTO missionCreateDTO = TestUtils.getMissionCreateDTO("Enterprise");
-//        CreateComponentDTO componentCreateDTO = TestUtils.getCraftComponentCreateDTO("Enterprise");
-//        Long componentId = componentFacade.addComponent(craftComponentCreateDTO);
-//        CreateRocketDTO spacecraftCreateDTO = TestUtils.getSpacecraftCreateDTO("Enterprise");
-//        spacecraftCreateDTO.setComponents(Collections.singleton(craftComponentFacade.findComponentById(componentId)));
-//        missionCreateDTO.setSpacecrafts(Collections.singleton(spacecraftFacade.findSpacecraftById(spacecraftFacade.addSpacecraft(spacecraftCreateDTO))));
-//        Long id = missionFacade.createMission(missionCreateDTO);
-//        CreateUserDTO userCreateDTO = createUser();
-//        userCreateDTO.setEmail("ASH@mail.com");
-//        userCreateDTO.setMission(missionFacade.findMissionById(id));
-//        Long us = userFacade.addUser(userCreateDTO);
-//        userFacade.rejectAssignedMission(userFacade.findUserById(us), "My mom won't let me go.");
-//        assertThat(userFacade.findUserById(us).getMission()).isNull();
-//        assertThat(userFacade.findUserById(us).getAcceptedMission()).isFalse();
-//
-//    }
+    @Test
+    public void testRejectMission() throws Exception {
+        CreateMissionDTO missionCreateDTO = MissionFacadeImplTest.getCreateMissionDTO("someasf", MissionProgress.IN_PROGRESS);
+        MissionDTO mission = missionFacade.addMission(missionCreateDTO);
+        CreateUserDTO userCreateDTO = createUser();
+        userCreateDTO.setEmail("ASH@mail.com");
+        userCreateDTO.setName("ASasdasH");
+        userCreateDTO.setMission(mission);
+        UserDTO us = userFacade.addUser(userCreateDTO);
+        us.setMission(mission);
+        userFacade.rejectAssignedMission(us, "I am Covid");
+        assertThat(userFacade.findUserById(us.getId()).getMission()).isNull();
+        assertThat(userFacade.findUserById(us.getId()).getMissionAccepted()).isFalse();
+    }
+
+    @Test
+    public void testAcceptMission() throws Exception {
+        CreateMissionDTO missionCreateDTO = MissionFacadeImplTest.getCreateMissionDTO("someasf", MissionProgress.IN_PROGRESS);
+        MissionDTO mission = missionFacade.addMission(missionCreateDTO);
+        CreateUserDTO userCreateDTO = createUser();
+        userCreateDTO.setEmail("ASH@mail.com");
+        userCreateDTO.setName("ASH");
+        userCreateDTO.setMission(mission);
+        UserDTO us = userFacade.addUser(userCreateDTO);
+        us.setMission(mission);
+        userFacade.acceptAssignedMission(us);
+        assertThat(userFacade.findUserById(us.getId()).getMission()).isNotNull();
+        assertThat(userFacade.findUserById(us.getId()).getMissionAccepted()).isTrue();
+
+    }
 }
