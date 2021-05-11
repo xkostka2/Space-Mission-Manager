@@ -1,8 +1,10 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.rocket.CreateRocketDTO;
-import cz.muni.fi.dto.rocket.RocketDTO;
-import cz.muni.fi.dto.rocket.UpdateRocketDTO;
+
+
+import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.create.CreateRocketDTO;
+import cz.muni.fi.dto.update.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.BeanMappingService;
@@ -23,10 +25,10 @@ import java.util.List;
 @Transactional
 public class RocketFacadeImpl implements RocketFacade {
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    RocketService rocketService;
+    private RocketService rocketService;
 
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {
@@ -35,11 +37,13 @@ public class RocketFacadeImpl implements RocketFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<RocketDTO> findAllRockets() {
         return beanMappingService.mapTo(rocketService.findAllRockets(), RocketDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public RocketDTO findRocketById(Long id) {
         Rocket rocket = rocketService.findRocketById(id);
         if (rocket == null) {

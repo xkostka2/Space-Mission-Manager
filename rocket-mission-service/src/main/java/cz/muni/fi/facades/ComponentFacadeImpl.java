@@ -23,10 +23,10 @@ import java.util.List;
 @Transactional
 public class ComponentFacadeImpl implements ComponentFacade {
     @Autowired
-    ComponentService componentService;
+    private ComponentService componentService;
 
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Override
     public ComponentDTO addComponent(CreateComponentDTO component) {
@@ -35,11 +35,13 @@ public class ComponentFacadeImpl implements ComponentFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<ComponentDTO> findAllComponents() {
         return beanMappingService.mapTo(componentService.findAllComponents(), ComponentDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public ComponentDTO findComponentById(Long id) {
         Component c = componentService.findComponentById(id);
         return (c == null) ? null : beanMappingService.mapTo(c, ComponentDTO.class);

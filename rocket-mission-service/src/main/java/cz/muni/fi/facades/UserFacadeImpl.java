@@ -22,10 +22,10 @@ import java.util.List;
 @Transactional
 public class UserFacadeImpl implements UserFacade {
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public UserDTO addUser(CreateUserDTO user) {
@@ -46,16 +46,19 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<UserDTO> findAllUsers() {
         return beanMappingService.mapTo(userService.findAllUsers(), UserDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<UserDTO> findAllAstronauts() {
         return beanMappingService.mapTo(userService.findAllAstronauts(), UserDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public UserDTO findUserById(Long id) {
         User user = userService.findUserById(id);
         if (user == null) {
@@ -65,11 +68,13 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<UserDTO> findAllAvailableAstronauts() {
         return beanMappingService.mapTo(userService.findAllAvailableAstronauts(), UserDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public UserDTO findUserByEmail(String email) {
         User user = userService.findUserByEmail(email);
         if (user == null) {
