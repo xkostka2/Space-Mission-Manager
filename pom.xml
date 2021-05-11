@@ -13,6 +13,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <version.spring>5.0.6.RELEASE</version.spring>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
 
     <parent>
@@ -27,7 +28,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -121,16 +132,6 @@
                 <version>1.0.0.GA</version>
             </dependency>
             <dependency>
-                <groupId>net.sf.dozer</groupId>
-                <artifactId>dozer</artifactId>
-                <version>5.5.1</version>
-            </dependency>
-            <dependency>
-                <groupId>io.craftsman</groupId>
-                <artifactId>dozer-jdk8-support</artifactId>
-                <version>1.0.6</version>
-            </dependency>
-            <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>RELEASE</version>
@@ -141,6 +142,11 @@
                 <artifactId>jakarta.validation-api</artifactId>
                 <version>2.0.2</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
