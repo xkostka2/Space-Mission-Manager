@@ -1,20 +1,18 @@
 package cz.muni.fi.facades;
 
 
-import cz.muni.fi.dto.*;
-
-import cz.muni.fi.dto.create.CreateComponentDTO;
+import cz.muni.fi.dto.ComponentDTO;
+import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.UserDTO;
 import cz.muni.fi.dto.create.CreateMissionDTO;
-import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.create.CreateUserDTO;
 import cz.muni.fi.dto.update.UpdateUserDTO;
-import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.enums.Role;
 import cz.muni.fi.facade.ComponentFacade;
 import cz.muni.fi.facade.MissionFacade;
-
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.facade.UserFacade;
 import cz.muni.fi.services.ServiceConfiguration;
@@ -26,11 +24,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZonedDateTime;
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
@@ -41,9 +34,9 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private ComponentFacade componentFacade;
     @Autowired
-    MissionFacade missionFacade;
+    private MissionFacade missionFacade;
     @Autowired
-    RocketFacade rocketFacade;
+    private RocketFacade rocketFacade;
 
 
     private UserDTO user;
@@ -69,13 +62,13 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @BeforeMethod
-    public void setUp() throws Exception {
+    public void setUp() {
         CreateUserDTO user = createUser();
         this.user = userFacade.addUser(user);
     }
 
     @AfterMethod
-    public void tearDown() throws Exception {
+    public void tearDown() {
         for (UserDTO user : userFacade.findAllUsers()) {
             userFacade.deleteUser(user);
         }
@@ -102,7 +95,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testUpdateUser() throws Exception {
+    public void testUpdateUser() {
         UpdateUserDTO userForUpdate = updateUser();
         userForUpdate.setId(user.getId());
         UserDTO updatedUser = userFacade.updateUser(userForUpdate);
@@ -110,7 +103,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testDeleteUser() throws Exception {
+    public void testDeleteUser() {
         int sizeBefore = userFacade.findAllUsers().size();
         userFacade.deleteUser(user);
         assertThat(userFacade.findAllUsers()).hasSize(sizeBefore - 1);
@@ -118,7 +111,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testFindAllUsers() throws Exception {
+    public void testFindAllUsers() {
         int sizeBefore = userFacade.findAllUsers().size();
         CreateUserDTO user1 = createUser();
         user1.setEmail("1@users.com");
@@ -134,7 +127,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testFindAllAstronauts() throws Exception {
+    public void testFindAllAstronauts() {
         int sizeBefore = userFacade.findAllAstronauts().size();
         CreateUserDTO user1 = createUser();
         user1.setEmail("1@users.com");
@@ -149,12 +142,12 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testFindUserById() throws Exception {
+    public void testFindUserById() {
         assertThat(userFacade.findUserById(user.getId())).isEqualTo(user);
     }
 
     @Test
-    public void testRejectMission() throws Exception {
+    public void testRejectMission() {
         CreateMissionDTO missionCreateDTO = MissionFacadeImplTest.getCreateMissionDTO("someasf", MissionProgress.IN_PROGRESS);
         MissionDTO mission = missionFacade.addMission(missionCreateDTO);
         CreateUserDTO userCreateDTO = createUser();
@@ -169,7 +162,7 @@ public class UserFacadeImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testAcceptMission() throws Exception {
+    public void testAcceptMission() {
         CreateMissionDTO missionCreateDTO = MissionFacadeImplTest.getCreateMissionDTO("someasf", MissionProgress.IN_PROGRESS);
         MissionDTO mission = missionFacade.addMission(missionCreateDTO);
         CreateUserDTO userCreateDTO = createUser();
