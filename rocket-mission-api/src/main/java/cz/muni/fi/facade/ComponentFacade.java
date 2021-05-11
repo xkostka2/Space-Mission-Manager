@@ -1,8 +1,8 @@
 package cz.muni.fi.facade;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.create.CreateComponentDTO;
-import cz.muni.fi.dto.update.UpdateComponentDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.component.CreateComponentDTO;
+import cz.muni.fi.dto.component.UpdateComponentDTO;
 
 import java.util.List;
 

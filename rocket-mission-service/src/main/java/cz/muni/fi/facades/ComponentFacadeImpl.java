@@ -1,8 +1,8 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.create.CreateComponentDTO;
-import cz.muni.fi.dto.update.UpdateComponentDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.component.CreateComponentDTO;
+import cz.muni.fi.dto.component.UpdateComponentDTO;
 import cz.muni.fi.entity.Component;
 import cz.muni.fi.facade.ComponentFacade;
 import cz.muni.fi.services.BeanMappingService;

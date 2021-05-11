@@ -1,4 +1,7 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.rocket;
+
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
 
 import java.util.Collections;
 import java.util.HashSet;

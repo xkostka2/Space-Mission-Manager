@@ -1,7 +1,7 @@
-package cz.muni.fi.dto.create;
+package cz.muni.fi.dto.component;
 
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.enums.ComponentType;
 
 import javax.validation.constraints.NotNull;

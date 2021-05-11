@@ -2,11 +2,11 @@ package cz.muni.fi.services;
 
 //import cz.muni.fi.config.ServiceConfiguration;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
 
-import cz.muni.fi.dto.RocketDTO;
-import cz.muni.fi.dto.UserDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.entity.Component;
 
 import cz.muni.fi.entity.Mission;

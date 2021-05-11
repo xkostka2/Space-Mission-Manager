@@ -1,14 +1,13 @@
 package cz.muni.fi.facades;
 
 
-import cz.muni.fi.dto.*;
-
-import cz.muni.fi.dto.create.CreateComponentDTO;
-import cz.muni.fi.dto.create.CreateMissionDTO;
-import cz.muni.fi.dto.create.CreateRocketDTO;
-import cz.muni.fi.dto.create.CreateUserDTO;
-import cz.muni.fi.dto.update.UpdateUserDTO;
-import cz.muni.fi.entity.User;
+import cz.muni.fi.dto.mission.CreateMissionDTO;
+import cz.muni.fi.dto.user.CreateUserDTO;
+import cz.muni.fi.dto.user.UpdateUserDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.enums.Role;
@@ -25,11 +24,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZonedDateTime;
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,6 @@
-package cz.muni.fi.dto.create;
+package cz.muni.fi.dto.user;
 
-import cz.muni.fi.dto.MissionDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
 

@@ -1,8 +1,8 @@
-package cz.muni.fi.dto.create;
+package cz.muni.fi.dto.mission;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.RocketDTO;
-import cz.muni.fi.dto.UserDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.enums.MissionProgress;
 
 import javax.validation.constraints.Future;

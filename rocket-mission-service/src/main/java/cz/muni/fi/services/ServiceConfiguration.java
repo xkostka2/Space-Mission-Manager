@@ -3,20 +3,20 @@ package cz.muni.fi.services;
 
 import cz.muni.fi.InMemoryDatabaseSpring;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.RocketDTO;
-import cz.muni.fi.dto.UserDTO;
-import cz.muni.fi.dto.create.CreateComponentDTO;
-import cz.muni.fi.dto.create.CreateMissionDTO;
-import cz.muni.fi.dto.update.UpdateComponentDTO;
-import cz.muni.fi.dto.update.UpdateMissionDTO;
-import cz.muni.fi.dto.update.UpdateRocketDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
+import cz.muni.fi.dto.component.CreateComponentDTO;
+import cz.muni.fi.dto.mission.CreateMissionDTO;
+import cz.muni.fi.dto.component.UpdateComponentDTO;
+import cz.muni.fi.dto.mission.UpdateMissionDTO;
+import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Mission;
-import cz.muni.fi.dto.create.CreateRocketDTO;
-import cz.muni.fi.dto.create.CreateUserDTO;
-import cz.muni.fi.dto.update.UpdateUserDTO;
+import cz.muni.fi.dto.rocket.CreateRocketDTO;
+import cz.muni.fi.dto.user.CreateUserDTO;
+import cz.muni.fi.dto.user.UpdateUserDTO;
 
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.entity.User;
