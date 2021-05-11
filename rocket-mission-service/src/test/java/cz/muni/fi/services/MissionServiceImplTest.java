@@ -9,10 +9,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,12 +27,10 @@ import static org.mockito.Mockito.when;
  *
  * @author Martin Hořelka (469003)
  */
-@ContextConfiguration(classes = ServiceConfiguration.class)
-public class MissionServiceImplTest extends AbstractTestNGSpringContextTests {
+public class MissionServiceImplTest {
     @Mock
     private MissionDao missionDao;
 
-    @Autowired
     @InjectMocks
     private final MissionService missionService = new MissionServiceImpl();
 
@@ -43,7 +38,6 @@ public class MissionServiceImplTest extends AbstractTestNGSpringContextTests {
     private Mission mission2;
     private Mission mission3;
     private Mission mission4;
-
 
     private Long counter = 10L;
     private final Map<Long, Mission> missions = new HashMap<>();
