@@ -23,11 +23,11 @@ public class Rocket {
     @NotNull
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> requiredComponents = new HashSet<>();
 
     public Long getId() {

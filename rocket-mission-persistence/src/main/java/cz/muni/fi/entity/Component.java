@@ -34,7 +34,7 @@ public class Component {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="rocket_id")
     private Rocket rocket;
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +41,13 @@ public class Mission{
     @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Rocket> rockets = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;
