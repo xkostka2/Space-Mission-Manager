@@ -1,10 +1,8 @@
 package cz.muni.fi.facades;
 
-
-
-import cz.muni.fi.dto.RocketDTO;
-import cz.muni.fi.dto.create.CreateRocketDTO;
-import cz.muni.fi.dto.update.UpdateRocketDTO;
+import cz.muni.fi.dto.rocket.CreateRocketDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.BeanMappingService;
