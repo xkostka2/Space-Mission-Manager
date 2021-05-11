@@ -1,8 +1,7 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.create.CreateRocketDTO;
 import cz.muni.fi.dto.update.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
@@ -24,10 +23,10 @@ import java.util.List;
 @Transactional
 public class RocketFacadeImpl implements RocketFacade {
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    RocketService rocketService;
+    private RocketService rocketService;
 
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {

@@ -23,10 +23,10 @@ import java.util.List;
 @Transactional
 public class ComponentFacadeImpl implements ComponentFacade {
     @Autowired
-    ComponentService componentService;
+    private ComponentService componentService;
 
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Override
     public ComponentDTO addComponent(CreateComponentDTO component) {

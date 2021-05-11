@@ -24,10 +24,10 @@ import java.util.List;
 @Transactional
 public class MissionFacadeImpl implements MissionFacade {
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    MissionService missionService;
+    private MissionService missionService;
 
     @Override
     public MissionDTO addMission(CreateMissionDTO mission) {

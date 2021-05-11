@@ -23,7 +23,7 @@ import java.util.List;
 public class MissionServiceImpl implements MissionService {
 
     @Autowired
-    MissionDao missionDao;
+    private MissionDao missionDao;
 
     @Override
     public Mission addMission(Mission mission) throws DataAccessException {

@@ -22,10 +22,10 @@ import java.util.List;
 @Transactional
 public class UserFacadeImpl implements UserFacade {
     @Autowired
-    BeanMappingService beanMappingService;
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public UserDTO addUser(CreateUserDTO user) {
