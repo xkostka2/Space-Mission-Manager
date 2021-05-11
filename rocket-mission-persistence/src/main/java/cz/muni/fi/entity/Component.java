@@ -5,6 +5,7 @@ import cz.muni.fi.enums.ComponentType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
  * @author tdtom167
  */
 @Entity
-public class Component {
+public class Component implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +35,7 @@ public class Component {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="rocket_id")
     private Rocket rocket;
 

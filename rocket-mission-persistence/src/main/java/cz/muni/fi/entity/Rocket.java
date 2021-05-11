@@ -2,6 +2,7 @@ package cz.muni.fi.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.Set;
  * @author Martin Hořelka (469003)
  */
 @Entity
-public class Rocket {
+public class Rocket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,11 +24,11 @@ public class Rocket {
     @NotNull
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> requiredComponents = new HashSet<>();
 
     public Long getId() {

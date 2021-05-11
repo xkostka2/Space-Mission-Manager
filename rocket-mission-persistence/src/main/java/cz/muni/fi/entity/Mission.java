@@ -6,12 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,7 +28,7 @@ import java.util.Set;
  */
 
 @Entity
-public class Mission{
+public class Mission implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,13 +42,13 @@ public class Mission{
     @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Rocket> rockets = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;

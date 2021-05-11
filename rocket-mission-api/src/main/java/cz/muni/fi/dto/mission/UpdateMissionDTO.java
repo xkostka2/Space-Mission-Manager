@@ -1,6 +1,8 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.mission;
 
-
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.enums.MissionProgress;
 
 import java.time.ZonedDateTime;
@@ -9,11 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Mission DTO
+ * DTO for updating of the mission
  *
  * @author Martin Kazimir
  */
-public class MissionDTO {
+public class UpdateMissionDTO {
 
     private long id;
     private String name;

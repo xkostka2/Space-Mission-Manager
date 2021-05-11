@@ -1,8 +1,8 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.create.CreateUserDTO;
-import cz.muni.fi.dto.update.UpdateUserDTO;
-import cz.muni.fi.dto.UserDTO;
+import cz.muni.fi.dto.user.CreateUserDTO;
+import cz.muni.fi.dto.user.UpdateUserDTO;
+import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.facade.UserFacade;
 import cz.muni.fi.services.BeanMappingService;

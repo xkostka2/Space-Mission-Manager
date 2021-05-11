@@ -1,13 +1,14 @@
 package cz.muni.fi.facades;
 
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.RocketDTO;
-import cz.muni.fi.dto.UserDTO;
-import cz.muni.fi.dto.create.CreateMissionDTO;
-import cz.muni.fi.dto.create.CreateUserDTO;
-import cz.muni.fi.dto.update.UpdateUserDTO;
+
+import cz.muni.fi.dto.mission.CreateMissionDTO;
+import cz.muni.fi.dto.user.CreateUserDTO;
+import cz.muni.fi.dto.user.UpdateUserDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
+import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.enums.Role;

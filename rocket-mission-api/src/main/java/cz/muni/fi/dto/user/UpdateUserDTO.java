@@ -1,18 +1,19 @@
-package cz.muni.fi.dto;
+package cz.muni.fi.dto.user;
 
+import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
 
 import java.util.Objects;
 
 /**
- * User DTO.
+ * User update DTO.
  *
  * @author Martin Hořelka (469003)
  */
-public class UserDTO {
+public class UpdateUserDTO {
 
-    private Long id;
+    private long id;
     private String name;
     private String email;
     private String password;
@@ -21,14 +22,6 @@ public class UserDTO {
     private MissionDTO mission;
     private boolean missionAccepted;
     private String missionExplanation;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -70,6 +63,14 @@ public class UserDTO {
         this.levelOfExperience = levelOfExperience;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public MissionDTO getMission() {
         return mission;
     }
@@ -97,8 +98,8 @@ public class UserDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO other = (UserDTO) o;
+        if (!(o instanceof UpdateUserDTO)) return false;
+        UpdateUserDTO other = (UpdateUserDTO) o;
         return getName().equals(other.getName());
     }
 
@@ -109,8 +110,7 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "id=" + id +
+        return "UpdateUserDTO{" +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

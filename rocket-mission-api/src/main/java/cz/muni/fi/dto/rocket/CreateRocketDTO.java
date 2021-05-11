@@ -1,8 +1,7 @@
-package cz.muni.fi.dto.update;
+package cz.muni.fi.dto.rocket;
 
-import cz.muni.fi.dto.ComponentDTO;
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.component.ComponentDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,10 +16,7 @@ import java.util.Set;
  * @author Tomas Bouma (469275)
  */
 
-public class UpdateRocketDTO {
-
-    private long id;
-
+public class CreateRocketDTO {
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
@@ -49,14 +45,6 @@ public class UpdateRocketDTO {
 
     public Set<ComponentDTO> getRequiredComponents() {
         return Collections.unmodifiableSet(requiredComponents);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setRequiredComponents(Set<ComponentDTO> requiredComponents) {

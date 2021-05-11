@@ -1,7 +1,7 @@
-package cz.muni.fi.dto.update;
+package cz.muni.fi.dto.component;
 
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.RocketDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.enums.ComponentType;
 
 import javax.validation.constraints.NotNull;
@@ -9,11 +9,11 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
- * Object used while updating Components
+ * Component used in missions
  *
  * @author Martin Kostka
  */
-public class UpdateComponentDTO {
+public class ComponentDTO {
 
     @NotNull
     private String name;
@@ -83,13 +83,13 @@ public class UpdateComponentDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UpdateComponentDTO that = (UpdateComponentDTO) o;
-        return getName().equals(that.getName()) && getReadyDate().equals(that.getReadyDate()) && Objects.equals(getMission(), that.getMission()) && Objects.equals(getRocket(), that.getRocket());
+        if (!(o instanceof ComponentDTO)) return false;
+        ComponentDTO that = (ComponentDTO) o;
+        return Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getReadyDate(), getMission(), getRocket());
+        return Objects.hash(getName());
     }
 }

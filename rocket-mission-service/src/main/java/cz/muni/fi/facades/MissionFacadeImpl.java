@@ -1,8 +1,8 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.MissionDTO;
-import cz.muni.fi.dto.create.CreateMissionDTO;
-import cz.muni.fi.dto.update.UpdateMissionDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
+import cz.muni.fi.dto.mission.CreateMissionDTO;
+import cz.muni.fi.dto.mission.UpdateMissionDTO;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.facade.MissionFacade;
