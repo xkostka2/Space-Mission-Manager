@@ -49,16 +49,19 @@ public class MissionFacadeImpl implements MissionFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<MissionDTO> findAllMissions() {
         return beanMappingService.mapTo(missionService.findAllMissions(), MissionDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<MissionDTO> findAllMissions(MissionProgress progress) {
         return beanMappingService.mapTo(missionService.findAllMissions(progress), MissionDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public MissionDTO findMissionById(Long id) {
         Mission mission = missionService.findMissionById(id);
         if (mission == null) {

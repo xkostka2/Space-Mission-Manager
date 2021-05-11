@@ -35,11 +35,13 @@ public class RocketFacadeImpl implements RocketFacade {
     }
 
     @Override
+    @Transactional(readOnly=true)
     public List<RocketDTO> findAllRockets() {
         return beanMappingService.mapTo(rocketService.findAllRockets(), RocketDTO.class);
     }
 
     @Override
+    @Transactional(readOnly=true)
     public RocketDTO findRocketById(Long id) {
         Rocket rocket = rocketService.findRocketById(id);
         if (rocket == null) {
