@@ -5,8 +5,8 @@ import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
-import cz.muni.fi.services.BeanMappingService;
 import cz.muni.fi.services.RocketService;
+import cz.muni.fi.services.mapper.RocketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,21 +23,21 @@ import java.util.List;
 @Transactional
 public class RocketFacadeImpl implements RocketFacade {
     @Autowired
-    private BeanMappingService beanMappingService;
+    private RocketMapper rocketMapper;
 
     @Autowired
     private RocketService rocketService;
 
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {
-        Rocket mappedRocket = beanMappingService.mapTo(rocket, Rocket.class);
-        return beanMappingService.mapTo(rocketService.addRocket(mappedRocket), RocketDTO.class);
+        Rocket mappedRocket = rocketMapper.createRocketDTOToRocket(rocket);
+        return rocketMapper.rocketToRocketDTO(rocketService.addRocket(mappedRocket));
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<RocketDTO> findAllRockets() {
-        return beanMappingService.mapTo(rocketService.findAllRockets(), RocketDTO.class);
+        return rocketMapper.rocketsToRocketDTOs(rocketService.findAllRockets());
     }
 
     @Override
@@ -47,20 +47,20 @@ public class RocketFacadeImpl implements RocketFacade {
         if (rocket == null) {
             return null;
         }
-        return beanMappingService.mapTo(rocket, RocketDTO.class);
+        return rocketMapper.rocketToRocketDTO(rocket);
     }
 
     @Override
     public RocketDTO updateRocket(UpdateRocketDTO rocket) {
-        Rocket mappedRocket = beanMappingService.mapTo(rocket, Rocket.class);
+        Rocket mappedRocket = rocketMapper.updateRocketDTOToRocket(rocket);
         rocketService.updateRocket(mappedRocket);
 
-        return beanMappingService.mapTo(rocketService.updateRocket(mappedRocket), RocketDTO.class);
+        return rocketMapper.rocketToRocketDTO(rocketService.updateRocket(mappedRocket));
     }
 
     @Override
     public void removeRocket(RocketDTO rocket) {
-        Rocket mappedRocket = beanMappingService.mapTo(rocket, Rocket.class);
+        Rocket mappedRocket = rocketMapper.rocketDTOToRocket(rocket);
         rocketService.removeRocket(mappedRocket);
     }
 }
