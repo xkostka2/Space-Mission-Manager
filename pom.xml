@@ -78,7 +78,6 @@
         <module>rocket-mission-persistence</module>
         <module>rocket-mission-service</module>
         <module>rocket-mission-api</module>
-        <module>rocket-mission-angular</module>
         <module>rocket-mission-rest</module>
         <module>rocket-mission-sample-data</module>
     </modules>
