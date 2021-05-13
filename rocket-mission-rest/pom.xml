@@ -10,8 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rocket-mission-rest</artifactId>
+    <packaging>war</packaging>
 
     <build>
+        <defaultGoal>cargo:run</defaultGoal>
+        <finalName>pa165/rest</finalName>
         <plugins>
             <!--  embedded tomcat -->
             <plugin>
