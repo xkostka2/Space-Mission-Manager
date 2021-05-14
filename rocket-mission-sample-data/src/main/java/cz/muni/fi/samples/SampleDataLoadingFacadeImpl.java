@@ -188,6 +188,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user4.setName("THE BOSS");
         user4.setEmail("boss@gmail.com");
         user4.setPassword("bosspassword");
+        user4.setLevelOfExperience(LevelOfExperience.ROOKIE);
         user4.setRole(Role.MANAGER);
         userService.addUser(user4);
         log.info("user4 loaded");

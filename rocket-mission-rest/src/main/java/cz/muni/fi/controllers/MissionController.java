@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(ApiUris.ROOT_URI_ROCKETS)
+@RequestMapping(ApiUris.ROOT_URI_MISSIONS)
 public class MissionController {
 
     private final static Logger logger = Logger.getLogger(ComponentController.class.getName());
