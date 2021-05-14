@@ -13,14 +13,14 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-@Mapper(componentModel = "spring")
+@Mapper
 public interface ComponentMapper {
     ComponentDTO componentToComponentDTO(Component component);
     Component componentDTOToComponent(ComponentDTO componentDTO);
 
     CreateComponentDTO componentToCreateComponentDTO(Component component);
     Component createComponentDTOToComponent(CreateComponentDTO createComponentDTO);
-
+    Component mapToEntity(CreateComponentDTO createComponentDTO);
     UpdateComponentDTO componentToUpdateComponentDTO(Component component);
     Component updateComponentDTOToComponent(UpdateComponentDTO updateComponentDTO);
 

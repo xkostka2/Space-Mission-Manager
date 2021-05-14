@@ -6,7 +6,9 @@ import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.RocketService;
+import cz.muni.fi.services.mapper.MissionMapper;
 import cz.muni.fi.services.mapper.RocketMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +20,19 @@ import java.util.List;
  *
  * @author Tomas Bouma (469275)
  */
-
 @Service
 @Transactional
 public class RocketFacadeImpl implements RocketFacade {
-    @Autowired
-    private RocketMapper rocketMapper;
+
+    private final RocketMapper rocketMapper;
+
+    private final RocketService rocketService;
 
     @Autowired
-    private RocketService rocketService;
+    public RocketFacadeImpl(RocketService rocketService, RocketMapper rocketMapper) {
+        this.rocketService = rocketService;
+        this.rocketMapper = rocketMapper;
+    }
 
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {

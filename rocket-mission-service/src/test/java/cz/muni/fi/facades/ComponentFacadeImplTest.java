@@ -3,8 +3,14 @@ package cz.muni.fi.facades;
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.component.CreateComponentDTO;
 import cz.muni.fi.dto.component.UpdateComponentDTO;
+import cz.muni.fi.entity.Component;
 import cz.muni.fi.facade.ComponentFacade;
-import cz.muni.fi.services.ServiceConfiguration;
+import cz.muni.fi.services.ComponentService;
+import cz.muni.fi.services.impl.ComponentServiceImpl;
+import cz.muni.fi.services.mapper.ComponentMapper;
+import cz.muni.fi.services.mapper.ComponentMapperImpl;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -12,56 +18,125 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
-
+import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Martin Kazimir
  */
-@ContextConfiguration(classes = ServiceConfiguration.class)
-public class ComponentFacadeImplTest extends AbstractTestNGSpringContextTests {
+public class ComponentFacadeImplTest {
+
+
+    @Mock
+    private ComponentServiceImpl componentService = new ComponentServiceImpl();
+
+    @Mock
+    private ComponentMapperImpl componentMapper;
+
     @Autowired
     private ComponentFacade componentFacade;
 
     private CreateComponentDTO createComponentDTO;
+
+    private CreateComponentDTO createComponentDTO1;
+    private CreateComponentDTO createComponentDTO2;
+
+    private ComponentDTO componentDTO;
     private ComponentDTO componentDTO1;
     private ComponentDTO componentDTO2;
 
+    private Component component;
+    private Component component1;
+    private Component component2;
+
     @BeforeMethod
     public void init() {
-        createComponentDTO = getCreateComponentDTO("create component");
-        componentDTO1 = componentFacade.findComponentById(componentFacade.addComponent(getCreateComponentDTO("component 1")).getId());
-        componentDTO2 = componentFacade.findComponentById(componentFacade.addComponent(getCreateComponentDTO("component 2")).getId());
-    }
+        MockitoAnnotations.initMocks(this);
+        this.componentFacade = new ComponentFacadeImpl(componentService, componentMapper);
 
-    @AfterMethod
-    public void destroyAll() {
-        for (ComponentDTO component : componentFacade.findAllComponents()) {
-            componentFacade.removeComponent(component);
-        }
-        assertThat(componentFacade.findAllComponents()).isEmpty();
-        createComponentDTO = null;
-        componentDTO1 = null;
-        componentDTO2 = null;
+        createComponentDTO = getCreateComponentDTO("create component");
+        component = new Component();
+        component.setName("create component");
+        component.setId(3L);
+
+        createComponentDTO1 = getCreateComponentDTO("component 1");
+        createComponentDTO2 = getCreateComponentDTO("component 2");
+
+        component1 = new Component();
+        component1.setName("component 1");
+        component1.setId(1L);
+
+        component2 = new Component();
+        component2.setName("component 2");
+        component2.setId(2L);
+
+        given(componentMapper.createComponentDTOToComponent(createComponentDTO)).willReturn(component);
+        given(componentMapper.createComponentDTOToComponent(createComponentDTO1)).willReturn(component1);
+        given(componentMapper.createComponentDTOToComponent(createComponentDTO2)).willReturn(component2);
+
+
+
+        given(componentService.addComponent(component)).willReturn(component);
+        given(componentService.addComponent(component1)).willReturn(component1);
+        given(componentService.addComponent(component2)).willReturn(component2);
+
+        given(componentService.findComponentById(1L)).willReturn(component1);
+        given(componentService.findComponentById(2L)).willReturn(component2);
+        given(componentService.findComponentById(3L)).willReturn(component);
+
+        componentDTO = getComponentDTO("create component", 3L);
+        componentDTO1 = getComponentDTO("component 1", 1L);
+        componentDTO2 = getComponentDTO("component 2", 2L);
+
+        given(componentMapper.componentToComponentDTO(component)).willReturn(componentDTO);
+        given(componentMapper.componentToComponentDTO(component1)).willReturn(componentDTO1);
+        given(componentMapper.componentToComponentDTO(component2)).willReturn(componentDTO2);
+
+
     }
 
     @Test
     public void testAddComponent()  {
+        List<Component> componentList = Arrays.asList(component1, component2);
+        List<ComponentDTO> componentDTOList = Arrays.asList(componentDTO1, componentDTO2);
+
+        given(componentService.findAllComponents()).willReturn(componentList);
+        given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
+
         assertThat(componentFacade.findAllComponents()).hasSize(2).contains(componentDTO1, componentDTO2);
         ComponentDTO componentDTO = componentFacade.findComponentById(componentFacade.addComponent(createComponentDTO).getId());
         assertThat(componentDTO).isEqualToIgnoringGivenFields(createComponentDTO, "id");
-        componentFacade.findAllComponents();
+
+        componentList = Arrays.asList(component1, component2, component);
+        componentDTOList = Arrays.asList(componentDTO1, componentDTO2, componentDTO);
+
+        given(componentService.findAllComponents()).willReturn(componentList);
+
+        given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
+
         assertThat(componentFacade.findAllComponents()).hasSize(3).contains(componentDTO);
     }
 
     @Test
     public void testFindAllComponents() {
+        List<Component> componentList = Arrays.asList(component1, component2);
+        List<ComponentDTO> componentDTOList = Arrays.asList(componentDTO1, componentDTO2);
+
+        given(componentService.findAllComponents()).willReturn(componentList);
+        given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
+
         assertThat(componentFacade.findAllComponents()).hasSize(2).contains(componentDTO1, componentDTO2);
     }
 
     @Test
     public void testFindComponentById() {
+        given(componentService.findComponentById(componentDTO1.getId())).willReturn(component1);
+        given(componentService.findComponentById(componentDTO2.getId())).willReturn(component2);
+
         assertThat(componentFacade.findComponentById(componentDTO1.getId())).isEqualTo(componentDTO1);
         assertThat(componentFacade.findComponentById(componentDTO2.getId())).isEqualTo(componentDTO2);
     }
@@ -70,14 +145,31 @@ public class ComponentFacadeImplTest extends AbstractTestNGSpringContextTests {
     public void testUpdateComponent() {
         UpdateComponentDTO updateComponentDTO = getUpdateComponentDTO(componentDTO1.getName(), componentDTO1.getId());
         updateComponentDTO.setName("update");
+        component1.setName("update");
+        given(componentMapper.updateComponentDTOToComponent(updateComponentDTO)).willReturn(component1);
+        given(componentService.updateComponent(component1)).willReturn(component1);
+
         componentFacade.updateComponent(updateComponentDTO);
-        assertThat(componentFacade.findComponentById(updateComponentDTO.getId())).isEqualToComparingFieldByField(updateComponentDTO);
+        assertThat(componentFacade.findComponentById(updateComponentDTO.getId()).getId()).isEqualTo(updateComponentDTO.getId());
     }
 
     @Test
     public void testRemoveComponent() {
+        List<Component> componentList = Arrays.asList(component1, component2);
+        List<ComponentDTO> componentDTOList = Arrays.asList(componentDTO1, componentDTO2);
+
+        given(componentService.findAllComponents()).willReturn(componentList);
+        given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
+
         assertThat(componentFacade.findAllComponents()).hasSize(2).contains(componentDTO1, componentDTO2);
+
         componentFacade.removeComponent(componentDTO2);
+        componentList = Arrays.asList(component1);
+        componentDTOList = Arrays.asList(componentDTO1);
+
+        given(componentService.findAllComponents()).willReturn(componentList);
+        given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
+
         assertThat(componentFacade.findAllComponents()).hasSize(1).contains(componentDTO1);
     }
     
@@ -90,6 +182,13 @@ public class ComponentFacadeImplTest extends AbstractTestNGSpringContextTests {
 
     private UpdateComponentDTO getUpdateComponentDTO(String name, Long id) {
         UpdateComponentDTO componentDTO = new UpdateComponentDTO();
+        componentDTO.setName(name);
+        componentDTO.setId(id);
+        return componentDTO;
+    }
+
+    private ComponentDTO getComponentDTO(String name, Long id) {
+        ComponentDTO componentDTO = new ComponentDTO();
         componentDTO.setName(name);
         componentDTO.setId(id);
         return componentDTO;

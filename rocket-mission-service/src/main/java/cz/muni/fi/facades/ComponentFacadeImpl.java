@@ -7,6 +7,7 @@ import cz.muni.fi.entity.Component;
 import cz.muni.fi.facade.ComponentFacade;
 import cz.muni.fi.services.ComponentService;
 import cz.muni.fi.services.mapper.ComponentMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,18 +20,21 @@ import java.util.List;
  * @author Martin Kostka
  */
 
-@Service
-@Transactional
-public class ComponentFacadeImpl implements ComponentFacade {
-    @Autowired
-    private ComponentService componentService;
 
-    @Autowired
-    private ComponentMapper componentMapper;
+public class ComponentFacadeImpl implements ComponentFacade {
+    private final ComponentService componentService;
+
+    private final ComponentMapper componentMapper;
+
+    public ComponentFacadeImpl(ComponentService componentService, ComponentMapper componentMapper) {
+        this.componentService = componentService;
+        this.componentMapper = componentMapper;
+    }
 
     @Override
     public ComponentDTO addComponent(CreateComponentDTO component) {
         Component mappedComponent = componentMapper.createComponentDTOToComponent(component);
+
         return componentMapper.componentToComponentDTO(componentService.addComponent(mappedComponent));
     }
 

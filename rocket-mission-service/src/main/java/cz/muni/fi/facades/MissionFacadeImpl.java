@@ -7,7 +7,9 @@ import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.facade.MissionFacade;
 import cz.muni.fi.services.MissionService;
+import cz.muni.fi.services.mapper.ComponentMapper;
 import cz.muni.fi.services.mapper.MissionMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +22,18 @@ import java.util.List;
  *
  * @author Martin Kazimir
  */
-@Service
-@Transactional
+
 public class MissionFacadeImpl implements MissionFacade {
-    @Autowired
-    private MissionMapper missionMapper;
+
+    private final MissionMapper missionMapper;
+
+    private final MissionService missionService;
 
     @Autowired
-    private MissionService missionService;
+    public MissionFacadeImpl(MissionService missionService, MissionMapper missionMapper) {
+        this.missionMapper = missionMapper;
+        this.missionService = missionService;
+    }
 
     @Override
     public MissionDTO addMission(CreateMissionDTO mission) {
