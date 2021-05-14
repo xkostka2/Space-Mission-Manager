@@ -1,13 +1,13 @@
 package cz.muni.fi.controllers;
 
 import cz.muni.fi.ApiUris;
-import cz.muni.fi.dto.user.CreateUserDTO;
-import cz.muni.fi.dto.user.UpdateUserDTO;
-import cz.muni.fi.dto.user.UserDTO;
+import cz.muni.fi.dto.mission.CreateMissionDTO;
+import cz.muni.fi.dto.mission.UpdateMissionDTO;
+import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.MissionFacade;
-import cz.muni.fi.facade.UserFacade;
+import cz.muni.fi.facade.MissionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,17 +26,17 @@ public class MissionController {
 
 
     @Autowired
-    public UserController(UserFacade userFacade) {
-        this.userFacade = userFacade;
+    public MissionController(MissionFacade missionFacade) {
+        this.missionFacade = missionFacade;
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO createComponent(@RequestBody CreateUserDTO userCreateDTO) {
+    public MissionDTO createComponent(@RequestBody CreateMissionDTO missionCreateDTO) {
 
-        logger.log(Level.INFO, "[REST] creating user");
+        logger.log(Level.INFO, "[REST] creating mission");
 
         try {
-            return userFacade.findUserById(userFacade.addUser(userCreateDTO).getId());
+            return missionFacade.findMissionById(missionFacade.addMission(missionCreateDTO).getId());
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -44,33 +44,33 @@ public class MissionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> findAllUsers() {
+    public List<MissionDTO> findAllMissions() {
 
-        logger.log(Level.INFO, "[REST] finding all users");
+        logger.log(Level.INFO, "[REST] finding all missions");
 
-        return userFacade.findAllUsers();
+        return missionFacade.findAllMissions();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO findUserById(@PathVariable("id") Long id) {
+    public MissionDTO findMissionById(@PathVariable("id") Long id) {
 
-        logger.log(Level.INFO, "[REST] finding user " + id);
+        logger.log(Level.INFO, "[REST] finding mission " + id);
 
-        UserDTO userDTO = userFacade.findUserById(id);
-        if (userDTO == null) {
+        MissionDTO missionDTO = missionFacade.findMissionById(id);
+        if (missionDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return userDTO;
+        return missionDTO;
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+    public MissionDTO updateMission(@RequestBody UpdateMissionDTO updateMissionDTO) {
 
-        logger.log(Level.INFO, "[REST] updating user" + updateUserDTO.getId());
+        logger.log(Level.INFO, "[REST] updating mission" + updateMissionDTO.getId());
 
         try {
-            userFacade.updateUser(updateUserDTO);
-            return userFacade.findUserById(updateUserDTO.getId());
+            missionFacade.updateMission(updateMissionDTO);
+            return missionFacade.findMissionById(updateMissionDTO.getId());
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -78,16 +78,16 @@ public class MissionController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> removeUser(@PathVariable("id") long id) {
+    public List<MissionDTO> removeMission(@PathVariable("id") long id) {
 
-        logger.log(Level.INFO, "[REST] deleting user" + id);
+        logger.log(Level.INFO, "[REST] deleting mission" + id);
 
-        UserDTO user = userFacade.findUserById(id);
-        if (user == null) {
+        MissionDTO mission = missionFacade.findMissionById(id);
+        if (mission == null) {
             throw new ResourceNotFoundException();
         }
 
-        userFacade.deleteUser(user);
-        return userFacade.findAllUsers();
+        missionFacade.deleteMission(mission);
+        return missionFacade.findAllMissions();
     }
 }
