@@ -27,6 +27,6 @@ public class MissionManagerWithSamplesConfig {
     @PostConstruct
     public void dataLoading() throws IOException {
         log.debug("dataLoading()");
-        sampleDataLoadingFacade.loadData();
+        sampleDataLoadingFacade.loadAllData();
     }
 }
