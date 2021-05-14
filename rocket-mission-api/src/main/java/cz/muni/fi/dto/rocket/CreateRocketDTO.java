@@ -51,6 +51,20 @@ public class CreateRocketDTO {
         this.requiredComponents = requiredComponents;
     }
 
+    public void addRequiredComponent(ComponentDTO requiredComponent) {
+        if (!requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.add(requiredComponent);
+        }
+    }
+
+    public void removeRequiredComponent(ComponentDTO requiredComponent){
+        if (requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.remove(requiredComponent);
+            requiredComponent.setRocket(null);
+        }
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
