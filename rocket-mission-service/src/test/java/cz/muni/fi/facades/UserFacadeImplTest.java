@@ -1,63 +1,37 @@
 package cz.muni.fi.facades;
 
-
-
-import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.user.UpdateUserDTO;
-import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.user.CreateUserDTO;
-import cz.muni.fi.dto.user.UpdateUserDTO;
-import cz.muni.fi.dto.user.CreateUserDTO;
-import cz.muni.fi.dto.mission.CreateMissionDTO;
-import cz.muni.fi.dto.user.CreateUserDTO;
-import cz.muni.fi.dto.user.UpdateUserDTO;
-import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
-import cz.muni.fi.dto.user.UserDTO;
-import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.entity.User;
-import cz.muni.fi.entity.User;
-import cz.muni.fi.entity.User;
-import cz.muni.fi.entity.User;
-import cz.muni.fi.enums.LevelOfExperience;
-import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.enums.Role;
-import cz.muni.fi.facade.UserFacade;
-import cz.muni.fi.facade.MissionFacade;
-import cz.muni.fi.facade.UserFacade;
 import cz.muni.fi.facade.UserFacade;
 import cz.muni.fi.services.impl.UserServiceImpl;
 import cz.muni.fi.services.mapper.UserMapperImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 public class UserFacadeImplTest {
+
     @Mock
-    private UserServiceImpl userService = new UserServiceImpl();
+    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Mock
     private UserMapperImpl userMapper;
 
-    @Autowired
     private UserFacade userFacade;
 
     private CreateUserDTO createUserDTO;
-
-    private CreateUserDTO createUserDTO1;
-    private CreateUserDTO createUserDTO2;
 
     private UserDTO userDTO;
     private UserDTO userDTO1;
@@ -77,8 +51,8 @@ public class UserFacadeImplTest {
         user.setName("create user");
         user.setId(3L);
 
-        createUserDTO1 = getCreateUserDTO("user 1");
-        createUserDTO2 = getCreateUserDTO("user 2");
+        CreateUserDTO createUserDTO1 = getCreateUserDTO("user 1");
+        CreateUserDTO createUserDTO2 = getCreateUserDTO("user 2");
 
         user1 = new User();
         user1.setName("user 1");
@@ -102,7 +76,7 @@ public class UserFacadeImplTest {
 
         userDTO = getUserDTO("create user", 3L);
         userDTO1 = getUserDTO("user 1", 1L);
-        userDTO1.setMission(getMissionDTO("simple mission", 1L));
+        userDTO1.setMission(getMissionDTO());
         userDTO1.setMissionAccepted(true);
         userDTO2 = getUserDTO("user 2", 2L);
         userDTO1.setRole(Role.ASTRONAUT);
@@ -177,8 +151,8 @@ public class UserFacadeImplTest {
         assertThat(userFacade.findAllUsers()).hasSize(2).contains(userDTO1, userDTO2);
 
         userFacade.deleteUser(userDTO2);
-        userList = Arrays.asList(user1);
-        userDTOList = Arrays.asList(userDTO1);
+        userList = Collections.singletonList(user1);
+        userDTOList = Collections.singletonList(userDTO1);
 
         given(userService.findAllUsers()).willReturn(userList);
         given(userMapper.usersToUserDTOs(userList)).willReturn(userDTOList);
@@ -199,8 +173,8 @@ public class UserFacadeImplTest {
 
     @Test
     public void testFindAllAstronauts() {
-        List<User> userList = Arrays.asList(user1);
-        List<UserDTO> userDTOList = Arrays.asList(userDTO1);
+        List<User> userList = Collections.singletonList(user1);
+        List<UserDTO> userDTOList = Collections.singletonList(userDTO1);
 
         given(userService.findAllUsers()).willReturn(userList);
         given(userMapper.usersToUserDTOs(userList)).willReturn(userDTOList);
@@ -229,13 +203,12 @@ public class UserFacadeImplTest {
         userFacade.acceptAssignedMission(userDTO1);
         assertThat(userFacade.findUserById(userDTO1.getId()).getMission()).isNotNull();
         assertThat(userFacade.findUserById(userDTO1.getId()).getMissionAccepted()).isTrue();
-
     }
 
-    private MissionDTO getMissionDTO(String name, Long id) {
+    private MissionDTO getMissionDTO() {
         MissionDTO missionDTO = new MissionDTO();
-        missionDTO.setName(name);
-        missionDTO.setId(id);
+        missionDTO.setName("simple mission");
+        missionDTO.setId(1);
         return missionDTO;
     }
 }

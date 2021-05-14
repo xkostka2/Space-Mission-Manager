@@ -1,30 +1,15 @@
 package cz.muni.fi.facades;
 
-import cz.muni.fi.dto.component.ComponentDTO;
-
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.rocket.UpdateRocketDTO;
-import cz.muni.fi.dto.rocket.RocketDTO;
-import cz.muni.fi.dto.rocket.RocketDTO;
-import cz.muni.fi.dto.component.CreateComponentDTO;
 import cz.muni.fi.dto.rocket.CreateRocketDTO;
-import cz.muni.fi.dto.rocket.UpdateRocketDTO;
-import cz.muni.fi.entity.Rocket;
-import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 
 import cz.muni.fi.services.impl.RocketServiceImpl;
-import cz.muni.fi.services.impl.RocketServiceImpl;
-import cz.muni.fi.services.mapper.RocketMapperImpl;
-import cz.muni.fi.services.mapper.RocketMapper;
 import cz.muni.fi.services.mapper.RocketMapperImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -41,21 +26,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Martin Kostka
  */
 public class RocketFacadeImplTest {
+
     @Mock
-    private RocketServiceImpl rocketService = new RocketServiceImpl();
+    private final RocketServiceImpl rocketService = new RocketServiceImpl();
 
     @Mock
     private RocketMapperImpl rocketMapper;
 
-    @Autowired
     private RocketFacade rocketFacade;
 
     private CreateRocketDTO createRocketDTO;
 
-    private CreateRocketDTO createRocketDTO1;
-    private CreateRocketDTO createRocketDTO2;
-
-    private RocketDTO rocketDTO;
     private RocketDTO rocketDTO1;
     private RocketDTO rocketDTO2;
 
@@ -74,13 +55,12 @@ public class RocketFacadeImplTest {
         rocket.setName("create rocket");
         rocket.setId(3L);
 
-        createRocketDTO1 = getCreateRocketDTO("rocket 1");
-        createRocketDTO2 = getCreateRocketDTO("rocket 2");
+        CreateRocketDTO createRocketDTO1 = getCreateRocketDTO("rocket 1");
+        CreateRocketDTO createRocketDTO2 = getCreateRocketDTO("rocket 2");
 
         rocket1 = new Rocket();
         rocket1.setName("rocket 1");
         rocket1.setId(1L);
-        
 
         rocket2 = new Rocket();
         rocket2.setName("rocket 2");
@@ -90,8 +70,6 @@ public class RocketFacadeImplTest {
         given(rocketMapper.createRocketDTOToRocket(createRocketDTO1)).willReturn(rocket1);
         given(rocketMapper.createRocketDTOToRocket(createRocketDTO2)).willReturn(rocket2);
 
-
-
         given(rocketService.addRocket(rocket)).willReturn(rocket);
         given(rocketService.addRocket(rocket1)).willReturn(rocket1);
         given(rocketService.addRocket(rocket2)).willReturn(rocket2);
@@ -100,19 +78,15 @@ public class RocketFacadeImplTest {
         given(rocketService.findRocketById(2L)).willReturn(rocket2);
         given(rocketService.findRocketById(3L)).willReturn(rocket);
 
-        rocketDTO = getRocketDTO("create rocket", 3L);
+        RocketDTO rocketDTO = getRocketDTO("create rocket", 3L);
         rocketDTO1 = getRocketDTO("rocket 1", 1L);
 
-        
         rocketDTO2 = getRocketDTO("rocket 2", 2L);
-
 
         given(rocketMapper.rocketToRocketDTO(rocket)).willReturn(rocketDTO);
         given(rocketMapper.rocketToRocketDTO(rocket1)).willReturn(rocketDTO1);
         given(rocketMapper.rocketToRocketDTO(rocket2)).willReturn(rocketDTO2);
-
     }
-    
 
     private CreateRocketDTO getCreateRocketDTO(String name) {
         CreateRocketDTO rocketDTO = new CreateRocketDTO();
@@ -158,7 +132,6 @@ public class RocketFacadeImplTest {
 
     @Test
     public void testRemoveRocket() {
-
         List<Rocket> rocketList = Arrays.asList(rocket1, rocket2);
         List<RocketDTO> rocketDTOList = Arrays.asList(rocketDTO1, rocketDTO2);
 
@@ -168,8 +141,8 @@ public class RocketFacadeImplTest {
         assertThat(rocketFacade.findAllRockets()).hasSize(2).contains(rocketDTO1, rocketDTO2);
 
         rocketFacade.removeRocket(rocketDTO2);
-        rocketList = Arrays.asList(rocket1);
-        rocketDTOList = Arrays.asList(rocketDTO1);
+        rocketList = Collections.singletonList(rocket1);
+        rocketDTOList = Collections.singletonList(rocketDTO1);
 
         given(rocketService.findAllRockets()).willReturn(rocketList);
         given(rocketMapper.rocketsToRocketDTOs(rocketList)).willReturn(rocketDTOList);
@@ -205,5 +178,4 @@ public class RocketFacadeImplTest {
         rocketFacade.updateRocket(updateRocketDTO);
         assertThat(rocketFacade.findRocketById(updateRocketDTO.getId()).getId()).isEqualTo(updateRocketDTO.getId());
     }
-
 }

@@ -6,9 +6,7 @@ import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.RocketService;
-import cz.muni.fi.services.mapper.MissionMapper;
 import cz.muni.fi.services.mapper.RocketMapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +23,6 @@ import java.util.List;
 public class RocketFacadeImpl implements RocketFacade {
 
     private final RocketMapper rocketMapper;
-
     private final RocketService rocketService;
 
     @Autowired

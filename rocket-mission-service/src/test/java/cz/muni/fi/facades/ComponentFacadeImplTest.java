@@ -5,21 +5,15 @@ import cz.muni.fi.dto.component.CreateComponentDTO;
 import cz.muni.fi.dto.component.UpdateComponentDTO;
 import cz.muni.fi.entity.Component;
 import cz.muni.fi.facade.ComponentFacade;
-import cz.muni.fi.services.ComponentService;
 import cz.muni.fi.services.impl.ComponentServiceImpl;
-import cz.muni.fi.services.mapper.ComponentMapper;
 import cz.muni.fi.services.mapper.ComponentMapperImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
@@ -30,22 +24,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ComponentFacadeImplTest {
 
-
     @Mock
-    private ComponentServiceImpl componentService = new ComponentServiceImpl();
+    private final ComponentServiceImpl componentService = new ComponentServiceImpl();
 
     @Mock
     private ComponentMapperImpl componentMapper;
 
-    @Autowired
     private ComponentFacade componentFacade;
 
     private CreateComponentDTO createComponentDTO;
 
-    private CreateComponentDTO createComponentDTO1;
-    private CreateComponentDTO createComponentDTO2;
-
-    private ComponentDTO componentDTO;
     private ComponentDTO componentDTO1;
     private ComponentDTO componentDTO2;
 
@@ -63,8 +51,8 @@ public class ComponentFacadeImplTest {
         component.setName("create component");
         component.setId(3L);
 
-        createComponentDTO1 = getCreateComponentDTO("component 1");
-        createComponentDTO2 = getCreateComponentDTO("component 2");
+        CreateComponentDTO createComponentDTO1 = getCreateComponentDTO("component 1");
+        CreateComponentDTO createComponentDTO2 = getCreateComponentDTO("component 2");
 
         component1 = new Component();
         component1.setName("component 1");
@@ -78,8 +66,6 @@ public class ComponentFacadeImplTest {
         given(componentMapper.createComponentDTOToComponent(createComponentDTO1)).willReturn(component1);
         given(componentMapper.createComponentDTOToComponent(createComponentDTO2)).willReturn(component2);
 
-
-
         given(componentService.addComponent(component)).willReturn(component);
         given(componentService.addComponent(component1)).willReturn(component1);
         given(componentService.addComponent(component2)).willReturn(component2);
@@ -88,15 +74,13 @@ public class ComponentFacadeImplTest {
         given(componentService.findComponentById(2L)).willReturn(component2);
         given(componentService.findComponentById(3L)).willReturn(component);
 
-        componentDTO = getComponentDTO("create component", 3L);
+        ComponentDTO componentDTO = getComponentDTO("create component", 3L);
         componentDTO1 = getComponentDTO("component 1", 1L);
         componentDTO2 = getComponentDTO("component 2", 2L);
 
         given(componentMapper.componentToComponentDTO(component)).willReturn(componentDTO);
         given(componentMapper.componentToComponentDTO(component1)).willReturn(componentDTO1);
         given(componentMapper.componentToComponentDTO(component2)).willReturn(componentDTO2);
-
-
     }
 
     @Test
@@ -164,15 +148,14 @@ public class ComponentFacadeImplTest {
         assertThat(componentFacade.findAllComponents()).hasSize(2).contains(componentDTO1, componentDTO2);
 
         componentFacade.removeComponent(componentDTO2);
-        componentList = Arrays.asList(component1);
-        componentDTOList = Arrays.asList(componentDTO1);
+        componentList = Collections.singletonList(component1);
+        componentDTOList = Collections.singletonList(componentDTO1);
 
         given(componentService.findAllComponents()).willReturn(componentList);
         given(componentMapper.componentsToComponentDTOs(componentList)).willReturn(componentDTOList);
 
         assertThat(componentFacade.findAllComponents()).hasSize(1).contains(componentDTO1);
     }
-    
 
     private CreateComponentDTO getCreateComponentDTO(String name) {
         CreateComponentDTO componentDTO = new CreateComponentDTO();
@@ -193,5 +176,4 @@ public class ComponentFacadeImplTest {
         componentDTO.setId(id);
         return componentDTO;
     }
-
 }

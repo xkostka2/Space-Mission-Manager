@@ -22,11 +22,11 @@ import java.util.List;
  *
  * @author Martin Kazimir
  */
-
+@Service
+@Transactional
 public class MissionFacadeImpl implements MissionFacade {
 
     private final MissionMapper missionMapper;
-
     private final MissionService missionService;
 
     @Autowired

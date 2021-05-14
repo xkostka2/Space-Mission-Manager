@@ -3,28 +3,21 @@ package cz.muni.fi.facades;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.dto.mission.CreateMissionDTO;
 import cz.muni.fi.dto.mission.UpdateMissionDTO;
-import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
-import cz.muni.fi.facade.ComponentFacade;
 import cz.muni.fi.facade.MissionFacade;
 
-import cz.muni.fi.services.impl.ComponentServiceImpl;
 import cz.muni.fi.services.impl.MissionServiceImpl;
-import cz.muni.fi.services.mapper.ComponentMapperImpl;
 import cz.muni.fi.services.mapper.MissionMapperImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,20 +32,15 @@ import static org.mockito.BDDMockito.given;
 public class MissionFacadeImplTest {
 
     @Mock
-    private MissionServiceImpl missionService = new MissionServiceImpl();
+    private final MissionServiceImpl missionService = new MissionServiceImpl();
 
     @Mock
     private MissionMapperImpl missionMapper;
 
-    @Autowired
     private MissionFacade missionFacade;
 
     private CreateMissionDTO createMissionDTO;
 
-    private CreateMissionDTO createMissionDTO1;
-    private CreateMissionDTO createMissionDTO2;
-
-    private MissionDTO missionDTO;
     private MissionDTO missionDTO1;
     private MissionDTO missionDTO2;
 
@@ -71,8 +59,8 @@ public class MissionFacadeImplTest {
         mission.setName("create mission");
         mission.setId(3L);
 
-        createMissionDTO1 = getCreateMissionDTO("mission 1");
-        createMissionDTO2 = getCreateMissionDTO("mission 2");
+        CreateMissionDTO createMissionDTO1 = getCreateMissionDTO("mission 1");
+        CreateMissionDTO createMissionDTO2 = getCreateMissionDTO("mission 2");
 
         mission1 = new Mission();
         mission1.setName("mission 1");
@@ -88,8 +76,6 @@ public class MissionFacadeImplTest {
         given(missionMapper.createMissionDTOToMission(createMissionDTO1)).willReturn(mission1);
         given(missionMapper.createMissionDTOToMission(createMissionDTO2)).willReturn(mission2);
 
-
-
         given(missionService.addMission(mission)).willReturn(mission);
         given(missionService.addMission(mission1)).willReturn(mission1);
         given(missionService.addMission(mission2)).willReturn(mission2);
@@ -98,7 +84,7 @@ public class MissionFacadeImplTest {
         given(missionService.findMissionById(2L)).willReturn(mission2);
         given(missionService.findMissionById(3L)).willReturn(mission);
 
-        missionDTO = getMissionDTO("create mission", 3L);
+        MissionDTO missionDTO = getMissionDTO("create mission", 3L);
         missionDTO1 = getMissionDTO("mission 1", 1L);
         missionDTO1.setMissionProgress(MissionProgress.FINISHED);
         missionDTO1.setResult("It's over!");
@@ -108,15 +94,6 @@ public class MissionFacadeImplTest {
         given(missionMapper.missionToMissionDTO(mission)).willReturn(missionDTO);
         given(missionMapper.missionToMissionDTO(mission1)).willReturn(missionDTO1);
         given(missionMapper.missionToMissionDTO(mission2)).willReturn(missionDTO2);
-
-
-    }
-
-    static public CreateMissionDTO getCreateMissionDTO(String name, MissionProgress progress) {
-        CreateMissionDTO createMissionDTO = new CreateMissionDTO();
-        createMissionDTO.setName(name);
-        createMissionDTO.setMissionProgress(progress);
-        return createMissionDTO;
     }
 
     @Test
@@ -152,8 +129,8 @@ public class MissionFacadeImplTest {
         assertThat(missionFacade.findAllMissions()).hasSize(2).contains(missionDTO1, missionDTO2);
 
         missionFacade.deleteMission(missionDTO2);
-        missionList = Arrays.asList(mission1);
-        missionDTOList = Arrays.asList(missionDTO1);
+        missionList = Collections.singletonList(mission1);
+        missionDTOList = Collections.singletonList(missionDTO1);
 
         given(missionService.findAllMissions()).willReturn(missionList);
         given(missionMapper.missionsToMissionDTOs(missionList)).willReturn(missionDTOList);
@@ -180,11 +157,11 @@ public class MissionFacadeImplTest {
 
     @Test
     public void testFindAllMissionsWithProgress() {
-        List<Mission> missionFinishedList = Arrays.asList(mission1);
-        List<MissionDTO> missionFinishedDTOList = Arrays.asList(missionDTO1);
+        List<Mission> missionFinishedList = Collections.singletonList(mission1);
+        List<MissionDTO> missionFinishedDTOList = Collections.singletonList(missionDTO1);
 
-        List<Mission> missionInProgressList = Arrays.asList(mission2);
-        List<MissionDTO> missionInProgressDTOList = Arrays.asList(missionDTO2);
+        List<Mission> missionInProgressList = Collections.singletonList(mission2);
+        List<MissionDTO> missionInProgressDTOList = Collections.singletonList(missionDTO2);
 
         given(missionService.findAllMissions(MissionProgress.FINISHED)).willReturn(missionFinishedList);
         given(missionMapper.missionsToMissionDTOs(missionFinishedList)).willReturn(missionFinishedDTOList);

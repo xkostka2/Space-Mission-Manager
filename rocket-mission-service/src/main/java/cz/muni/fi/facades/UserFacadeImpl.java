@@ -18,13 +18,14 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-
+@Service
+@Transactional
 public class UserFacadeImpl implements UserFacade {
 
     private final UserMapper userMapper;
-
     private final UserService userService;
 
+    @Autowired
     public UserFacadeImpl(UserService userService, UserMapper userMapper) {
         this.userMapper = userMapper;
         this.userService = userService;
