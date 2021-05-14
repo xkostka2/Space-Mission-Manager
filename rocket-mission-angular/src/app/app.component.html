@@ -1,4 +1,35 @@
-<mat-toolbar style="background: cadetblue">HOME</mat-toolbar>
-IT WORKS
+<mat-toolbar [ngStyle]="{'background': headerColor}" class="sticky-top header-container">
+  <div class="header-part">
+    <button (click)="sidenav.toggle()" [ngStyle]="{'color': 'white'}" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
 
-<router-outlet></router-outlet>
+    <p class="ml-3 mt-auto mb-auto">{{'APP_NAME' | translate}}</p>
+  </div>
+
+  <div class="header-part">
+    <p class="mt-auto mb-auto me-2">USERNAME PLACEHOLDER</p>
+    <button mat-flat-button>{{'LOG_OUT' | translate}}</button>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened [ngStyle]="{'background': sideMenuColor}" class="side-menu-size"
+               fixedInViewport fixedTopGap="64">
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of items"
+                     [class.activated]="isActive(item.activeRegex)" disableRipple
+                     routerLink="{{item.url}}">
+        <span class="nav-caption">{{item.label | translate}}</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content id="content">
+    <div [ngStyle]="{'min-height': 'calc(100vh - 64px - 100px)'}" id="content-wrap">
+      <router-outlet></router-outlet>
+    </div>
+    <footer [ngStyle]="{'background': footerColor}" class="footer-content align-bottom">
+      © {{currentYear}} Copyright: Martin Kostka, Martin Hořelka, Martin Kažimír, Tomáš Bouma
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

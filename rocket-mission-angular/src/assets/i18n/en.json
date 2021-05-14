@@ -1,0 +1,11 @@
+{
+  "APP_NAME": "Space Mission Manager",
+  "LOG_OUT": "Log out",
+  "MENU_ITEMS": {
+    "HOME": "Home",
+    "MISSIONS": "Missions",
+    "COMPONENTS": "Components",
+    "ASTRONAUTS": "Astronauts",
+    "MY_MISSIONS": "My missions"
+  }
+}
