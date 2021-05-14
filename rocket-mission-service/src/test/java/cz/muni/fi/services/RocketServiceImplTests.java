@@ -6,9 +6,7 @@ import cz.muni.fi.services.impl.RocketServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,7 +18,6 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
@@ -29,18 +26,16 @@ import static org.mockito.Mockito.when;
  *
  * @author Martin Kostka
  */
-@ContextConfiguration(classes = ServiceConfiguration.class)
 public class RocketServiceImplTests {
     @Mock
     private RocketDao rocketDao;
 
-    @Autowired
     @InjectMocks
-    private RocketService rocketService = new RocketServiceImpl();
+    private final RocketService rocketService = new RocketServiceImpl();
 
 
     private Long counter = 10L;
-    private Map<Long, Rocket> rockets = new HashMap<>();
+    private final Map<Long, Rocket> rockets = new HashMap<>();
 
 
     private Rocket rocket1;

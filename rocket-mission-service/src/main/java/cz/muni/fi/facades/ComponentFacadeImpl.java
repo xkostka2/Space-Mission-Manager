@@ -5,8 +5,9 @@ import cz.muni.fi.dto.component.CreateComponentDTO;
 import cz.muni.fi.dto.component.UpdateComponentDTO;
 import cz.muni.fi.entity.Component;
 import cz.muni.fi.facade.ComponentFacade;
-import cz.muni.fi.services.BeanMappingService;
 import cz.muni.fi.services.ComponentService;
+import cz.muni.fi.services.mapper.ComponentMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,42 +20,45 @@ import java.util.List;
  * @author Martin Kostka
  */
 
-@Service
-@Transactional
-public class ComponentFacadeImpl implements ComponentFacade {
-    @Autowired
-    private ComponentService componentService;
 
-    @Autowired
-    private BeanMappingService beanMappingService;
+public class ComponentFacadeImpl implements ComponentFacade {
+    private final ComponentService componentService;
+
+    private final ComponentMapper componentMapper;
+
+    public ComponentFacadeImpl(ComponentService componentService, ComponentMapper componentMapper) {
+        this.componentService = componentService;
+        this.componentMapper = componentMapper;
+    }
 
     @Override
     public ComponentDTO addComponent(CreateComponentDTO component) {
-        Component mappedComponent = beanMappingService.mapTo(component, Component.class);
-        return beanMappingService.mapTo(componentService.addComponent(mappedComponent), ComponentDTO.class);
+        Component mappedComponent = componentMapper.createComponentDTOToComponent(component);
+
+        return componentMapper.componentToComponentDTO(componentService.addComponent(mappedComponent));
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<ComponentDTO> findAllComponents() {
-        return beanMappingService.mapTo(componentService.findAllComponents(), ComponentDTO.class);
+        return componentMapper.componentsToComponentDTOs(componentService.findAllComponents());
     }
 
     @Override
     @Transactional(readOnly=true)
     public ComponentDTO findComponentById(Long id) {
         Component c = componentService.findComponentById(id);
-        return (c == null) ? null : beanMappingService.mapTo(c, ComponentDTO.class);
+        return (c == null) ? null : componentMapper.componentToComponentDTO(c);
     }
 
     @Override
     public ComponentDTO updateComponent(UpdateComponentDTO component) {
-        Component mappedComponent = beanMappingService.mapTo(component, Component.class);
-        return beanMappingService.mapTo(componentService.updateComponent(mappedComponent), ComponentDTO.class);
+        Component mappedComponent = componentMapper.updateComponentDTOToComponent(component);
+        return componentMapper.componentToComponentDTO(componentService.updateComponent(mappedComponent));
     }
 
     @Override
     public void removeComponent(ComponentDTO component) {
-        componentService.removeComponent(beanMappingService.mapTo(component, Component.class));
+        componentService.removeComponent(componentMapper.componentDTOToComponent(component));
     }
 }

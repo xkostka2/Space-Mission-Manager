@@ -1,18 +1,15 @@
 package cz.muni.fi.services;
 
-
 import cz.muni.fi.dao.MissionDao;
 import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.Role;
 import cz.muni.fi.helpers.ServiceDataAccessException;
+import cz.muni.fi.services.impl.UserServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,21 +23,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-
-@ContextConfiguration(classes = ServiceConfiguration.class)
-public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
+public class UserServiceImplTest {
     @Mock
     private UserDao userDao;
     @Mock
     private MissionDao missionDao;
 
-    @Autowired
     @InjectMocks
-    private UserService userService;
+    private final UserService userService = new UserServiceImpl();
 
     private Long idCounter;
-    private Map<Long, User> users = new HashMap<>();
-    private Map<Long, Mission> missions = new HashMap<>();
+    private final Map<Long, User> users = new HashMap<>();
+    private final Map<Long, Mission> missions = new HashMap<>();
 
     @BeforeClass
     public void beforeClass() {
@@ -153,7 +147,6 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         users.put(5L, user5);
         idCounter = 10L;
     }
-
 
     @Test
     public void addNewUser() {
@@ -320,7 +313,6 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         }
     }
 
-
     private User prepareAstronautWithMission(){
         Mission m = MissionServiceImplTest.createMission("mission1");
         User u = users.get(3L);
@@ -331,7 +323,6 @@ public class UserServiceImplTest extends AbstractTestNGSpringContextTests {
         assertThat(u.missionStatusPending()).isTrue();
         return u;
     }
-
 
     private boolean checkUserNames(String name){
         for(User m : users.values()){
