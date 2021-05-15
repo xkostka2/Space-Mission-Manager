@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Role } from '../models/role';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginRedirectGuard implements CanActivate {
 
   constructor(
     private router: Router,
@@ -14,18 +15,15 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const currentUser = this.authenticationService.currentUser;
-    
-    if (currentUser) {
-      // logged in
-      const role = this.authenticationService.getRole();
-      
-      if (route.data.role === role) {
-        return true;
+    if (this.authenticationService.currentUser) {
+      if (this.authenticationService.getRole() == Role.Astronaut) {
+        this.router.navigate(['astronaut']);
+        return false;
       }
+      this.router.navigate(['manager']);
+      return false;
     }
 
-    this.router.navigate(['']);
-    return false;
+    return true;
   }
 }

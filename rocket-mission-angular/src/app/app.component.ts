@@ -55,8 +55,6 @@ export class AppComponent  implements OnInit{
   onLogout(): void {
     this.authenticationService.logout();
     this.router.navigate(['']);
-    console.log(this.authenticationService.currentUser.name);
-    
   }
 }
 

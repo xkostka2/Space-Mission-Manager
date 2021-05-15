@@ -5,6 +5,6 @@ export interface User {
     id?: number;
     name: string;
     password: string;
-    role?: Role;
+    role: Role;
     levelOfExperience?: LevelOfExperience;
 }
