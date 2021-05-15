@@ -5,8 +5,8 @@ import cz.muni.fi.dto.user.UpdateUserDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.facade.UserFacade;
-import cz.muni.fi.services.BeanMappingService;
 import cz.muni.fi.services.UserService;
+import cz.muni.fi.services.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,40 +21,44 @@ import java.util.List;
 @Service
 @Transactional
 public class UserFacadeImpl implements UserFacade {
-    @Autowired
-    private BeanMappingService beanMappingService;
+
+    private final UserMapper userMapper;
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserFacadeImpl(UserService userService, UserMapper userMapper) {
+        this.userMapper = userMapper;
+        this.userService = userService;
+    }
 
     @Override
     public UserDTO addUser(CreateUserDTO user) {
-        User mappedUser = beanMappingService.mapTo(user, User.class);
-        return beanMappingService.mapTo(userService.addUser(mappedUser), UserDTO.class);
+        User mappedUser = userMapper.createUserDTOToUser(user);
+        return userMapper.userToUserDTO(userService.addUser(mappedUser));
     }
 
     @Override
     public UserDTO updateUser(UpdateUserDTO user) {
-        User mappedUser = beanMappingService.mapTo(user, User.class);
-        return beanMappingService.mapTo(userService.updateUser(mappedUser), UserDTO.class);
+        User mappedUser = userMapper.updateUserDTOToUser(user);
+        return userMapper.userToUserDTO(userService.updateUser(mappedUser));
     }
 
     @Override
     public void deleteUser(UserDTO user) {
-        User mappedUser = beanMappingService.mapTo(user, User.class);
+        User mappedUser = userMapper.userDTOToUser(user);
         userService.deleteUser(mappedUser);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllUsers() {
-        return beanMappingService.mapTo(userService.findAllUsers(), UserDTO.class);
+        return userMapper.usersToUserDTOs(userService.findAllUsers());
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllAstronauts() {
-        return beanMappingService.mapTo(userService.findAllAstronauts(), UserDTO.class);
+        return userMapper.usersToUserDTOs(userService.findAllAstronauts());
     }
 
     @Override
@@ -64,13 +68,13 @@ public class UserFacadeImpl implements UserFacade {
         if (user == null) {
             return null;
         }
-        return beanMappingService.mapTo(user, UserDTO.class);
+        return userMapper.userToUserDTO(user);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllAvailableAstronauts() {
-        return beanMappingService.mapTo(userService.findAllAvailableAstronauts(), UserDTO.class);
+        return userMapper.usersToUserDTOs(userService.findAllAvailableAstronauts());
     }
 
     @Override
@@ -80,17 +84,16 @@ public class UserFacadeImpl implements UserFacade {
         if (user == null) {
             return null;
         }
-        return beanMappingService.mapTo(user, UserDTO.class);
+        return userMapper.userToUserDTO(user);
     }
 
     @Override
     public void acceptAssignedMission(UserDTO user) {
-        userService.acceptAssignedMission(beanMappingService.mapTo(user, User.class));
+        userService.acceptAssignedMission(userMapper.userDTOToUser(user));
     }
 
     @Override
     public void rejectAssignedMission(UserDTO user, String explanation) {
-        userService.rejectAssignedMission(beanMappingService.mapTo(user, User.class), explanation);
+        userService.rejectAssignedMission(userMapper.userDTOToUser(user), explanation);
     }
-
 }
