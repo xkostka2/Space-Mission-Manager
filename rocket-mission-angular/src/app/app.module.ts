@@ -14,6 +14,14 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { AstronautHomePageComponent } from './pages/astronaut-home-page/astronaut-home-page.component';
 import { MyMissionsPageComponent } from './pages/my-missions-page/my-missions-page.component';
+import { MissionDetailPageComponent } from './pages/mission-detail-page/mission-detail-page.component';
+import { ManagerHomePageComponent } from './pages/manager-home-page/manager-home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { MissionsPageComponent } from './pages/missions-page/missions-page.component';
+import { AstronautsPageComponent } from './pages/astronauts-page/astronauts-page.component';
+import { ComponentsPageComponent } from './pages/components-page/components-page.component';
+import { AstronautDetailPageComponent } from './pages/astronaut-detail-page/astronaut-detail-page.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +31,15 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     AstronautHomePageComponent,
-    MyMissionsPageComponent
+    MyMissionsPageComponent,
+    MissionDetailPageComponent,
+    ManagerHomePageComponent,
+    LoginPageComponent,
+    NotFoundPageComponent,
+    MissionsPageComponent,
+    AstronautsPageComponent,
+    ComponentsPageComponent,
+    AstronautDetailPageComponent
   ],
   imports: [
     BrowserModule,
