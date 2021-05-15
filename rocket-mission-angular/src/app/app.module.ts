@@ -22,6 +22,8 @@ import { MissionsPageComponent } from './pages/missions-page/missions-page.compo
 import { AstronautsPageComponent } from './pages/astronauts-page/astronauts-page.component';
 import { ComponentsPageComponent } from './pages/components-page/components-page.component';
 import { AstronautDetailPageComponent } from './pages/astronaut-detail-page/astronaut-detail-page.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,6 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -51,6 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

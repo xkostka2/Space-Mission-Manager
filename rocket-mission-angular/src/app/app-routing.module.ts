@@ -1,6 +1,6 @@
-import { componentFactoryName } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { AstronautDetailPageComponent } from './pages/astronaut-detail-page/astronaut-detail-page.component';
 import {AstronautHomePageComponent} from "./pages/astronaut-home-page/astronaut-home-page.component";
 import { AstronautsPageComponent } from './pages/astronauts-page/astronauts-page.component';
@@ -16,44 +16,53 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    component: LoginPageComponent,
+    pathMatch: 'full',
   },
   {
-    path: 'auth',
-    component: LoginPageComponent
+    path: 'astronaut',
+    component: AstronautHomePageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'home',
-    component: AstronautHomePageComponent
+    path: 'astronaut/my-missions',
+    component: MyMissionsPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'home/manager',
-    component: ManagerHomePageComponent
+    path: 'astronaut/mission/:id',
+    component: MissionDetailPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'myMissions',
-    component: MyMissionsPageComponent
+    path: 'manager',
+    component: ManagerHomePageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'missions',
-    component: MissionsPageComponent
+    path: 'manager/missions',
+    component: MissionsPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'mission/:id',
-    component: MissionDetailPageComponent
+    path: 'manager/mission/:id',
+    component: MissionDetailPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'astronauts',
-    component: AstronautsPageComponent
+    path: 'manager/astronauts',
+    component: AstronautsPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'astronaut/:id',
-    component: AstronautDetailPageComponent
+    path: 'manager/astronaut/:id',
+    component: AstronautDetailPageComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'components',
-    component: ComponentsPageComponent
+    path: 'manager/components',
+    component: ComponentsPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

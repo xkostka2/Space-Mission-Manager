@@ -1,6 +1,8 @@
 {
   "APP_NAME": "Space Mission Manager",
   "LOG_OUT": "Log out",
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
   "MENU_ITEMS": {
     "HOME": "Home",
     "MISSIONS": "Missions",

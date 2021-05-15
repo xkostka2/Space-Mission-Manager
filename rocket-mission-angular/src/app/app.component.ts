@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent  implements OnInit{
 
   private currentUrl: string;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    ) {
     this.currentUrl = router.url;
 
     router.events.subscribe((_: NavigationEnd) => {
@@ -46,6 +50,13 @@ export class AppComponent  implements OnInit{
     const regexp = new RegExp(regexValue);
 
     return regexp.test(this.currentUrl);
+  }
+
+  onLogout(): void {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
+    console.log(this.authenticationService.currentUser.name);
+    
   }
 }
 

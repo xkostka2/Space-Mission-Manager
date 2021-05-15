@@ -8,8 +8,8 @@
   </div>
 
   <div class="header-part">
-    <p class="mt-auto mb-auto me-2">USERNAME PLACEHOLDER</p>
-    <button mat-flat-button>{{'LOG_OUT' | translate}}</button>
+    <p *ngIf="authenticationService.currentUser" class="mt-auto mb-auto me-2">{{authenticationService.currentUser.name}}</p>
+    <button *ngIf="authenticationService.currentUser" mat-flat-button (click)="onLogout()">{{'LOG_OUT' | translate}}</button>
   </div>
 </mat-toolbar>
 
