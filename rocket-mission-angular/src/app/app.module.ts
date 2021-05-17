@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BreadcrumbsComponent} from "./components/breadcrumbs/breadcrumbs.component";
 import { HomePageComponent } from './components/home-page/home-page.component';
+import {AuthenticationService} from "./services/authentication.service";
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
     ComponentsPageComponent,
     AstronautDetailPageComponent,
     BreadcrumbsComponent,
-    HomePageComponent
+    HomePageComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,9 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

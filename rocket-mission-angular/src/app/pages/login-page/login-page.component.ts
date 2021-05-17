@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Role } from 'src/app/models/role';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -31,13 +30,7 @@ export class LoginPageComponent implements OnInit {
       const username = this.loginForm.get('username').value;
       const password = this.loginForm.get('password').value;
 
-      if (this.authenticationService.login(username, password)) {
-        if (this.authenticationService.getRole() === Role.Astronaut) {
-          this.router.navigate(['astronaut']);
-          return;
-        }
-        this.router.navigate(['manager']);
-      }
+      this.authenticationService.login(username, password);
     }
   }
 }
