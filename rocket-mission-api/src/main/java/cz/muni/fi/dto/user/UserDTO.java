@@ -1,6 +1,8 @@
 package cz.muni.fi.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;
@@ -12,6 +14,8 @@ import java.util.Objects;
  *
  * @author Martin Hořelka (469003)
  */
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UserDTO {
 
     private Long id;
@@ -20,8 +24,6 @@ public class UserDTO {
     private String password;
     private Role role;
     private LevelOfExperience levelOfExperience;
-
-    @JsonBackReference
     private MissionDTO mission;
     private boolean missionAccepted;
     private String missionExplanation;

@@ -1,7 +1,9 @@
 package cz.muni.fi.dto.mission;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cz.muni.fi.config.ZonedDateTimeDeserializer;
@@ -21,6 +23,8 @@ import java.util.Set;
  *
  * @author Martin Kazimir
  */
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class MissionDTO {
 
     private long id;
@@ -28,13 +32,8 @@ public class MissionDTO {
     private String destination;
     private MissionProgress missionProgress;
 
-    @JsonManagedReference
     private Set<UserDTO> users = new HashSet<>();
-
-    @JsonManagedReference
     private Set<RocketDTO> rockets = new HashSet<>();
-
-    @JsonManagedReference
     private Set<ComponentDTO> components = new HashSet<>();
 
     @JsonDeserialize(using = ZonedDateTimeDeserializer.class)

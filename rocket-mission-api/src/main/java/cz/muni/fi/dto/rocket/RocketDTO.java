@@ -1,7 +1,9 @@
 package cz.muni.fi.dto.rocket;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
 
@@ -16,14 +18,11 @@ import java.util.Set;
  * @author Tomas Bouma (469275)
  */
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class RocketDTO {
     private Long id;
     private String name;
-
-    @JsonBackReference
     private MissionDTO mission;
-
-    @JsonManagedReference
     private Set<ComponentDTO> requiredComponents = new HashSet<>();
 
     public Long getId() {
