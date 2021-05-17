@@ -18,7 +18,6 @@ import java.util.Set;
 
 public class RocketDTO {
     private Long id;
-
     private String name;
 
     @JsonBackReference

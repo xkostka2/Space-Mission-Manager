@@ -1,6 +1,10 @@
 package cz.muni.fi.dto.component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import cz.muni.fi.config.ZonedDateTimeDeserializer;
+import cz.muni.fi.config.ZonedDateTimeSerializer;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.enums.ComponentType;
@@ -22,6 +26,9 @@ public class CreateComponentDTO {
     private String name;
     private boolean readyToUse;
     private ComponentType type;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime readyDate;
 
     @JsonBackReference

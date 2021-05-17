@@ -1,6 +1,10 @@
 package cz.muni.fi.dto.mission;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import cz.muni.fi.config.ZonedDateTimeDeserializer;
+import cz.muni.fi.config.ZonedDateTimeSerializer;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.component.ComponentDTO;
@@ -45,10 +49,18 @@ public class CreateMissionDTO {
 
     @NotNull
     @Future
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime eta;
 
     private MissionProgress missionProgress;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime finishedDate;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime startedDate;
     private String result;
 
