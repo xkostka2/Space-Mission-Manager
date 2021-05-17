@@ -13,7 +13,7 @@ export class AppComponent  implements OnInit{
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     ) {
     this.currentUrl = router.url;
 
@@ -32,18 +32,20 @@ export class AppComponent  implements OnInit{
   items: SideMenuItem[] = [];
 
   ngOnInit(): void {
-    this.items = [
-      {
-        label: 'MENU_ITEMS.HOME',
-        url: '/home',
-        activeRegex: '^/home$'
-      },
-      {
-        label: 'MENU_ITEMS.MY_MISSIONS',
-        url: '/myMissions',
-        activeRegex: '^/myMissions$'
-      }
-    ]
+      // const prefix = this.authenticationService.currentUser.role ? '/astronaut': '/manager'
+    const prefix = '/astronaut';
+      this.items = [
+        {
+          label: 'MENU_ITEMS.HOME',
+          url: prefix,
+          activeRegex: `^${prefix}$`
+        },
+        {
+          label: 'MENU_ITEMS.MY_MISSIONS',
+          url: `${prefix}/my-missions`,
+          activeRegex: `^${prefix}/my-missions$`
+        }
+      ];
   }
 
   isActive(regexValue: string) {
