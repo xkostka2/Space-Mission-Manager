@@ -1,0 +1,7 @@
+<mat-nav-list>
+  <mat-list-item *ngFor="let item of items"
+                 [class.activated]="isActive(item.activeRegex)" disableRipple
+                 routerLink="{{item.url}}">
+    <span>{{item.label | translate}}</span>
+  </mat-list-item>
+</mat-nav-list>

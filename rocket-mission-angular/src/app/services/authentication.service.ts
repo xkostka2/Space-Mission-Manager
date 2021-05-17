@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Role } from '../models/role';
 import { User } from '../models/user';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
+    private router: Router
   ) { }
 
   login(username: string, password: string): boolean {
@@ -21,7 +23,9 @@ export class AuthenticationService {
         password: password,
         role: Role.Astronaut, //TODO
       }
-
+      const storedUser = JSON.stringify(this.currentUser);
+      localStorage.setItem('auth:user', storedUser);
+      this.redirectToOriginDestination();
       return true
     }
 
@@ -31,6 +35,8 @@ export class AuthenticationService {
 
   logout(): void {
     this.currentUser = null;
+    localStorage.removeItem('auth:user');
+    this.router.navigate(['']);
   }
 
   getRole(): Role | null {
@@ -38,5 +44,31 @@ export class AuthenticationService {
       return this.currentUser.role;
     }
     return null;
+  }
+
+  isLoggedIn(): boolean {
+    return this.currentUser !== null && this.currentUser !== undefined;
+  }
+
+  verifyAuth() {
+    const storedUser = localStorage.getItem('auth:user');
+    if(!this.isLoggedIn()){
+      if(storedUser){
+        this.currentUser = JSON.parse(storedUser);
+      } else {
+        sessionStorage.setItem('auth:redirect', location.pathname);
+        this.router.navigate([])
+      }
+    }
+  }
+
+  redirectToOriginDestination(){
+    let redirectUrl = sessionStorage.getItem('auth:redirect');
+    sessionStorage.removeItem('auth:redirect')
+
+    if (!redirectUrl || redirectUrl === '') {
+      redirectUrl = this.getRole() === Role.Astronaut ? '/astronaut' : '/manager';
+    }
+    this.router.navigate([redirectUrl], {replaceUrl: true})
   }
 }

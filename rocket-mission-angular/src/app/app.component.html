@@ -16,13 +16,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" [opened]="!!authenticationService.currentUser" [ngStyle]="{'background': sideMenuColor}" class="side-menu-size"
                fixedInViewport fixedTopGap="64">
-    <mat-nav-list>
-      <mat-list-item *ngFor="let item of items"
-                     [class.activated]="isActive(item.activeRegex)" disableRipple
-                     routerLink="{{item.url}}">
-        <span class="nav-caption">{{item.label | translate}}</span>
-      </mat-list-item>
-    </mat-nav-list>
+    <app-side-menu [userRole]="authenticationService.getRole()"></app-side-menu>
   </mat-sidenav>
   <mat-sidenav-content id="content">
     <div [ngStyle]="{'min-height': 'calc(100vh - 64px - 100px)'}" id="content-wrap">
