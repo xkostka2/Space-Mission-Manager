@@ -79,11 +79,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/email", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO findUserByEmail(@RequestBody String email) {
+    public UserDTO findUserByEmail(@RequestBody Message email) {
 
         logger.log(Level.INFO, "[REST] finding user with email " + email);
 
-        UserDTO userDTO = userFacade.findUserByEmail(email);
+        UserDTO userDTO = userFacade.findUserByEmail(email.getValue());
         if (userDTO == null) {
             throw new ResourceNotFoundException();
         }
@@ -133,7 +133,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "{id}/rejectMission", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO rejectMission(@PathVariable Long id, @RequestBody String explanation) {
+    public UserDTO rejectMission(@PathVariable Long id, @RequestBody Message explanation) {
 
         logger.log(Level.INFO, "[REST] reject mission by user with id " + id);
 
@@ -141,7 +141,7 @@ public class UserController {
         if (user == null) {
             throw new ResourceNotFoundException();
         }
-        userFacade.rejectAssignedMission(user, explanation);
+        userFacade.rejectAssignedMission(user, explanation.getValue());
         return userFacade.findUserById(id);
     }
 }
