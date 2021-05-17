@@ -13,6 +13,7 @@ import { MissionDetailPageComponent } from './pages/mission-detail-page/mission-
 import { MissionsPageComponent } from './pages/missions-page/missions-page.component';
 import {MyMissionsPageComponent} from "./pages/my-missions-page/my-missions-page.component";
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import {HomePageComponent} from "./components/home-page/home-page.component";
 
 
 const routes: Routes = [
@@ -24,75 +25,112 @@ const routes: Routes = [
   },
   {
     path: 'astronaut',
-    component: AstronautHomePageComponent,
+    component: HomePageComponent,
     canActivate: [AuthGuard],
     data: {
-      role: Role.Astronaut
-    }
-  },
-  {
-    path: 'astronaut/my-missions',
-    component: MyMissionsPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Astronaut
-    }
-  },
-  {
-    path: 'astronaut/mission/:id',
-    component: MissionDetailPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Astronaut
-    }
+      role: Role.Astronaut,
+      breadcrumb: 'MENU_ITEMS.HOME'
+    },
+    children: [
+      {
+        path: '',
+        component: AstronautHomePageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Astronaut,
+          breadcrumb: 'MENU_ITEMS.HOME'
+        }
+      },
+      {
+        path: 'my-missions',
+        component: MyMissionsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Astronaut,
+          breadcrumb: 'MENU_ITEMS.MY_MISSIONS'
+        },
+        children: [
+          {
+            path: ':id',
+            component: MissionDetailPageComponent,
+            canActivate: [AuthGuard],
+            data: {
+              role: Role.Astronaut,
+              breadcrumb: 'MENU_ITEMS.MISSION_DETAIL'
+            }
+          }
+        ]
+      },
+    ]
   },
   {
     path: 'manager',
-    component: ManagerHomePageComponent,
+    component: HomePageComponent,
     canActivate: [AuthGuard],
     data: {
-      role: Role.Manager
-    }
-  },
-  {
-    path: 'manager/missions',
-    component: MissionsPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Manager
-    }
-  },
-  {
-    path: 'manager/mission/:id',
-    component: MissionDetailPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Manager
-    }
-  },
-  {
-    path: 'manager/astronauts',
-    component: AstronautsPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Manager
-    }
-  },
-  {
-    path: 'manager/astronaut/:id',
-    component: AstronautDetailPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Manager
-    }
-  },
-  {
-    path: 'manager/components',
-    component: ComponentsPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: Role.Manager
-    }
+      role: Role.Manager,
+      breadcrumb: 'MENU_ITEMS.HOME'
+    },
+    children: [
+      {
+        path: '',
+        component: ManagerHomePageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'MENU_ITEMS.HOME'
+        }
+      },
+      {
+        path: 'missions',
+        component: MissionsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'MENU_ITEMS.MISSIONS'
+        },
+        children: [
+          {
+            path: ':id',
+            component: MissionDetailPageComponent,
+            canActivate: [AuthGuard],
+            data: {
+              role: Role.Manager,
+              breadcrumb: 'MENU_ITEMS.MISSION_DETAIL'
+            }
+          }
+        ]
+      },
+      {
+        path: 'astronauts',
+        component: AstronautsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'MENU_ITEMS.ASTRONAUTS'
+        },
+        children: [
+          {
+            path: ':id',
+            component: AstronautDetailPageComponent,
+            canActivate: [AuthGuard],
+            data: {
+              role: Role.Manager,
+              breadcrumb: 'MENU_ITEMS.ASTRONAUT_DETAIL'
+            }
+          },
+        ]
+      },
+      {
+        path: 'components',
+        component: ComponentsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'MENU_ITEMS.COMPONENTS'
+        }
+      },
+    ]
   },
   {
     path: '**',

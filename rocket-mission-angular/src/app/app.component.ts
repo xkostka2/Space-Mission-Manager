@@ -44,6 +44,11 @@ export class AppComponent  implements OnInit{
           label: 'MENU_ITEMS.MY_MISSIONS',
           url: `${prefix}/my-missions`,
           activeRegex: `^${prefix}/my-missions$`
+        },
+        {
+          label: 'MENU_ITEMS.MISSION_DETAIL',
+          url: `${prefix}/my-missions/42`,
+          activeRegex: `^${prefix}/my-missions/42$`
         }
       ];
   }

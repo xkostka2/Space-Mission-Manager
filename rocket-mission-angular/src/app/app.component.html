@@ -1,6 +1,6 @@
 <mat-toolbar [ngStyle]="{'background': headerColor}" class="sticky-top header-container">
   <div class="header-part">
-    <button (click)="sidenav.toggle()" [ngStyle]="{'color': 'white'}" mat-icon-button>
+    <button *ngIf="authenticationService.currentUser" (click)="sidenav.toggle()" [ngStyle]="{'color': 'white'}" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -14,7 +14,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" opened [ngStyle]="{'background': sideMenuColor}" class="side-menu-size"
+  <mat-sidenav #sidenav mode="side" [opened]="!!authenticationService.currentUser" [ngStyle]="{'background': sideMenuColor}" class="side-menu-size"
                fixedInViewport fixedTopGap="64">
     <mat-nav-list>
       <mat-list-item *ngFor="let item of items"
@@ -26,6 +26,7 @@
   </mat-sidenav>
   <mat-sidenav-content id="content">
     <div [ngStyle]="{'min-height': 'calc(100vh - 64px - 100px)'}" id="content-wrap">
+      <breadcrumbs *ngIf="authenticationService.currentUser"></breadcrumbs>
       <router-outlet></router-outlet>
     </div>
     <footer [ngStyle]="{'background': footerColor}" class="footer-content align-bottom">
