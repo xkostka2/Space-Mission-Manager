@@ -25,11 +25,8 @@ public class UpdateRocketDTO {
     @NotNull
     @Size(min = 3, max = 50)
     private String name;
-
-    @JsonBackReference
     private MissionDTO mission;
 
-    @JsonManagedReference
     @NotNull
     @Size(min = 1)
     private Set<ComponentDTO> requiredComponents = new HashSet<>();

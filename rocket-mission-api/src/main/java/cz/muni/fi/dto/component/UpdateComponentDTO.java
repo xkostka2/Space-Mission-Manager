@@ -30,10 +30,7 @@ public class UpdateComponentDTO {
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime readyDate;
 
-    @JsonBackReference
     private MissionDTO mission;
-
-    @JsonBackReference
     private RocketDTO rocket;
 
     public Long getId() {

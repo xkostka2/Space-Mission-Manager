@@ -27,13 +27,8 @@ public class UpdateMissionDTO {
     private String destination;
     private MissionProgress missionProgress;
 
-    @JsonManagedReference
     private Set<UserDTO> users = new HashSet<>();
-
-    @JsonManagedReference
     private Set<RocketDTO> rockets = new HashSet<>();
-
-    @JsonManagedReference
     private Set<ComponentDTO> components = new HashSet<>();
 
     @JsonDeserialize(using = ZonedDateTimeDeserializer.class)

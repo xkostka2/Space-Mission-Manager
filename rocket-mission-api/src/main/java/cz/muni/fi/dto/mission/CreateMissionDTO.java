@@ -34,16 +34,13 @@ public class CreateMissionDTO {
     @Size(min = 2, max = 255)
     private String destination;
 
-    @JsonManagedReference
     @NotNull
     private Set<UserDTO> users = new HashSet<>();
 
-    @JsonManagedReference
     @NotNull
     @Size(min = 1)
     private Set<RocketDTO> rockets = new HashSet<>();
 
-    @JsonManagedReference
     @NotNull
     private Set<ComponentDTO> components = new HashSet<>();
 

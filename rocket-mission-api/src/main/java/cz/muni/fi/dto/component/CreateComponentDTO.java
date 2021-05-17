@@ -31,10 +31,7 @@ public class CreateComponentDTO {
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime readyDate;
 
-    @JsonBackReference
     private MissionDTO mission;
-
-    @JsonBackReference
     private RocketDTO rocket;
 
     public boolean isReadyToUse() {

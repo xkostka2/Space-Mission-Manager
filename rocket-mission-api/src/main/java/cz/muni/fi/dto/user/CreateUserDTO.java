@@ -19,8 +19,6 @@ public class CreateUserDTO {
     private String password;
     private Role role;
     private LevelOfExperience levelOfExperience;
-
-    @JsonBackReference
     private MissionDTO mission;
     private boolean missionAccepted;
     private String missionExplanation;
