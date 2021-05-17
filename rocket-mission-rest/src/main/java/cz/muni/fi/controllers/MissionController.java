@@ -7,11 +7,11 @@ import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.MissionFacade;
-import cz.muni.fi.facade.MissionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,5 +89,19 @@ public class MissionController {
 
         missionFacade.deleteMission(mission);
         return missionFacade.findAllMissions();
+    }
+
+    @RequestMapping(value = "/{id}/archive", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public MissionDTO archive(@PathVariable("id") long id, @RequestBody String archiveComment) {
+
+        logger.log(Level.INFO, "[REST] archiving mission" + id);
+
+        MissionDTO mission = missionFacade.findMissionById(id);
+        if (mission == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        missionFacade.archive(mission, ZonedDateTime.now(), archiveComment);
+        return missionFacade.findMissionById(id);
     }
 }
