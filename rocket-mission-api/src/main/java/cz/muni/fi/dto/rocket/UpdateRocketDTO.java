@@ -1,5 +1,7 @@
 package cz.muni.fi.dto.rocket;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
 
@@ -24,8 +26,10 @@ public class UpdateRocketDTO {
     @Size(min = 3, max = 50)
     private String name;
 
+    @JsonBackReference
     private MissionDTO mission;
 
+    @JsonManagedReference
     @NotNull
     @Size(min = 1)
     private Set<ComponentDTO> requiredComponents = new HashSet<>();

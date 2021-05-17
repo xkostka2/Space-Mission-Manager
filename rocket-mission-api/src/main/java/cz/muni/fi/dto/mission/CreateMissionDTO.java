@@ -1,5 +1,6 @@
 package cz.muni.fi.dto.mission;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.component.ComponentDTO;
@@ -29,13 +30,16 @@ public class CreateMissionDTO {
     @Size(min = 2, max = 255)
     private String destination;
 
+    @JsonManagedReference
     @NotNull
     private Set<UserDTO> users = new HashSet<>();
 
+    @JsonManagedReference
     @NotNull
     @Size(min = 1)
     private Set<RocketDTO> rockets = new HashSet<>();
 
+    @JsonManagedReference
     @NotNull
     private Set<ComponentDTO> components = new HashSet<>();
 

@@ -1,5 +1,6 @@
 package cz.muni.fi.dto.component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.enums.ComponentType;
@@ -22,7 +23,11 @@ public class CreateComponentDTO {
     private boolean readyToUse;
     private ComponentType type;
     private ZonedDateTime readyDate;
+
+    @JsonBackReference
     private MissionDTO mission;
+
+    @JsonBackReference
     private RocketDTO rocket;
 
     public boolean isReadyToUse() {
