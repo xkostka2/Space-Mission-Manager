@@ -54,6 +54,8 @@ public class Mission implements Serializable {
     private ZonedDateTime eta;
     private ZonedDateTime finishedDate;
     private ZonedDateTime startedDate;
+
+    @Column(length = 8192)
     private String result;
 
     public String getResult() {
