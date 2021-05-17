@@ -24,6 +24,8 @@ import { ComponentsPageComponent } from './pages/components-page/components-page
 import { AstronautDetailPageComponent } from './pages/astronaut-detail-page/astronaut-detail-page.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BreadcrumbsComponent} from "./components/breadcrumbs/breadcrumbs.component";
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,7 +43,9 @@ export function createTranslateLoader(http: HttpClient) {
     MissionsPageComponent,
     AstronautsPageComponent,
     ComponentsPageComponent,
-    AstronautDetailPageComponent
+    AstronautDetailPageComponent,
+    BreadcrumbsComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

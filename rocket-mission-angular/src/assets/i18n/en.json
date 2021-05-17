@@ -8,6 +8,8 @@
     "MISSIONS": "Missions",
     "COMPONENTS": "Components",
     "ASTRONAUTS": "Astronauts",
-    "MY_MISSIONS": "My missions"
+    "MY_MISSIONS": "My missions",
+    "MISSION_DETAIL": "Mission detail",
+    "ASTRONAUT_DETAIL": "Astronaut detail"
   }
 }
