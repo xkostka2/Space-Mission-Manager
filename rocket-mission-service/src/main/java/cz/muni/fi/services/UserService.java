@@ -87,4 +87,13 @@ public interface UserService {
      */
     void rejectAssignedMission(User user, String explanation)
         throws DataAccessException, IllegalArgumentException;
+
+    /**
+     * Authenticates user
+     * @param user user
+     * @param password password
+     * @return true if successful, otherwise false
+     */
+
+    boolean authenticate(User user, String password) throws DataAccessException;
 }

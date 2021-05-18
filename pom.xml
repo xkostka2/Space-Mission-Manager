@@ -58,6 +58,8 @@
                                 <artifactId>tomcat</artifactId>
                                 <version>${tomcat.version}</version>
                             </artifactInstaller>
+<!--                            <log>target/cargo.log</log>-->
+                            <logLevel>debug</logLevel>
                         </container>
                     </configuration>
                 </plugin>

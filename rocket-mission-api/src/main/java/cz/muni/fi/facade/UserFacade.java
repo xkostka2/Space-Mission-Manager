@@ -87,4 +87,13 @@ public interface UserFacade {
      * @param explanation explanation why user did not accept mission
      */
     void rejectAssignedMission(UserDTO user, String explanation);
+
+    /**
+     * Authenticates email and password
+     * @param email email
+     * @param unencryptedPassword password
+     * @return userDTO
+     */
+
+    boolean authenticate(String email, String unencryptedPassword);
 }

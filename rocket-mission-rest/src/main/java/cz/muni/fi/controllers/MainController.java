@@ -24,7 +24,8 @@ public class MainController {
                 "users_uri", ApiUris.ROOT_URI_USERS,
                 "components_uri", ApiUris.ROOT_URI_COMPONENTS,
                 "rockets_uri", ApiUris.ROOT_URI_ROCKETS,
-                "missions_uri", ApiUris.ROOT_URI_MISSIONS
+                "missions_uri", ApiUris.ROOT_URI_MISSIONS,
+                "auth_uri", ApiUris.ROOT_URI_AUTH
         );
     }
 }

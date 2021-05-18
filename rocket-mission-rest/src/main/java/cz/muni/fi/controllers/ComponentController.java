@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ComponentController {
         this.componentFacade = componentFacade;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ComponentDTO createComponent(@RequestBody CreateComponentDTO componentCreateDTO) {
 
@@ -50,6 +52,7 @@ public class ComponentController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ComponentDTO> findAllComponents() {
 
@@ -58,6 +61,7 @@ public class ComponentController {
         return componentFacade.findAllComponents();
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ComponentDTO findComponentById(@PathVariable("id") Long id) {
 
@@ -70,6 +74,7 @@ public class ComponentController {
         return componentDTO;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ComponentDTO updateComponent(@RequestBody UpdateComponentDTO updateComponentDTO) {
 
@@ -84,6 +89,7 @@ public class ComponentController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ComponentDTO> removeComponent(@PathVariable("id") long id) {
 
@@ -99,6 +105,7 @@ public class ComponentController {
     }
 
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/available", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ComponentDTO> findAllAvailableComponents() {
 

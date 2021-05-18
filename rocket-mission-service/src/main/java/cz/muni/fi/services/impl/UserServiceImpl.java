@@ -5,6 +5,7 @@ import cz.muni.fi.entity.User;
 import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -133,5 +134,15 @@ public class UserServiceImpl implements UserService {
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not update a user", e);
         }
+    }
+
+    @Override
+    public boolean authenticate(User user, String password) throws DataAccessException {
+        if(user == null){
+            throw new IllegalArgumentException("User is null");
+        }
+
+        User u = findUserById(user.getId());
+        return u.getPassword().equals(password);
     }
 }

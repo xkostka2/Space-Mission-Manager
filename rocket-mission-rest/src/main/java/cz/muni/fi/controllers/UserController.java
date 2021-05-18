@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 @RequestMapping(ApiUris.ROOT_URI_USERS)
 public class UserController {
 
-    private final static Logger logger = Logger.getLogger(ComponentController.class.getName());
+    private final static Logger logger = Logger.getLogger(UserController.class.getName());
 
     private final UserFacade userFacade;
 
@@ -29,8 +30,9 @@ public class UserController {
         this.userFacade = userFacade;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO createComponent(@RequestBody CreateUserDTO userCreateDTO) {
+    public UserDTO createUser(@RequestBody CreateUserDTO userCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating user");
 
@@ -42,6 +44,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> findAllUsers() {
 
@@ -50,6 +53,7 @@ public class UserController {
         return userFacade.findAllUsers();
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/astronauts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> findAllAstronauts() {
 
@@ -58,6 +62,7 @@ public class UserController {
         return userFacade.findAllAstronauts();
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/astronauts/available", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> findAllAvailableAstronauts() {
 
@@ -66,6 +71,7 @@ public class UserController {
         return userFacade.findAllAvailableAstronauts();
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDTO findUserById(@PathVariable("id") Long id) {
 
@@ -78,6 +84,7 @@ public class UserController {
         return userDTO;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/email", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDTO findUserByEmail(@RequestBody String email) {
 
@@ -90,6 +97,7 @@ public class UserController {
         return userDTO;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDTO updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
 
@@ -104,6 +112,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> removeUser(@PathVariable("id") long id) {
 
@@ -118,6 +127,7 @@ public class UserController {
         return userFacade.findAllUsers();
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}/acceptMission", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDTO acceptMission(@PathVariable Long id) {
 
@@ -132,6 +142,7 @@ public class UserController {
         return userFacade.findUserById(id);
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "{id}/rejectMission", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDTO rejectMission(@PathVariable Long id, @RequestBody String explanation) {
 

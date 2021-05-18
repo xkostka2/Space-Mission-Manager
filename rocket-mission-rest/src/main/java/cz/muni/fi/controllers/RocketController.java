@@ -10,6 +10,8 @@ import cz.muni.fi.facade.RocketFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
 @RequestMapping(ApiUris.ROOT_URI_ROCKETS)
 public class RocketController {
 
-    private final static Logger logger = Logger.getLogger(ComponentController.class.getName());
+    private final static Logger logger = Logger.getLogger(RocketController.class.getName());
 
     private final RocketFacade rocketFacade;
 
@@ -28,8 +30,9 @@ public class RocketController {
         this.rocketFacade = rocketFacade;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public RocketDTO createComponent(@RequestBody CreateRocketDTO rocketCreateDTO) {
+    public RocketDTO createRocket(@RequestBody CreateRocketDTO rocketCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating rocket");
 
@@ -41,6 +44,7 @@ public class RocketController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RocketDTO> findAllRockets() {
 
@@ -49,6 +53,7 @@ public class RocketController {
         return rocketFacade.findAllRockets();
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public RocketDTO findRocketById(@PathVariable("id") Long id) {
 
@@ -61,6 +66,7 @@ public class RocketController {
         return rocketDTO;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public RocketDTO updateRocket(@RequestBody UpdateRocketDTO updateRocketDTO) {
 
@@ -75,6 +81,7 @@ public class RocketController {
         }
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RocketDTO> removeRocket(@PathVariable("id") long id) {
 

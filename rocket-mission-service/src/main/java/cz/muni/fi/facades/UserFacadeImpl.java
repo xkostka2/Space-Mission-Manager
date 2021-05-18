@@ -10,6 +10,7 @@ import cz.muni.fi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 
@@ -91,6 +92,14 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void rejectAssignedMission(UserDTO user, String explanation) {
         userService.rejectAssignedMission(beanMappingService.mapTo(user, User.class), explanation);
+    }
+
+    @Override
+    public boolean authenticate(String email, String unencryptedPassword) {
+        String md5Hex = DigestUtils
+                .md5Hex(unencryptedPassword).toUpperCase();
+        User user = userService.findUserByEmail(email);
+        return user != null && userService.authenticate(user, md5Hex);
     }
 
 }

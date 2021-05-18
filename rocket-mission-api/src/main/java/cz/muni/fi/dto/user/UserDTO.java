@@ -100,6 +100,10 @@ public class UserDTO {
         this.missionExplanation = missionRejectedExplanation;
     }
 
+    public boolean isManager() {
+        return role == Role.MANAGER;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

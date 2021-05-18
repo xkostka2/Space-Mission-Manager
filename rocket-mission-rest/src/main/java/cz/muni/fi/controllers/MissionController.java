@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 @RequestMapping(ApiUris.ROOT_URI_MISSIONS)
 public class MissionController {
 
-    private final static Logger logger = Logger.getLogger(ComponentController.class.getName());
+    private final static Logger logger = Logger.getLogger(MissionController.class.getName());
 
     private final MissionFacade missionFacade;
 
@@ -30,8 +31,9 @@ public class MissionController {
         this.missionFacade = missionFacade;
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO createComponent(@RequestBody CreateMissionDTO missionCreateDTO) {
+    public MissionDTO createMission(@RequestBody CreateMissionDTO missionCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating mission");
 
@@ -43,6 +45,7 @@ public class MissionController {
         }
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MissionDTO> findAllMissions() {
 
@@ -51,6 +54,7 @@ public class MissionController {
         return missionFacade.findAllMissions();
     }
 
+    @RolesAllowed({"MANAGER", "USER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MissionDTO findMissionById(@PathVariable("id") Long id) {
 
@@ -63,6 +67,7 @@ public class MissionController {
         return missionDTO;
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MissionDTO updateMission(@RequestBody UpdateMissionDTO updateMissionDTO) {
 
@@ -77,6 +82,7 @@ public class MissionController {
         }
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MissionDTO> removeMission(@PathVariable("id") long id) {
 
@@ -91,6 +97,7 @@ public class MissionController {
         return missionFacade.findAllMissions();
     }
 
+    @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/{id}/archive", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public MissionDTO archive(@PathVariable("id") long id, @RequestBody String archiveComment) {
 
