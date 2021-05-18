@@ -4,7 +4,9 @@ import cz.muni.fi.dto.rocket.CreateRocketDTO;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-@Mapper
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface RocketMapper {
     RocketDTO rocketToRocketDTO(Rocket rocket);
     Rocket rocketDTOToRocket(RocketDTO rocketDTO);

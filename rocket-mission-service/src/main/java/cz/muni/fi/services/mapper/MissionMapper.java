@@ -4,7 +4,9 @@ import cz.muni.fi.dto.mission.CreateMissionDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.dto.mission.UpdateMissionDTO;
 import cz.muni.fi.entity.Mission;
+import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-@Mapper
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface MissionMapper {
     MissionDTO missionToMissionDTO(Mission mission);
     Mission missionDTOToMission(MissionDTO missionDTO);

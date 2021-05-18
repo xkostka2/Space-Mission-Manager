@@ -31,7 +31,6 @@ public class ComponentController {
     
     private final ComponentFacade componentFacade;
 
-
     @Autowired
     public ComponentController(ComponentFacade componentFacade) {
         this.componentFacade = componentFacade;

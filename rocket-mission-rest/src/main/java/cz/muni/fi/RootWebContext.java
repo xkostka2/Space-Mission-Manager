@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import cz.muni.fi.samples.MissionManagerWithSamplesConfig;
+import cz.muni.fi.services.config.ServiceConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @EnableWebMvc
 @Configuration
-@Import(MissionManagerWithSamplesConfig.class)
+@Import({ServiceConfiguration.class, MissionManagerWithSamplesConfig.class})
 @ComponentScan(basePackages = {"cz.muni.fi.controllers"})
 public class RootWebContext implements WebMvcConfigurer {
 
