@@ -1,5 +1,12 @@
 package cz.muni.fi.dto.component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import cz.muni.fi.config.ZonedDateTimeDeserializer;
+import cz.muni.fi.config.ZonedDateTimeSerializer;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.enums.ComponentType;
@@ -13,6 +20,8 @@ import java.util.Objects;
  *
  * @author Martin Kostka
  */
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ComponentDTO {
 
     @NotNull
@@ -20,7 +29,11 @@ public class ComponentDTO {
     private Long id;
     private boolean readyToUse;
     private ComponentType type;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime readyDate;
+
     private MissionDTO mission;
     private RocketDTO rocket;
 

@@ -18,11 +18,11 @@ public class MissionManagerWithSamplesConfig {
     final static Logger log = LoggerFactory.getLogger(MissionManagerWithSamplesConfig.class);
 
     @Autowired
-    SampleDataLoadingFacade sampleDataLoadingFacade;
+    private SampleDataLoadingFacade sampleDataLoadingFacade;
 
     @PostConstruct
     public void dataLoading() throws IOException {
         log.debug("dataLoading()");
-        sampleDataLoadingFacade.loadData();
+        sampleDataLoadingFacade.loadAllData();
     }
 }

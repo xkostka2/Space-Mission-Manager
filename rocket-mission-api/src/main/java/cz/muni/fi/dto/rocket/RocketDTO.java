@@ -1,5 +1,9 @@
 package cz.muni.fi.dto.rocket;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
 
@@ -14,13 +18,11 @@ import java.util.Set;
  * @author Tomas Bouma (469275)
  */
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class RocketDTO {
     private Long id;
-
     private String name;
-
     private MissionDTO mission;
-
     private Set<ComponentDTO> requiredComponents = new HashSet<>();
 
     public Long getId() {
@@ -53,6 +55,20 @@ public class RocketDTO {
 
     public void setRequiredComponents(Set<ComponentDTO> requiredComponents) {
         this.requiredComponents = requiredComponents;
+    }
+
+    public void addRequiredComponent(ComponentDTO requiredComponent) {
+        if (!requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.add(requiredComponent);
+            requiredComponent.setRocket(this);
+        }
+    }
+
+    public void removeRequiredComponent(ComponentDTO requiredComponent){
+        if (requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.remove(requiredComponent);
+            requiredComponent.setRocket(null);
+        }
     }
 
     @Override

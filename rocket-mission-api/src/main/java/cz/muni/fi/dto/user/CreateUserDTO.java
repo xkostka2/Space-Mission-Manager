@@ -1,5 +1,6 @@
 package cz.muni.fi.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import cz.muni.fi.dto.mission.MissionDTO;
 import cz.muni.fi.enums.LevelOfExperience;
 import cz.muni.fi.enums.Role;

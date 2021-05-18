@@ -9,5 +9,15 @@ import java.io.IOException;
  */
 public interface SampleDataLoadingFacade {
 
-    void loadData() throws IOException;
+    void loadAllData() throws IOException;
+
+    void loadAllComponents() throws IOException;
+
+    void loadAllMissions() throws IOException;
+
+    void loadAllUsers() throws IOException;
+
+    void loadAllRockets() throws IOException;
+
+    void loadRelationships() throws IOException;
 }

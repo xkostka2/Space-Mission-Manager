@@ -1,6 +1,13 @@
 package cz.muni.fi.dto.mission;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import cz.muni.fi.config.ZonedDateTimeDeserializer;
+import cz.muni.fi.config.ZonedDateTimeSerializer;
 import cz.muni.fi.dto.rocket.RocketDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.dto.component.ComponentDTO;
@@ -16,17 +23,29 @@ import java.util.Set;
  *
  * @author Martin Kazimir
  */
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class MissionDTO {
 
     private long id;
     private String name;
     private String destination;
     private MissionProgress missionProgress;
+
     private Set<UserDTO> users = new HashSet<>();
     private Set<RocketDTO> rockets = new HashSet<>();
     private Set<ComponentDTO> components = new HashSet<>();
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime eta;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime finishedDate;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime startedDate;
     private String result;
 

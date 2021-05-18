@@ -63,6 +63,20 @@ public class Rocket implements Serializable {
         this.requiredComponents = requiredComponents;
     }
 
+    public void addRequiredComponent(Component requiredComponent) {
+        if (!requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.add(requiredComponent);
+            requiredComponent.setRocket(this);
+        }
+    }
+
+    public void removeRequiredComponent(Component requiredComponent){
+        if (requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.remove(requiredComponent);
+            requiredComponent.setRocket(null);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,5 +1,7 @@
 package cz.muni.fi.dto.rocket;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.mission.MissionDTO;
 
@@ -50,6 +52,20 @@ public class CreateRocketDTO {
     public void setRequiredComponents(Set<ComponentDTO> requiredComponents) {
         this.requiredComponents = requiredComponents;
     }
+
+    public void addRequiredComponent(ComponentDTO requiredComponent) {
+        if (!requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.add(requiredComponent);
+        }
+    }
+
+    public void removeRequiredComponent(ComponentDTO requiredComponent){
+        if (requiredComponents.contains(requiredComponent)) {
+            this.requiredComponents.remove(requiredComponent);
+            requiredComponent.setRocket(null);
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {
