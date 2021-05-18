@@ -2,6 +2,7 @@ package cz.muni.fi.services.impl;
 
 import cz.muni.fi.dao.MissionDao;
 import cz.muni.fi.entity.Mission;
+import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.MissionService;
@@ -10,7 +11,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -103,20 +106,21 @@ public class MissionServiceImpl implements MissionService {
         sb.append("\nMembers: ");
         mission.getUsers().forEach(u -> {
             sb.append("\n").append(u.getName()).append(": ").append(u.getRole());
-            mission.removeUser(u);
         });
+        new ArrayList<>(mission.getUsers()).forEach(mission::removeUser);
+
 
         sb.append("\nRockets: ");
         mission.getRockets().forEach(r -> {
             sb.append("\n").append(r.getName());
-            mission.removeRocket(r);
         });
+        new ArrayList<>(mission.getRockets()).forEach(mission::removeRocket);
 
         sb.append("\nComponents: ");
         mission.getComponents().forEach(c -> {
             sb.append("\n").append(c.getName());
-            mission.removeComponent(c);
         });
+        new ArrayList<>(mission.getComponents()).forEach(mission::removeComponent);
 
         sb.append("\nArchive comment: ").append(archiveComment);
 

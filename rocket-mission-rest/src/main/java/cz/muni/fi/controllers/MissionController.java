@@ -99,7 +99,7 @@ public class MissionController {
 
     @RolesAllowed({"MANAGER"})
     @RequestMapping(value = "/{id}/archive", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO archive(@PathVariable("id") long id, @RequestBody String archiveComment) {
+    public MissionDTO archive(@PathVariable("id") long id, @RequestBody Message comment) {
 
         logger.log(Level.INFO, "[REST] archiving mission" + id);
 
@@ -108,7 +108,9 @@ public class MissionController {
             throw new ResourceNotFoundException();
         }
 
-        missionFacade.archive(mission, ZonedDateTime.now(), archiveComment);
+        missionFacade.archive(mission, ZonedDateTime.now(), comment.getValue());
         return missionFacade.findMissionById(id);
     }
+
+
 }
