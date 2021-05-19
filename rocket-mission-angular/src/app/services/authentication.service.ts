@@ -21,7 +21,7 @@ export class AuthenticationService {
       this.currentUser = {
         name: username,
         password: password,
-        role: Role.Astronaut, //TODO
+        role: Role.Manager, //TODO
       }
       const storedUser = JSON.stringify(this.currentUser);
       localStorage.setItem('auth:user', storedUser);

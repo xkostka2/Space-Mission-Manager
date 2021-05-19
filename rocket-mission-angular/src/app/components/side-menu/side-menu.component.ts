@@ -50,19 +50,35 @@ export class SideMenuComponent implements OnChanges {
         label: 'MENU_ITEMS.HOME',
         url: prefix,
         activeRegex: `^${prefix}$`
-      },
-      {
-        label: 'MENU_ITEMS.MY_MISSIONS',
-        url: `${prefix}/my-missions`,
-        activeRegex: `^${prefix}/my-missions$`
-      },
-      {
-        label: 'MENU_ITEMS.MISSION_DETAIL',
-        url: `${prefix}/my-missions/42`,
-        activeRegex: `^${prefix}/my-missions/42$`
       }
     ];
-  }
 
+    if (this.userRole === Role.Astronaut) {
+      this.items.push(
+        {
+          label: 'MENU_ITEMS.MY_MISSIONS',
+          url: `${prefix}/my-missions`,
+          activeRegex: `^${prefix}/my-missions$`
+      });
+      return;
+    }
+      
+    this.items.push(
+      {
+        label: 'MENU_ITEMS.MISSIONS',
+        url: `${prefix}/missions`,
+        activeRegex: `^${prefix}/missions`
+      },
+      {
+        label: 'MENU_ITEMS.ASTRONAUTS',
+        url: `${prefix}/astronauts`,
+        activeRegex: `^${prefix}/astronauts`
+      },
+      {
+        label: 'MENU_ITEMS.COMPONENTS',
+        url: `${prefix}/components`,
+        activeRegex: `^${prefix}/components`
+    });
+  }
 }
 

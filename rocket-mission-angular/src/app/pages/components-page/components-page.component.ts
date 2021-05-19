@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComponentService } from 'src/app/services/component.service';
 
 @Component({
   selector: 'app-components-page',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentsPageComponent implements OnInit {
 
-  constructor() { }
+  components: Component[] = []
+
+  constructor(
+    private componentService: ComponentService,
+  ) { }
 
   ngOnInit() {
+    this.componentService.getComponents().subscribe((data: any[]) => {
+      this.components = data;
+    });
   }
 
 }
