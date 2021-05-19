@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Role } from '../models/role';
-import { User } from '../models/user';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Role} from '../models/role';
+import {User} from '../models/user';
 import {Router} from "@angular/router";
+import {LevelOfExperience} from "../models/levelOfExperience";
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,15 @@ export class AuthenticationService {
   login(username: string, password: string): boolean {
     if (true) { // HTTP request
       this.currentUser = {
-        name: username,
-        password: password,
-        role: Role.Manager, //TODO
+        id: 1,
+        name: "John",
+        email: "john@gmail.com",
+        password: "tralala123",
+        role: Role.Astronaut,
+        levelOfExperience: LevelOfExperience.Rookie,
+        mission: {id: 42},
+        missionAccepted: true,
+        missionExplanation: null
       }
       const storedUser = JSON.stringify(this.currentUser);
       localStorage.setItem('auth:user', storedUser);
