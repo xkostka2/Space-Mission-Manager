@@ -29,7 +29,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       role: Role.Astronaut,
-      breadcrumb: 'MENU_ITEMS.HOME'
+      breadcrumb: 'Home'
     },
     children: [
       {
@@ -38,7 +38,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Astronaut,
-          breadcrumb: 'MENU_ITEMS.HOME'
+          breadcrumb: 'Home'
         }
       },
       {
@@ -47,7 +47,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Astronaut,
-          breadcrumb: 'MENU_ITEMS.MY_MISSIONS'
+          breadcrumb: 'My missions'
         },
         children: [
           {
@@ -56,7 +56,7 @@ const routes: Routes = [
             canActivate: [AuthGuard],
             data: {
               role: Role.Astronaut,
-              breadcrumb: 'MENU_ITEMS.MISSION_DETAIL'
+              breadcrumb: 'Mission detail'
             }
           }
         ]
@@ -69,7 +69,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       role: Role.Manager,
-      breadcrumb: 'MENU_ITEMS.HOME'
+      breadcrumb: 'Home'
     },
     children: [
       {
@@ -78,7 +78,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Manager,
-          breadcrumb: 'MENU_ITEMS.HOME'
+          breadcrumb: 'Home'
         }
       },
       {
@@ -87,7 +87,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Manager,
-          breadcrumb: 'MENU_ITEMS.MISSIONS'
+          breadcrumb: 'Missions'
         },
         children: [
           {
@@ -96,7 +96,7 @@ const routes: Routes = [
             canActivate: [AuthGuard],
             data: {
               role: Role.Manager,
-              breadcrumb: 'MENU_ITEMS.MISSION_DETAIL'
+              breadcrumb: 'Mission detail'
             }
           }
         ]
@@ -107,7 +107,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Manager,
-          breadcrumb: 'MENU_ITEMS.ASTRONAUTS'
+          breadcrumb: 'Astronauts'
         },
         children: [
           {
@@ -116,7 +116,7 @@ const routes: Routes = [
             canActivate: [AuthGuard],
             data: {
               role: Role.Manager,
-              breadcrumb: 'MENU_ITEMS.ASTRONAUT_DETAIL'
+              breadcrumb: 'Astronaut detail'
             }
           },
         ]
@@ -127,7 +127,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           role: Role.Manager,
-          breadcrumb: 'MENU_ITEMS.COMPONENTS'
+          breadcrumb: 'Components'
         }
       },
     ]
