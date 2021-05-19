@@ -1,3 +1,11 @@
 # Space-Mission-Manager
 
-The web application allows the management of a space mission (clearly simplified from real needs!). The managers can mainly track different missions and for each mission the required components. Each mission has a final destination and Estimated Time of Arrival (ETA). They can also track the completion of rocket construction for a mission, based on the several components that are needed. They can assign astronauts with different levels of experience to the missions. There are also exploratory missions in which there are no astronauts, but just probes / pathfinders for planets exploration. Ended missions need to be archived with all the information that was collected. Each astronaut can login to the system and see to which mission he has been assigned. He can confirm / reject the participation to the mission and add their explanation for the decision.
+Description of project available on wiki [here](https://github.com/xkostka2/Space-Mission-Manager/wiki).
+
+## REST API
+
+Run `mvn clean install && cd rocket-mission-rest && mvn cargo:run` for REST API deployment.
+
+REST API available at [http://localhost:8080/pa165/rest/](http://localhost:8080/pa165/rest/)
+
+The Swagger documentation of REST API is available at [http://localhost:8080/pa165/rest/swagger-ui.html](http://localhost:8080/pa165/rest/swagger-ui.html).
