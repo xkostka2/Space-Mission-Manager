@@ -1,1 +1,7 @@
-<p>components-page works!</p>
+<div *ngFor="let comp of components">
+    <div>{{ comp.id }}</div>
+    <div>{{ comp.name }}</div>
+    <div>{{ comp.componentType }}</div>
+    <div>{{ comp.readyToUse }}</div>
+    <div>{{ comp.readyDate }}</div>
+</div>
