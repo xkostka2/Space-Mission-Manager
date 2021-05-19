@@ -6,6 +6,7 @@ import cz.muni.fi.dto.rocket.UpdateRocketDTO;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.facade.RocketFacade;
 import cz.muni.fi.services.RocketService;
+import cz.muni.fi.services.mapper.CycleAvoidingMappingContext;
 import cz.muni.fi.services.mapper.RocketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.List;
 @Service
 @Transactional
 public class RocketFacadeImpl implements RocketFacade {
-
+    private CycleAvoidingMappingContext cycleAvoidingMappingContext;
     private final RocketMapper rocketMapper;
     private final RocketService rocketService;
 
@@ -29,18 +30,19 @@ public class RocketFacadeImpl implements RocketFacade {
     public RocketFacadeImpl(RocketService rocketService, RocketMapper rocketMapper) {
         this.rocketService = rocketService;
         this.rocketMapper = rocketMapper;
+        this.cycleAvoidingMappingContext = new CycleAvoidingMappingContext();
     }
 
     @Override
     public RocketDTO addRocket(CreateRocketDTO rocket) {
-        Rocket mappedRocket = rocketMapper.createRocketDTOToRocket(rocket);
-        return rocketMapper.rocketToRocketDTO(rocketService.addRocket(mappedRocket));
+        Rocket mappedRocket = rocketMapper.createRocketDTOToRocket(rocket, cycleAvoidingMappingContext);
+        return rocketMapper.rocketToRocketDTO(rocketService.addRocket(mappedRocket), cycleAvoidingMappingContext);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<RocketDTO> findAllRockets() {
-        return rocketMapper.rocketsToRocketDTOs(rocketService.findAllRockets());
+        return rocketMapper.rocketsToRocketDTOs(rocketService.findAllRockets(), cycleAvoidingMappingContext);
     }
 
     @Override
@@ -50,20 +52,20 @@ public class RocketFacadeImpl implements RocketFacade {
         if (rocket == null) {
             return null;
         }
-        return rocketMapper.rocketToRocketDTO(rocket);
+        return rocketMapper.rocketToRocketDTO(rocket, cycleAvoidingMappingContext);
     }
 
     @Override
     public RocketDTO updateRocket(UpdateRocketDTO rocket) {
-        Rocket mappedRocket = rocketMapper.updateRocketDTOToRocket(rocket);
+        Rocket mappedRocket = rocketMapper.updateRocketDTOToRocket(rocket, cycleAvoidingMappingContext);
         rocketService.updateRocket(mappedRocket);
 
-        return rocketMapper.rocketToRocketDTO(rocketService.updateRocket(mappedRocket));
+        return rocketMapper.rocketToRocketDTO(rocketService.updateRocket(mappedRocket), cycleAvoidingMappingContext);
     }
 
     @Override
     public void removeRocket(RocketDTO rocket) {
-        Rocket mappedRocket = rocketMapper.rocketDTOToRocket(rocket);
+        Rocket mappedRocket = rocketMapper.rocketDTOToRocket(rocket, cycleAvoidingMappingContext);
         rocketService.removeRocket(mappedRocket);
     }
 }
