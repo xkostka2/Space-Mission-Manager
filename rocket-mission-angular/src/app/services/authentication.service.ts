@@ -26,7 +26,7 @@ export class AuthenticationService {
         password: "tralala123",
         role: Role.Astronaut,
         levelOfExperience: LevelOfExperience.Rookie,
-        mission: {id: 42},
+        mission: {id: 42, name: "Awesome mission"},
         missionAccepted: true,
         missionExplanation: null
       }

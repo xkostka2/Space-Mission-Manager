@@ -1,1 +1,3 @@
 <p>astronaut-home-page works!</p>
+<mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
+<app-missions-list *ngIf="!loading"></app-missions-list>
