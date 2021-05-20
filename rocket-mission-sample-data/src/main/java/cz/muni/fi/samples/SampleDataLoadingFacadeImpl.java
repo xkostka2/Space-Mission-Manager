@@ -12,6 +12,7 @@ import cz.muni.fi.services.ComponentService;
 import cz.muni.fi.services.MissionService;
 import cz.muni.fi.services.RocketService;
 import cz.muni.fi.services.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,7 +162,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user1.setName("John");
         user1.setEmail("john@gmail.com");
         user1.setLevelOfExperience(LevelOfExperience.ROOKIE);
-        user1.setPassword("tralala123");
+        user1.setPassword(DigestUtils.md5Hex("tralala123"));
         user1.setRole(Role.ASTRONAUT);
         userService.addUser(user1);
         log.info("user1 loaded");
@@ -170,7 +171,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user2.setName("David");
         user2.setEmail("david@gmail.com");
         user2.setLevelOfExperience(LevelOfExperience.VETERAN);
-        user2.setPassword("tralala321");
+        user2.setPassword(DigestUtils.md5Hex("tralala321"));
         user2.setRole(Role.ASTRONAUT);
         userService.addUser(user2);
         log.info("user2 loaded");
@@ -179,7 +180,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user3.setName("jiri");
         user3.setEmail("jiri@gmail.com");
         user3.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
-        user3.setPassword("taspokeqw");
+        user3.setPassword(DigestUtils.md5Hex("taspokeqw"));
+
         user3.setRole(Role.ASTRONAUT);
         userService.addUser(user3);
         log.info("user3 loaded");
@@ -187,7 +189,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user4 = new User();
         user4.setName("THE BOSS");
         user4.setEmail("boss@gmail.com");
-        user4.setPassword("bosspassword");
+        user4.setPassword(DigestUtils.md5Hex("bosspassword"));
         user4.setLevelOfExperience(LevelOfExperience.ROOKIE);
         user4.setRole(Role.MANAGER);
         userService.addUser(user4);

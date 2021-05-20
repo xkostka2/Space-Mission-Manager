@@ -10,7 +10,9 @@ import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.ComponentFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -37,12 +39,12 @@ public class ComponentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ComponentDTO createComponent(@RequestBody CreateComponentDTO componentCreateDTO) {
+    public ResponseEntity<ComponentDTO> createComponent(@RequestBody CreateComponentDTO componentCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating component");
 
         try {
-            return componentFacade.findComponentById(componentFacade.addComponent(componentCreateDTO).getId());
+            return new ResponseEntity<>(componentFacade.findComponentById(componentFacade.addComponent(componentCreateDTO).getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -50,15 +52,15 @@ public class ComponentController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ComponentDTO> findAllComponents() {
+    public ResponseEntity<List<ComponentDTO>> findAllComponents() {
 
         logger.log(Level.INFO, "[REST] finding all components");
 
-        return componentFacade.findAllComponents();
+        return new ResponseEntity<>(componentFacade.findAllComponents(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ComponentDTO findComponentById(@PathVariable("id") Long id) {
+    public ResponseEntity<ComponentDTO> findComponentById(@PathVariable("id") Long id) {
 
         logger.log(Level.INFO, "[REST] finding component " + id);
 
@@ -66,17 +68,17 @@ public class ComponentController {
         if (componentDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return componentDTO;
+        return new ResponseEntity<>(componentDTO, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ComponentDTO updateComponent(@RequestBody UpdateComponentDTO updateComponentDTO) {
+    public ResponseEntity<ComponentDTO> updateComponent(@RequestBody UpdateComponentDTO updateComponentDTO) {
 
         logger.log(Level.INFO, "[REST] updating component" + updateComponentDTO.getId());
 
         try {
             componentFacade.updateComponent(updateComponentDTO);
-            return componentFacade.findComponentById(updateComponentDTO.getId());
+            return new ResponseEntity<>(componentFacade.findComponentById(updateComponentDTO.getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -84,7 +86,7 @@ public class ComponentController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ComponentDTO> removeComponent(@PathVariable("id") long id) {
+    public ResponseEntity<List<ComponentDTO>> removeComponent(@PathVariable("id") long id) {
 
         logger.log(Level.INFO, "[REST] deleting component" + id);
 
@@ -94,12 +96,12 @@ public class ComponentController {
         }
 
         componentFacade.removeComponent(component);
-        return componentFacade.findAllComponents();
+        return new ResponseEntity<>(componentFacade.findAllComponents(), HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/available", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ComponentDTO> findAllAvailableComponents() {
+    public ResponseEntity<List<ComponentDTO>> findAllAvailableComponents() {
 
         logger.log(Level.INFO, "[REST] finding all available components");
 
@@ -112,6 +114,6 @@ public class ComponentController {
                 availableComponentsDTO.add(componentDTO);
             }
         }
-        return Collections.unmodifiableList(availableComponentsDTO);
+        return new ResponseEntity<>(Collections.unmodifiableList(availableComponentsDTO), HttpStatus.OK);
     }
 }

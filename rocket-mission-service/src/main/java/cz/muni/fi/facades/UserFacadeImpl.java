@@ -1,5 +1,6 @@
 package cz.muni.fi.facades;
 
+import cz.muni.fi.dto.user.AuthUserDTO;
 import cz.muni.fi.dto.user.CreateUserDTO;
 import cz.muni.fi.dto.user.UpdateUserDTO;
 import cz.muni.fi.dto.user.UserDTO;
@@ -97,5 +98,10 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void rejectAssignedMission(UserDTO user, String explanation) {
         userService.rejectAssignedMission(userMapper.userDTOToUser(user, cycleAvoidingMappingContext), explanation);
+    }
+
+    @Override
+    public UserDTO login(AuthUserDTO user) {
+        return userMapper.userToUserDTO(userService.login(user.getEmail(), user.getPassword()), cycleAvoidingMappingContext);
     }
 }

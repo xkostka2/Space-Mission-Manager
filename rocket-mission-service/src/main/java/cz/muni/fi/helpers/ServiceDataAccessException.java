@@ -12,4 +12,8 @@ public class ServiceDataAccessException extends DataAccessException {
     public ServiceDataAccessException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public ServiceDataAccessException(String message) {
+        super(message);
+    }
 }

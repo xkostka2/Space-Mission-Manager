@@ -8,7 +8,9 @@ import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,12 +32,12 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO createComponent(@RequestBody CreateUserDTO userCreateDTO) {
+    public ResponseEntity<UserDTO> createComponent(@RequestBody CreateUserDTO userCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating user");
 
         try {
-            return userFacade.findUserById(userFacade.addUser(userCreateDTO).getId());
+            return new ResponseEntity<>(userFacade.findUserById(userFacade.addUser(userCreateDTO).getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -43,31 +45,31 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> findAllUsers() {
+    public ResponseEntity<List<UserDTO>> findAllUsers() {
 
         logger.log(Level.INFO, "[REST] finding all users");
 
-        return userFacade.findAllUsers();
+        return new ResponseEntity<>(userFacade.findAllUsers(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/astronauts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> findAllAstronauts() {
+    public ResponseEntity<List<UserDTO>> findAllAstronauts() {
 
         logger.log(Level.INFO, "[REST] finding all astronauts");
 
-        return userFacade.findAllAstronauts();
+        return new ResponseEntity<>(userFacade.findAllAstronauts(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/astronauts/available", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> findAllAvailableAstronauts() {
+    public ResponseEntity<List<UserDTO>> findAllAvailableAstronauts() {
 
         logger.log(Level.INFO, "[REST] finding all available astronauts");
 
-        return userFacade.findAllAvailableAstronauts();
+        return new ResponseEntity<>(userFacade.findAllAvailableAstronauts(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO findUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserDTO> findUserById(@PathVariable("id") Long id) {
 
         logger.log(Level.INFO, "[REST] finding user " + id);
 
@@ -75,11 +77,11 @@ public class UserController {
         if (userDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return userDTO;
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/email", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO findUserByEmail(@RequestBody Message email) {
+    public ResponseEntity<UserDTO> findUserByEmail(@RequestBody Message email) {
 
         logger.log(Level.INFO, "[REST] finding user with email " + email);
 
@@ -87,17 +89,17 @@ public class UserController {
         if (userDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return userDTO;
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UpdateUserDTO updateUserDTO) {
 
         logger.log(Level.INFO, "[REST] updating user" + updateUserDTO.getId());
 
         try {
             userFacade.updateUser(updateUserDTO);
-            return userFacade.findUserById(updateUserDTO.getId());
+            return new ResponseEntity<>(userFacade.findUserById(updateUserDTO.getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -105,7 +107,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> removeUser(@PathVariable("id") long id) {
+    public ResponseEntity<List<UserDTO>> removeUser(@PathVariable("id") long id) {
 
         logger.log(Level.INFO, "[REST] deleting user" + id);
 
@@ -115,11 +117,11 @@ public class UserController {
         }
 
         userFacade.deleteUser(user);
-        return userFacade.findAllUsers();
+        return new ResponseEntity<>(userFacade.findAllUsers(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}/acceptMission", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO acceptMission(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> acceptMission(@PathVariable Long id) {
 
         logger.log(Level.INFO, "[REST] accept mission by user with id " + id);
 
@@ -129,11 +131,11 @@ public class UserController {
         }
 
         userFacade.acceptAssignedMission(user);
-        return userFacade.findUserById(id);
+        return new ResponseEntity<>(userFacade.findUserById(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "{id}/rejectMission", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDTO rejectMission(@PathVariable Long id, @RequestBody Message explanation) {
+    public ResponseEntity<UserDTO> rejectMission(@PathVariable Long id, @RequestBody Message explanation) {
 
         logger.log(Level.INFO, "[REST] reject mission by user with id " + id);
 
@@ -142,6 +144,6 @@ public class UserController {
             throw new ResourceNotFoundException();
         }
         userFacade.rejectAssignedMission(user, explanation.getValue());
-        return userFacade.findUserById(id);
+        return new ResponseEntity<>(userFacade.findUserById(id), HttpStatus.OK);
     }
 }
