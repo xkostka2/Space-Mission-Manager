@@ -1,5 +1,6 @@
 package cz.muni.fi.facade;
 
+import cz.muni.fi.dto.user.AuthUserDTO;
 import cz.muni.fi.dto.user.CreateUserDTO;
 import cz.muni.fi.dto.user.UpdateUserDTO;
 import cz.muni.fi.dto.user.UserDTO;
@@ -87,4 +88,11 @@ public interface UserFacade {
      * @param explanation explanation why user did not accept mission
      */
     void rejectAssignedMission(UserDTO user, String explanation);
+
+    /**
+     * Login user into the system
+     * @param user email and password
+     * @return musician object
+     */
+    UserDTO login(AuthUserDTO user);
 }

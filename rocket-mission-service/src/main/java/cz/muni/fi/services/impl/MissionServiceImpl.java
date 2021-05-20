@@ -8,6 +8,7 @@ import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -29,6 +30,7 @@ public class MissionServiceImpl implements MissionService {
     private MissionDao missionDao;
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Mission addMission(Mission mission) throws DataAccessException {
         try {
             return missionDao.addMission(mission);
@@ -38,6 +40,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Mission updateMission(Mission mission) throws DataAccessException {
         try {
             return missionDao.updateMission(mission);
@@ -47,6 +50,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void deleteMission(Mission mission) throws DataAccessException {
         try {
             missionDao.removeMission(mission);
@@ -56,6 +60,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<Mission> findAllMissions() throws DataAccessException {
         try {
             return Collections.unmodifiableList(missionDao.findAllMissions());
@@ -65,6 +70,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<Mission> findAllMissions(MissionProgress progress) throws DataAccessException {
         try {
             return Collections.unmodifiableList(missionDao.findAllMissions(progress));
@@ -74,6 +80,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Mission findMissionById(Long id) throws DataAccessException {
         try {
             return missionDao.findMissionById(id);
@@ -83,6 +90,7 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void archive(Mission mission, ZonedDateTime endDate, String archiveComment) {
         if (mission == null) {
             throw new IllegalArgumentException("Mission can not be null");

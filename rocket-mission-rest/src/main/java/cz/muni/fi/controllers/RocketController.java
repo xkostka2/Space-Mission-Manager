@@ -8,8 +8,12 @@ import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.RocketFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +33,12 @@ public class RocketController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public RocketDTO createComponent(@RequestBody CreateRocketDTO rocketCreateDTO) {
+    public ResponseEntity<RocketDTO> createComponent(@RequestBody CreateRocketDTO rocketCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating rocket");
 
         try {
-            return rocketFacade.findRocketById(rocketFacade.addRocket(rocketCreateDTO).getId());
+            return new ResponseEntity<>(rocketFacade.findRocketById(rocketFacade.addRocket(rocketCreateDTO).getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -42,15 +46,15 @@ public class RocketController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<RocketDTO> findAllRockets() {
+    public ResponseEntity<List<RocketDTO>> findAllRockets() {
 
         logger.log(Level.INFO, "[REST] finding all rockets");
 
-        return rocketFacade.findAllRockets();
+        return new ResponseEntity<>(rocketFacade.findAllRockets(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public RocketDTO findRocketById(@PathVariable("id") Long id) {
+    public ResponseEntity<RocketDTO> findRocketById(@PathVariable("id") Long id) {
 
         logger.log(Level.INFO, "[REST] finding rocket " + id);
 
@@ -58,17 +62,17 @@ public class RocketController {
         if (rocketDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return rocketDTO;
+        return new ResponseEntity<>(rocketDTO, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public RocketDTO updateRocket(@RequestBody UpdateRocketDTO updateRocketDTO) {
+    public ResponseEntity<RocketDTO> updateRocket(@RequestBody UpdateRocketDTO updateRocketDTO) {
 
         logger.log(Level.INFO, "[REST] updating rocket" + updateRocketDTO.getId());
 
         try {
             rocketFacade.updateRocket(updateRocketDTO);
-            return rocketFacade.findRocketById(updateRocketDTO.getId());
+            return new ResponseEntity<>(rocketFacade.findRocketById(updateRocketDTO.getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -76,7 +80,7 @@ public class RocketController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<RocketDTO> removeRocket(@PathVariable("id") long id) {
+    public ResponseEntity<List<RocketDTO>> removeRocket(@PathVariable("id") long id) {
 
         logger.log(Level.INFO, "[REST] deleting rocket" + id);
 
@@ -86,6 +90,6 @@ public class RocketController {
         }
 
         rocketFacade.removeRocket(rocket);
-        return rocketFacade.findAllRockets();
+        return new ResponseEntity<>(rocketFacade.findAllRockets(), HttpStatus.OK);
     }
 }

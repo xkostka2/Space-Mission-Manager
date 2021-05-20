@@ -6,6 +6,7 @@ import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.RocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -25,6 +26,7 @@ public class RocketServiceImpl implements RocketService {
     private RocketDao rocketDao;
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Rocket addRocket(Rocket rocket) throws DataAccessException {
         try {
             rocketDao.addRocket(rocket);
@@ -36,6 +38,7 @@ public class RocketServiceImpl implements RocketService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<Rocket> findAllRockets() throws DataAccessException {
         try {
             return Collections.unmodifiableList(rocketDao.findAllRockets());
@@ -45,6 +48,7 @@ public class RocketServiceImpl implements RocketService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Rocket findRocketById(Long id) throws DataAccessException {
         try{
             return rocketDao.findRocketById(id);
@@ -55,6 +59,7 @@ public class RocketServiceImpl implements RocketService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Rocket updateRocket(Rocket rocket) throws DataAccessException {
         try {
             rocketDao.updateRocket(rocket);
@@ -66,6 +71,7 @@ public class RocketServiceImpl implements RocketService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void removeRocket(Rocket rocket) throws DataAccessException {
         try {
             rocketDao.removeRocket(rocket);

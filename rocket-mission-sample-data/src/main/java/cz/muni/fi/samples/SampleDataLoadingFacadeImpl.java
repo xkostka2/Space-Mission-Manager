@@ -12,9 +12,12 @@ import cz.muni.fi.services.ComponentService;
 import cz.muni.fi.services.MissionService;
 import cz.muni.fi.services.RocketService;
 import cz.muni.fi.services.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Component;
 
@@ -64,6 +67,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Rocket rocket3;
     private Rocket rocket4;
 
+    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+
     @Override
     public void loadAllData() {
         log.info("data loading starting");
@@ -82,7 +87,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         component1.setName("wing");
         component1.setType(ComponentType.ROCKET);
         component1.setReadyToUse(false);
-//        component1.setReadyDate(ZonedDateTime.now().plusDays(10));
+        component1.setReadyDate(ZonedDateTime.now().plusDays(10));
         componentService.addComponent(component1);
         log.info("component1 loaded");
 
@@ -90,7 +95,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         component2.setName("food");
         component2.setType(ComponentType.MISSION);
         component2.setReadyToUse(false);
-//        component2.setReadyDate(ZonedDateTime.now().plusDays(2));
+        component2.setReadyDate(ZonedDateTime.now().plusDays(2));
         componentService.addComponent(component2);
         log.info("component1 loaded");
 
@@ -161,7 +166,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user1.setName("John");
         user1.setEmail("john@gmail.com");
         user1.setLevelOfExperience(LevelOfExperience.ROOKIE);
-        user1.setPassword("tralala123");
+        user1.setPassword(encoder.encode("tralala123"));
         user1.setRole(Role.ASTRONAUT);
         userService.addUser(user1);
         log.info("user1 loaded");
@@ -170,7 +175,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user2.setName("David");
         user2.setEmail("david@gmail.com");
         user2.setLevelOfExperience(LevelOfExperience.VETERAN);
-        user2.setPassword("tralala321");
+        user2.setPassword(encoder.encode("tralala321"));
         user2.setRole(Role.ASTRONAUT);
         userService.addUser(user2);
         log.info("user2 loaded");
@@ -179,7 +184,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user3.setName("jiri");
         user3.setEmail("jiri@gmail.com");
         user3.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
-        user3.setPassword("taspokeqw");
+        user3.setPassword(encoder.encode("taspokeqw"));
+
         user3.setRole(Role.ASTRONAUT);
         userService.addUser(user3);
         log.info("user3 loaded");
@@ -187,7 +193,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user4 = new User();
         user4.setName("THE BOSS");
         user4.setEmail("boss@gmail.com");
-        user4.setPassword("bosspassword");
+        user4.setPassword(encoder.encode("bosspassword"));
         user4.setLevelOfExperience(LevelOfExperience.ROOKIE);
         user4.setRole(Role.MANAGER);
         userService.addUser(user4);

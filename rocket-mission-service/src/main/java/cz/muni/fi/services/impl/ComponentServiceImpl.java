@@ -6,6 +6,7 @@ import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class ComponentServiceImpl implements ComponentService {
     private ComponentDao componentDao;
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Component addComponent(Component component) throws DataAccessException {
         try {
             return componentDao.addComponent(component);
@@ -32,6 +34,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<Component> findAllComponents() throws DataAccessException {
         try {
             return Collections.unmodifiableList(componentDao.findAllComponents());
@@ -41,6 +44,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Component findComponentById(Long id) throws DataAccessException {
         try{
             return componentDao.findComponentById(id);
@@ -50,6 +54,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Component updateComponent(Component component) throws DataAccessException {
         try {
             return componentDao.updateComponent(component);
@@ -59,6 +64,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void removeComponent(Component component) throws DataAccessException {
         try {
             componentDao.removeComponent(component);

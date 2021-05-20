@@ -2,11 +2,23 @@ package cz.muni.fi.services.impl;
 
 import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.User;
+import cz.muni.fi.enums.Role;
 import cz.muni.fi.helpers.ServiceDataAccessException;
 import cz.muni.fi.services.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +34,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public User addUser(User user) {
         try {
             return userDao.addUser(user);
@@ -32,6 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public User updateUser(User user) {
         try {
             return userDao.updateUser(user);
@@ -41,6 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void deleteUser(User user) {
         try {
             userDao.deleteUser(user);
@@ -50,6 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<User> findAllUsers() {
         try {
             return Collections.unmodifiableList(userDao.findAllUsers());
@@ -59,6 +77,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<User> findAllAstronauts() {
         try {
             return Collections.unmodifiableList(userDao.findAllAstronauts());
@@ -68,6 +87,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public User findUserById(Long id) {
         try {
             return userDao.findUserById(id);
@@ -77,6 +97,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public List<User> findAllAvailableAstronauts() {
         try {
             return Collections.unmodifiableList(userDao.findAllAvailableAstronauts());
@@ -86,6 +107,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public User findUserByEmail(String email) {
         try {
             return userDao.findUserByEmail(email);
@@ -95,6 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void acceptAssignedMission(User user) {
         if (user == null) {
             throw new IllegalArgumentException("User must not be null");
@@ -115,6 +138,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void rejectAssignedMission(User user, String explanation) {
         if (user == null) {
             throw new IllegalArgumentException("User must not be null");
@@ -133,5 +157,39 @@ public class UserServiceImpl implements UserService {
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not update a user", e);
         }
+    }
+
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public User login(String email, String password) {
+        User user = findUserByEmail(email);
+        passwordCheck(user.getPassword(), password);
+        setSecurityContext(user.getPassword(), password, user.getRole() == Role.MANAGER);
+        return user;
+    }
+
+    private void passwordCheck(String passwordHash, String password){
+        String encrypted = encoder.encode(password);
+
+        if (!encrypted.equals(passwordHash))
+            throw new ServiceDataAccessException("Wrong password/login combination");
+    }
+
+
+    private void setSecurityContext(String name, String password, boolean isManager){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if (isManager) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
+        }
+        org.springframework.security.core.userdetails.User springUser
+                = new org.springframework.security.core.userdetails.User(name, password, authorities);
+
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                springUser.getUsername(),
+                springUser.getPassword(),
+                springUser.getAuthorities()));
     }
 }

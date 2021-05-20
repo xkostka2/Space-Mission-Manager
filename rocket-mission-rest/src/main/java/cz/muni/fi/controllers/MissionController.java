@@ -8,7 +8,9 @@ import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.MissionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
@@ -31,12 +33,12 @@ public class MissionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO createComponent(@RequestBody CreateMissionDTO missionCreateDTO) {
+    public ResponseEntity<MissionDTO> createComponent(@RequestBody CreateMissionDTO missionCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating mission");
 
         try {
-            return missionFacade.findMissionById(missionFacade.addMission(missionCreateDTO).getId());
+            return new ResponseEntity<>(missionFacade.findMissionById(missionFacade.addMission(missionCreateDTO).getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -44,15 +46,15 @@ public class MissionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MissionDTO> findAllMissions() {
+    public ResponseEntity<List<MissionDTO>> findAllMissions() {
 
         logger.log(Level.INFO, "[REST] finding all missions");
 
-        return missionFacade.findAllMissions();
+        return new ResponseEntity<>(missionFacade.findAllMissions(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO findMissionById(@PathVariable("id") Long id) {
+    public ResponseEntity<MissionDTO> findMissionById(@PathVariable("id") Long id) {
 
         logger.log(Level.INFO, "[REST] finding mission " + id);
 
@@ -60,17 +62,17 @@ public class MissionController {
         if (missionDTO == null) {
             throw new ResourceNotFoundException();
         }
-        return missionDTO;
+        return new ResponseEntity<>(missionDTO, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO updateMission(@RequestBody UpdateMissionDTO updateMissionDTO) {
+    public ResponseEntity<MissionDTO> updateMission(@RequestBody UpdateMissionDTO updateMissionDTO) {
 
         logger.log(Level.INFO, "[REST] updating mission" + updateMissionDTO.getId());
 
         try {
             missionFacade.updateMission(updateMissionDTO);
-            return missionFacade.findMissionById(updateMissionDTO.getId());
+            return new ResponseEntity<>(missionFacade.findMissionById(updateMissionDTO.getId()), HttpStatus.OK);
         } catch (Exception e) {
             logger.log(Level.WARNING, e.getMessage());
             throw new ResourceAlreadyExistsException();
@@ -78,7 +80,7 @@ public class MissionController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MissionDTO> removeMission(@PathVariable("id") long id) {
+    public ResponseEntity<List<MissionDTO>> removeMission(@PathVariable("id") long id) {
 
         logger.log(Level.INFO, "[REST] deleting mission" + id);
 
@@ -88,11 +90,11 @@ public class MissionController {
         }
 
         missionFacade.deleteMission(mission);
-        return missionFacade.findAllMissions();
+        return new ResponseEntity<>(missionFacade.findAllMissions(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}/archive", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MissionDTO archive(@PathVariable("id") long id, @RequestBody Message comment) {
+    public ResponseEntity<MissionDTO> archive(@PathVariable("id") long id, @RequestBody Message comment) {
 
         logger.log(Level.INFO, "[REST] archiving mission" + id);
 
@@ -102,7 +104,7 @@ public class MissionController {
         }
 
         missionFacade.archive(mission, ZonedDateTime.now(), comment.getValue());
-        return missionFacade.findMissionById(id);
+        return new ResponseEntity<>(missionFacade.findMissionById(id), HttpStatus.OK);
     }
 
 
