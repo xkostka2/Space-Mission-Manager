@@ -1,3 +1,4 @@
 export interface Mission {
-  id: number
+  id: number;
+  name: string;
 }
