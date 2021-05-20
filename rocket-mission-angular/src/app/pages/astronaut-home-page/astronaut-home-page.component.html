@@ -1,3 +1,7 @@
-<p>astronaut-home-page works!</p>
+<div class="mb-4">
+  {{'ASTRONAUT_HOME.CURRENT_MISSION'|translate}} {{user.mission ? user.mission.name : '-'}}
+  <button mat-flat-button *ngIf="user.mission" color="primary" [routerLink]="['my-missions',this.user.mission.id.toString()]">{{'ASTRONAUT_HOME.VIEW_DETAIL'|translate}}</button>
+</div>
+
 <mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
-<app-missions-list *ngIf="!loading"></app-missions-list>
+<app-missions-list *ngIf="!loading" [missions]="missions"></app-missions-list>

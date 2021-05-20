@@ -31,6 +31,10 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import {MissionsService} from "./services/missions.service";
 import { MissionsListComponent } from './components/missions-list/missions-list.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,6 +80,10 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [
     AuthenticationService,
