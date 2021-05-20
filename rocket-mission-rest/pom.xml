@@ -87,7 +87,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-        
+
     <!-- librarries needed for unit tests -->
     <dependency>
         <groupId>org.testng</groupId>

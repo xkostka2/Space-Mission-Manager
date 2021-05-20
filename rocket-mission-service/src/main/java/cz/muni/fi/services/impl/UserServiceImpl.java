@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -166,10 +170,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private void passwordCheck(String passwordHash, String password){
-        String md5Hex = DigestUtils
-                .md5Hex(password);
+        String encrypted = encoder.encode(password);
 
-        if (!md5Hex.equals(passwordHash))
+        if (!encrypted.equals(passwordHash))
             throw new ServiceDataAccessException("Wrong password/login combination");
     }
 
