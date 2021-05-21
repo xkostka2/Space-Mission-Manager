@@ -1,4 +1,4 @@
 export enum ComponentType {
-    Rocket,
-    Mission
+    Rocket = "ROCKET",
+    Mission = "MISSION"
 }

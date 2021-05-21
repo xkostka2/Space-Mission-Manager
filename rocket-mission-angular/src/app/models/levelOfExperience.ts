@@ -1,5 +1,5 @@
 export enum LevelOfExperience {
-    Rookie,
-    Veteran,
-    KingOfGalaxy
+    Rookie = "ROOKIE",
+    Veteran = "VETERAN",
+    KingOfGalaxy = "KING_OF_GALAXY"
 }
