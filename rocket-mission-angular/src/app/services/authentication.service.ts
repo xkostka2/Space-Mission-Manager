@@ -20,6 +20,7 @@ export class AuthenticationService {
     if (true) { // HTTP request
       this.currentUser = {
         name: username,
+        email: "aaa@bbb.cc",
         password: password,
         role: Role.Manager, //TODO
       }

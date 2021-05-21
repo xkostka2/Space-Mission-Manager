@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
 import { Component } from "../models/component";
 
 @Injectable({
@@ -15,26 +14,27 @@ export class ComponentService {
         private http: HttpClient,
     ) { }
 
-    getComponents(): Observable<Component[]> {
-        return this.http.get(`${this.REST_API_SERVER}/components`)
-            .pipe(
-                map((res: any[]) => {
-                    const data: Component[] = [];
-                    
-                    res.forEach(x => {
-                        data.push(
-                            {
-                                id: x.id,
-                                readyToUse: x.readyToUse,
-                                name: x.name,
-                                readyDate: x.readyDate,
-                                componentType: x.type
-                            }
-                        )
-                    })
+    findAllComponents(): Observable<Component[]> {
+        return this.http.get(`${this.REST_API_SERVER}/components`) as Observable<Component[]>;
+    }
 
-                    return data;
-                })
-            );
+    getAvailableComponents(): Observable<Component[]> {
+        return this.http.get(`${this.REST_API_SERVER}/components/available`) as Observable<Component[]>;
+    }
+
+    getComponentById(id: number): Observable<Component> {
+        return this.http.get(`${this.REST_API_SERVER}/components/${id}`) as Observable<Component>;
+    }
+
+    createComponent(component: Component): Observable<Component> {
+        return this.http.post(`${this.REST_API_SERVER}/components/`, component) as Observable<Component>;
+    }
+
+    updateComponent(component: Component): Observable<Component> {
+        return this.http.put(`${this.REST_API_SERVER}/components/`, component) as Observable<Component>;
+    }
+
+    removeComponent(id: number): Observable<Object> {
+        return this.http.delete(`${this.REST_API_SERVER}/components/${id}`);
     }
 }

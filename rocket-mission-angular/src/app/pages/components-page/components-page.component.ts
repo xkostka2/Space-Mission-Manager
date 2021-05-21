@@ -15,7 +15,7 @@ export class ComponentsPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.componentService.getComponents().subscribe((data: any[]) => {
+    this.componentService.findAllComponents().subscribe((data: any[]) => {
       this.components = data;
     });
   }

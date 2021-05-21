@@ -1,11 +1,11 @@
 import { ComponentType } from "./componentType";
 
 export interface Component {
-    id: number;
-    readyToUse?: boolean;
+    id?: number;
+    mission?: any;
     name: string;
-    componentType: ComponentType;
-    readyDate: Date;
-    // mission: Mission;
-    // rocket: Rocket;
+    readyDate?: Date;
+    readyToUse?: boolean;
+    rocket?: any;
+    type: ComponentType;
 }
