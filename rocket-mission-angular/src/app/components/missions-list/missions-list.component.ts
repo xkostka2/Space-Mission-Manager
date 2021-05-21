@@ -14,11 +14,11 @@ export class MissionsListComponent implements OnChanges {
   @Input()
   missions: Mission[] = [];
 
+  displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject'];
   dataSource = new MatTableDataSource<Mission>()
 
   ngOnChanges() {
-    console.log(this.missions)
-    this.dataSource.data = this.missions;
+    this.dataSource = new MatTableDataSource<Mission>(this.missions);
   }
 
 }

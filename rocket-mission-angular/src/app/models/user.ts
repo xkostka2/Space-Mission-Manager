@@ -8,7 +8,7 @@ export interface User {
     email: string;
     password: string;
     role: Role;
-    levelOfExperience?: LevelOfExperience;
+    levelOfExperience: LevelOfExperience;
     mission?: Mission;
     missionAccepted?: boolean;
     missionExplanation?: string;
