@@ -25,7 +25,7 @@ export class AuthenticationService {
         name: "John",
         email: "john@gmail.com",
         password: "tralala123",
-        role: Role.Astronaut,
+        role: Role.Manager,
         levelOfExperience: LevelOfExperience.Rookie,
         mission: {"id": 1,
           name: "Discovering Aliens",
@@ -87,6 +87,12 @@ export class AuthenticationService {
 
     if (!redirectUrl || redirectUrl === '') {
       redirectUrl = this.getRole() === Role.Astronaut ? '/astronaut' : '/manager';
+    }
+    if(redirectUrl.startsWith('/astronaut') && this.getRole() !== Role.Astronaut){
+      redirectUrl = '/manager'+redirectUrl.split('/').splice(0,1).join('/')
+    }
+    if(redirectUrl.startsWith('/manager') && this.getRole() !== Role.Manager){
+      redirectUrl = '/astronaut'+redirectUrl.split('/').splice(0,1).join('/')
     }
     this.router.navigate([redirectUrl], {replaceUrl: true})
   }
