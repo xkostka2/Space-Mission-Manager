@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDTO> createComponent(@RequestBody CreateUserDTO userCreateDTO) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO userCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating user");
 

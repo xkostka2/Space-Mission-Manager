@@ -33,7 +33,7 @@ public class RocketController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RocketDTO> createComponent(@RequestBody CreateRocketDTO rocketCreateDTO) {
+    public ResponseEntity<RocketDTO> createRocket(@RequestBody CreateRocketDTO rocketCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating rocket");
 
