@@ -97,7 +97,6 @@ public class RocketFacadeImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testUpdateRocket() {
         UpdateRocketDTO rocket = getUpdateRocketDTO(rocketDTO1.getName(), rocketDTO1.getId());
-        rocket.setRequiredComponents(rocketDTO1.getRequiredComponents());
         rocket.setName("UPDATED");
         rocketFacade.updateRocket(rocket);
         assertThat(rocketFacade.findRocketById(rocket.getId())).isEqualToComparingFieldByField(rocket);
