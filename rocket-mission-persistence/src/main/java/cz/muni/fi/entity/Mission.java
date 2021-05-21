@@ -2,6 +2,7 @@ package cz.muni.fi.entity;
 
 import cz.muni.fi.enums.MissionProgress;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,13 +43,13 @@ public class Mission implements Serializable {
     @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
     private Set<User> users = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
     private Set<Rocket> rockets = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;
