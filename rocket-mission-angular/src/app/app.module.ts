@@ -28,6 +28,13 @@ import {BreadcrumbsComponent} from "./components/breadcrumbs/breadcrumbs.compone
 import { HomePageComponent } from './components/home-page/home-page.component';
 import {AuthenticationService} from "./services/authentication.service";
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import {MissionsService} from "./services/missions.service";
+import { MissionsListComponent } from './components/missions-list/missions-list.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -48,7 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     AstronautDetailPageComponent,
     BreadcrumbsComponent,
     HomePageComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    MissionsListComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +79,15 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    MissionsService
   ],
   bootstrap: [AppComponent]
 })

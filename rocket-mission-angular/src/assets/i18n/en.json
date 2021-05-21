@@ -11,5 +11,17 @@
     "MY_MISSIONS": "My missions",
     "MISSION_DETAIL": "Mission detail",
     "ASTRONAUT_DETAIL": "Astronaut detail"
+  },
+  "MISSION_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "DESTINATION": "Destination",
+    "MISSION_PROGRESS": "Mission progress",
+    "ACCEPT": "Accept",
+    "REJECT": "Reject"
+  },
+  "ASTRONAUT_HOME": {
+    "CURRENT_MISSION": "Current mission:",
+    "VIEW_DETAIL": "View detail"
   }
 }

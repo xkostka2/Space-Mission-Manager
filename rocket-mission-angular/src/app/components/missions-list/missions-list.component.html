@@ -1,0 +1,37 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ID'|translate}} </th>
+      <td mat-cell *matCellDef="let mission"> {{mission.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.NAME'|translate}} </th>
+      <td mat-cell *matCellDef="let mission"> {{mission.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="destination">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.DESTINATION'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.destination}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="missionProgress">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.MISSION_PROGRESS'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.missionProgress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acceptReject">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let mission">
+        <button mat-flat-button color="primary">{{'MISSION_LIST.ACCEPT'|translate}}</button>
+        <button mat-flat-button class="ms-2" color="warn">{{'MISSION_LIST.REJECT'|translate}}</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
