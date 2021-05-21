@@ -17,6 +17,7 @@
           <mat-label>{{'CREATE_MISSION_DIALOG.ETA'| translate}}</mat-label>
           <input matInput formControlName="etaCtrl" required>
         </mat-form-field>
+        <p>{{'CREATE_MISSION_DIALOG.ETA_FORMAT'|translate}}</p>
         <div>
           <button mat-button matStepperNext [disabled]="detailsFormGroup.invalid">{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>
         </div>

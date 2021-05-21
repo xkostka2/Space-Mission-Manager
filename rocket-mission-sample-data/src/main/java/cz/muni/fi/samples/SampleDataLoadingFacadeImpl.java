@@ -53,6 +53,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private cz.muni.fi.entity.Component component2;
     private cz.muni.fi.entity.Component component3;
     private cz.muni.fi.entity.Component component4;
+    private cz.muni.fi.entity.Component component5;
 
     private Mission mission1;
     private Mission mission2;
@@ -63,6 +64,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private User user2;
     private User user3;
     private User user4;
+    private User user5;
 
     private Rocket rocket1;
     private Rocket rocket2;
@@ -115,6 +117,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         component4.setReadyToUse(true);
         componentService.addComponent(component4);
         log.info("component1 loaded");
+
+        component5 = new cz.muni.fi.entity.Component();
+        component5.setName("test comp");
+        component5.setType(ComponentType.MISSION);
+        component5.setReadyToUse(true);
+        componentService.addComponent(component5);
+        log.info("component5 loaded");
 
         log.info(componentService.findAllComponents().toString());
     }
@@ -203,6 +212,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user4.setRole(Role.MANAGER);
         userService.addUser(user4);
         log.info("user4 loaded");
+
+        user5 = new User();
+        user5.setName("test user");
+        user5.setEmail("test@gmail.com");
+        user5.setPassword(DigestUtils.sha256Hex("bosspassword"));
+        user5.setLevelOfExperience(LevelOfExperience.ROOKIE);
+        user5.setRole(Role.ASTRONAUT);
+        userService.addUser(user5);
+        log.info("user5 loaded");
     }
 
 
