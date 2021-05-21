@@ -74,6 +74,7 @@ public class RocketServiceImpl implements RocketService {
     @PreAuthorize("hasRole('ROLE_USER')")
     public void removeRocket(Rocket rocket) throws DataAccessException {
         try {
+
             rocketDao.removeRocket(rocket);
         }  catch (Throwable e) {
             throw new ServiceDataAccessException("Error when removing rocket.", e);

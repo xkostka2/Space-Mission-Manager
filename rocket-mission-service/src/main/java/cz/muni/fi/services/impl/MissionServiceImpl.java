@@ -1,6 +1,9 @@
 package cz.muni.fi.services.impl;
 
+import cz.muni.fi.dao.ComponentDao;
 import cz.muni.fi.dao.MissionDao;
+import cz.muni.fi.dao.RocketDao;
+import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.MissionProgress;
@@ -25,6 +28,15 @@ import java.util.List;
  */
 @Service
 public class MissionServiceImpl implements MissionService {
+
+    @Autowired
+    private RocketDao rocketDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private ComponentDao componentDao;
 
     @Autowired
     private MissionDao missionDao;
@@ -53,6 +65,19 @@ public class MissionServiceImpl implements MissionService {
     @PreAuthorize("hasRole('ROLE_USER')")
     public void deleteMission(Mission mission) throws DataAccessException {
         try {
+            mission.getComponents().forEach(component -> {
+                component.setMission(null);
+                componentDao.updateComponent(component);
+            });
+            mission.getUsers().forEach(user -> {
+                user.setMission(null);
+                userDao.updateUser(user);
+            });
+            mission.getRockets().forEach(rocket -> {
+                rocket.setMission(null);
+                rocketDao.updateRocket(rocket);
+            });
+
             missionDao.removeMission(mission);
         } catch (Throwable e) {
             throw new ServiceDataAccessException("Can not delete a mission ", e);
