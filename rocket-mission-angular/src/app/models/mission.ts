@@ -1,7 +1,7 @@
 import {MissionProgress} from "./missionProgress";
 import {User} from "./user";
 import {Rocket} from "./rocket";
-import {Component} from "./component";
+import {MissionComponent} from "./component";
 
 export interface Mission {
   id?: number;
@@ -10,7 +10,7 @@ export interface Mission {
   missionProgress?: MissionProgress;
   users?: User[];
   rockets?: Rocket[];
-  components?: Component[];
+  components?: MissionComponent[];
   eta?: Date;
   finishedDate?: Date;
   startedDate?: Date;

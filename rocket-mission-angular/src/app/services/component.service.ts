@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Component } from "../models/component";
+import { MissionComponent } from "../models/component";
 
 @Injectable({
     providedIn: 'root'
@@ -14,24 +14,24 @@ export class ComponentService {
         private http: HttpClient,
     ) { }
 
-    findAllComponents(): Observable<Component[]> {
-        return this.http.get(`${this.REST_API_SERVER}/components`) as Observable<Component[]>;
+    findAllComponents(): Observable<MissionComponent[]> {
+        return this.http.get(`${this.REST_API_SERVER}/components`) as Observable<MissionComponent[]>;
     }
 
-    getAvailableComponents(): Observable<Component[]> {
-        return this.http.get(`${this.REST_API_SERVER}/components/available`) as Observable<Component[]>;
+    getAvailableComponents(): Observable<MissionComponent[]> {
+        return this.http.get(`${this.REST_API_SERVER}/components/available`) as Observable<MissionComponent[]>;
     }
 
-    getComponentById(id: number): Observable<Component> {
-        return this.http.get(`${this.REST_API_SERVER}/components/${id}`) as Observable<Component>;
+    getComponentById(id: number): Observable<MissionComponent> {
+        return this.http.get(`${this.REST_API_SERVER}/components/${id}`) as Observable<MissionComponent>;
     }
 
-    createComponent(component: Component): Observable<Component> {
-        return this.http.post(`${this.REST_API_SERVER}/components/`, component) as Observable<Component>;
+    createComponent(component: MissionComponent): Observable<MissionComponent> {
+        return this.http.post(`${this.REST_API_SERVER}/components/`, component) as Observable<MissionComponent>;
     }
 
-    updateComponent(component: Component): Observable<Component> {
-        return this.http.put(`${this.REST_API_SERVER}/components/`, component) as Observable<Component>;
+    updateComponent(component: MissionComponent): Observable<MissionComponent> {
+        return this.http.put(`${this.REST_API_SERVER}/components/`, component) as Observable<MissionComponent>;
     }
 
     removeComponent(id: number): Observable<Object> {

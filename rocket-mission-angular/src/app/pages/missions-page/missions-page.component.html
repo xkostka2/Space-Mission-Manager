@@ -1,1 +1,11 @@
-<p>missions-page works!</p>
+<div class="mb-3">
+  <button mat-flat-button (click)="createMission()" color="accent">{{'MISSIONS_PAGE.CREATE' | translate}}</button>
+  <button mat-flat-button (click)="deleteMission()" class="ms-2" color="warn">{{'MISSIONS_PAGE.DELETE' | translate}}</button>
+</div>
+
+<mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
+<app-missions-list
+  *ngIf="!loading"
+  [missions]="missions"
+  [hiddenColumns]="['acceptReject']"
+></app-missions-list>

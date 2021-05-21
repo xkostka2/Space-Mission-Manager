@@ -68,6 +68,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     private Rocket rocket2;
     private Rocket rocket3;
     private Rocket rocket4;
+    private Rocket rocket5;
 
     private final PasswordEncoder encoder = new Argon2PasswordEncoder();
 
@@ -226,6 +227,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         rocket4.setName("BOBOBO");
         rocketService.addRocket(rocket4);
         log.info("rocket4 loaded");
+
+        rocket5 = new Rocket();
+        rocket5.setName("NOMISSION");
+        rocketService.addRocket(rocket5);
+        log.info("rocket5 loaded");
     }
 
     @Override
