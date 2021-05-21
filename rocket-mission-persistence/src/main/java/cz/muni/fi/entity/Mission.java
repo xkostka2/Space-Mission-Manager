@@ -2,7 +2,6 @@ package cz.muni.fi.entity;
 
 import cz.muni.fi.enums.MissionProgress;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -43,13 +41,13 @@ public class Mission implements Serializable {
     @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
     private Set<User> users = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
     private Set<Rocket> rockets = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;
