@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { User } from "src/app/models/user";
 
@@ -6,15 +6,15 @@ import { User } from "src/app/models/user";
     selector: 'app-users-list',
     templateUrl: './users-list.component.html',
     styleUrls: ['./users-list.component.scss']
-  })
-  export class UsersListComponent implements OnChanges {
+})
+export class UsersListComponent implements OnChanges {
 
-    @Input() users: User[];
-    @Input() displayedColumns: String[];
+  @Input() users: User[];
+  @Input() displayedColumns: String[];
 
-    dataSource = new MatTableDataSource<User>();
+  dataSource = new MatTableDataSource<User>();
 
-    ngOnChanges(): void {
-        this.dataSource = new MatTableDataSource<User>(this.users);
-    }
+  ngOnChanges(): void {
+      this.dataSource = new MatTableDataSource<User>(this.users);
   }
+}

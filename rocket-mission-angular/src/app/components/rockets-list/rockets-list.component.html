@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> {{'ROCKET_LIST.ID' | translate}} </th>
+        <td mat-cell *matCellDef="let rocket"> {{rocket.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{'ROCKET_LIST.NAME' | translate}} </th>
+        <td mat-cell *matCellDef="let rocket"> {{rocket.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="mission">
+        <th mat-header-cell *matHeaderCellDef> {{'ROCKET_LIST.MISSION' | translate}}</th>
+        <td mat-cell *matCellDef="let rocket"> {{rocket.mission.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="requiredComponents">
+        <th mat-header-cell *matHeaderCellDef> {{'ROCKET_LIST.REQUIRED_COMPONENTS' | translate}}</th>
+        <td mat-cell *matCellDef="let rocket"> {{rocket.requiredComponents}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>

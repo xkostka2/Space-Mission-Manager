@@ -29,6 +29,12 @@
     "ACCEPT": "Accept",
     "REJECT": "Reject"
   },
+  "ROCKET_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "MISSION": "Mission",
+    "REQUIRED_COMPONENTS": "Required components"
+  },
   "USER_LIST": {
     "ID": "Id",
     "NAME": "Name",
