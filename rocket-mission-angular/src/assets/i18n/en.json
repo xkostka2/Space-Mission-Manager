@@ -12,6 +12,15 @@
     "MISSION_DETAIL": "Mission detail",
     "ASTRONAUT_DETAIL": "Astronaut detail"
   },
+  "COMPONENT_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "MISSION": "Mission",
+    "READY_DATE": "Ready Date",
+    "READY_TO_USE": "Ready to use",
+    "ROCKET": "Rocket",
+    "COMPONENT_TYPE": "Component type"
+  },
   "MISSION_LIST": {
     "ID": "Id",
     "NAME": "Name",
