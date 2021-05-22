@@ -1,5 +1,6 @@
 package cz.muni.fi.dao;
 
+import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Rocket;
 import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
@@ -69,6 +70,11 @@ public class RocketDaoImpl implements RocketDao {
         Rocket del = findRocketById(rocket.getId());
 
         Guard.requireNotNull(del, "Rocket does not exist");
+
+        for (Component component : rocket.getRequiredComponents()) {
+            component.setMission(null);
+            entityManager.merge(component);
+        }
 
         entityManager.remove(del);
     }

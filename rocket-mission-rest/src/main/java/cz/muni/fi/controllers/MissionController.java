@@ -33,7 +33,7 @@ public class MissionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MissionDTO> createComponent(@RequestBody CreateMissionDTO missionCreateDTO) {
+    public ResponseEntity<MissionDTO> createMission(@RequestBody CreateMissionDTO missionCreateDTO) {
 
         logger.log(Level.INFO, "[REST] creating mission");
 

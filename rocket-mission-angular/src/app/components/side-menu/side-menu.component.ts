@@ -44,7 +44,7 @@ export class SideMenuComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const prefix = this.userRole ? '/astronaut' : '/manager'
+    const prefix = this.userRole === Role.Astronaut ? '/astronaut' : '/manager'
     this.items = [
       {
         label: 'MENU_ITEMS.HOME',
@@ -62,7 +62,7 @@ export class SideMenuComponent implements OnChanges {
       });
       return;
     }
-      
+
     this.items.push(
       {
         label: 'MENU_ITEMS.MISSIONS',

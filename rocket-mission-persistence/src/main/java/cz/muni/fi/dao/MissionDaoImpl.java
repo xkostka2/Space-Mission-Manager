@@ -1,6 +1,9 @@
 package cz.muni.fi.dao;
 
+import cz.muni.fi.entity.Component;
 import cz.muni.fi.entity.Mission;
+import cz.muni.fi.entity.Rocket;
+import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.helpers.Guard;
 import org.springframework.stereotype.Repository;
@@ -70,6 +73,21 @@ public class MissionDaoImpl implements MissionDao {
         Mission del = findMissionById(mission.getId());
 
         Guard.requireNotNull(del, "Mission does not exist");
+
+        for (User user : mission.getUsers()) {
+            user.setMission(null);
+            entityManager.merge(user);
+        }
+
+        for (Component component : mission.getComponents()) {
+            component.setMission(null);
+            entityManager.merge(component);
+        }
+
+        for (Rocket rocket : mission.getRockets()) {
+            rocket.setMission(null);
+            entityManager.merge(rocket);
+        }
 
         entityManager.remove(del);
     }

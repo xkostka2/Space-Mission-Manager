@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>cz.fi.muni</groupId>
-            <artifactId>rocket-mission-persistance</artifactId>
+            <artifactId>rocket-mission-persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
