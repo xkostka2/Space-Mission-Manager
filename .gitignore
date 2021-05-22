@@ -40,3 +40,5 @@ out/
 *.iws
 *.iml
 
+rocket-mission-angular/package-lock.json
+
