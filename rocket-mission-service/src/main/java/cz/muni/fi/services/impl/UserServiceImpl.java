@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+    public static final PasswordEncoder encoder = new Argon2PasswordEncoder();
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -170,10 +170,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private void passwordCheck(String passwordHash, String password){
-        String encrypted = encoder.encode(password);
+        String encrypted = DigestUtils.sha256Hex(password);
 
         if (!encrypted.equals(passwordHash))
-            throw new ServiceDataAccessException("Wrong password/login combination");
+            throw new ServiceDataAccessException("Wrong password/login combination" + passwordHash + " " + encrypted);
     }
 
 

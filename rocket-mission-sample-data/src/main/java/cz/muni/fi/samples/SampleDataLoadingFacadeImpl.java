@@ -12,6 +12,7 @@ import cz.muni.fi.services.ComponentService;
 import cz.muni.fi.services.MissionService;
 import cz.muni.fi.services.RocketService;
 import cz.muni.fi.services.UserService;
+import cz.muni.fi.services.impl.UserServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
@@ -162,11 +164,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Override
     public void loadAllUsers() {
+
+
         user1 = new User();
         user1.setName("John");
         user1.setEmail("john@gmail.com");
         user1.setLevelOfExperience(LevelOfExperience.ROOKIE);
-        user1.setPassword(encoder.encode("tralala123"));
+        user1.setPassword(DigestUtils.sha256Hex("tralala123"));
         user1.setRole(Role.ASTRONAUT);
         userService.addUser(user1);
         log.info("user1 loaded");
@@ -175,7 +179,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user2.setName("David");
         user2.setEmail("david@gmail.com");
         user2.setLevelOfExperience(LevelOfExperience.VETERAN);
-        user2.setPassword(encoder.encode("tralala321"));
+        user2.setPassword(DigestUtils.sha256Hex("tralala321"));
         user2.setRole(Role.ASTRONAUT);
         userService.addUser(user2);
         log.info("user2 loaded");
@@ -184,7 +188,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user3.setName("jiri");
         user3.setEmail("jiri@gmail.com");
         user3.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
-        user3.setPassword(encoder.encode("taspokeqw"));
+        user3.setPassword(DigestUtils.sha256Hex("asdasdasd"));
 
         user3.setRole(Role.ASTRONAUT);
         userService.addUser(user3);
@@ -193,7 +197,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user4 = new User();
         user4.setName("THE BOSS");
         user4.setEmail("boss@gmail.com");
-        user4.setPassword(encoder.encode("bosspassword"));
+        user4.setPassword(DigestUtils.sha256Hex("bosspassword"));
         user4.setLevelOfExperience(LevelOfExperience.ROOKIE);
         user4.setRole(Role.MANAGER);
         userService.addUser(user4);
