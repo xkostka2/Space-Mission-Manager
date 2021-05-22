@@ -18,7 +18,7 @@
   
       <ng-container matColumnDef="requiredComponents">
         <th mat-header-cell *matHeaderCellDef> {{'ROCKET_LIST.REQUIRED_COMPONENTS' | translate}}</th>
-        <td mat-cell *matCellDef="let rocket"> {{rocket.requiredComponents}} </td>
+        <td mat-cell *matCellDef="let rocket"> {{rocket.requiredComponents.map(x => x.name).join(", ")}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
