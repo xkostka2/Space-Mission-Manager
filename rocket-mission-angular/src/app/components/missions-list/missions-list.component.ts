@@ -9,12 +9,9 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class MissionsListComponent implements OnChanges {
 
-  constructor() { }
+  @Input() missions: Mission[] = [];
+  @Input() displayedColumns: String[];
 
-  @Input()
-  missions: Mission[] = [];
-
-  displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject'];
   dataSource = new MatTableDataSource<Mission>()
 
   ngOnChanges() {

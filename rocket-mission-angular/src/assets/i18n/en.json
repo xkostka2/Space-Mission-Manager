@@ -27,7 +27,14 @@
     "DESTINATION": "Destination",
     "MISSION_PROGRESS": "Mission progress",
     "ACCEPT": "Accept",
-    "REJECT": "Reject"
+    "REJECT": "Reject",
+    "USERS": "Users",
+    "ROCKETS": "Rockets",
+    "COMPONENTS": "Components",
+    "ETA": "Estimated time of arrival",
+    "FINISHED_DATE": "Finished Date",
+    "STARTED_DATE": "Started Date",
+    "RESULT": "Result"
   },
   "ROCKET_LIST": {
     "ID": "Id",

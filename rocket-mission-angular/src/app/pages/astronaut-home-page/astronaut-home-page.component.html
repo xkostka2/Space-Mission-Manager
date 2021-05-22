@@ -4,4 +4,7 @@
 </div>
 
 <mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
-<app-missions-list *ngIf="!loading" [missions]="missions"></app-missions-list>
+<app-missions-list *ngIf="!loading"
+                   [missions]="missions"
+                   [displayedColumns]="['id', 'name', 'destination', 'missionProgress', 'acceptReject']">
+</app-missions-list>

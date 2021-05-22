@@ -21,6 +21,41 @@
       <td mat-cell *matCellDef="let mission"> {{mission.missionProgress}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="users">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.USERS'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.users}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rockets">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ROCKETS'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.rockets}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="components">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.COMPONENTS'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.components}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="eta">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ETA'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.eta | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="finishedDate">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.FINISHED_DATE'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.finishedDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startedDate">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.STARTED_DATE'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.startedDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.RESULT'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.result}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="acceptReject">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mission">
