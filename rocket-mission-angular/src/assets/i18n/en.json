@@ -20,6 +20,16 @@
     "ACCEPT": "Accept",
     "REJECT": "Reject"
   },
+  "USER_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "ROLE": "Role",
+    "LEVEL_OF_EXPERIENCE": "Level of Experience",
+    "MISSION": "Mission",
+    "MISSION_ACCEPTED": "Mission accepted",
+    "MISSION_EXPLANATION": "Mission explanation"
+  },
   "ASTRONAUT_HOME": {
     "CURRENT_MISSION": "Current mission:",
     "VIEW_DETAIL": "View detail"
