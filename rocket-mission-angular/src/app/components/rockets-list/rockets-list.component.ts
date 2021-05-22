@@ -17,4 +17,8 @@ export class RocketsListComponent implements OnChanges {
     ngOnChanges(): void {
         this.dataSource = new MatTableDataSource<Rocket>(this.rockets);
     }
+
+    getRequiredComponentsList(rocket: Rocket): string {
+        return rocket.requiredComponents.map(x => x.name).join(", ");
+      }
 }

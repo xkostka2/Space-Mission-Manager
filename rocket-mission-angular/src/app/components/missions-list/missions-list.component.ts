@@ -18,4 +18,15 @@ export class MissionsListComponent implements OnChanges {
     this.dataSource = new MatTableDataSource<Mission>(this.missions);
   }
 
+  getUsersList(mission: Mission): string {
+    return mission.users.map(x => x.name).join(", ");
+  }
+
+  getRocketsList(mission: Mission): string {
+    return mission.rockets.map(x => x.name).join(", ");
+  }
+
+  getComponentsList(mission: Mission): string {
+    return mission.components.map(x => x.name).join(", ");
+  }
 }

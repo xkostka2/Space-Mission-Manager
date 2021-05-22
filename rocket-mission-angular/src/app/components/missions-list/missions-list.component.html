@@ -23,17 +23,17 @@
 
     <ng-container matColumnDef="users">
       <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.USERS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.users.map(x => x.name).join(", ")}} </td>
+      <td mat-cell *matCellDef="let mission"> {{getUsersList(mission)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="rockets">
       <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ROCKETS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.rockets.map(x => x.name).join(", ")}} </td>
+      <td mat-cell *matCellDef="let mission"> {{getRocketsList(mission)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="components">
       <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.COMPONENTS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.components.map(x => x.name).join(", ")}} </td>
+      <td mat-cell *matCellDef="let mission"> {{getComponentsList(mission)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="eta">
