@@ -12,13 +12,45 @@
     "MISSION_DETAIL": "Mission detail",
     "ASTRONAUT_DETAIL": "Astronaut detail"
   },
+  "COMPONENT_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "MISSION": "Mission",
+    "READY_DATE": "Ready Date",
+    "READY_TO_USE": "Ready to use",
+    "ROCKET": "Rocket",
+    "COMPONENT_TYPE": "Component type"
+  },
   "MISSION_LIST": {
     "ID": "Id",
     "NAME": "Name",
     "DESTINATION": "Destination",
     "MISSION_PROGRESS": "Mission progress",
     "ACCEPT": "Accept",
-    "REJECT": "Reject"
+    "REJECT": "Reject",
+    "USERS": "Users",
+    "ROCKETS": "Rockets",
+    "COMPONENTS": "Components",
+    "ETA": "Estimated time of arrival",
+    "FINISHED_DATE": "Finished Date",
+    "STARTED_DATE": "Started Date",
+    "RESULT": "Result"
+  },
+  "ROCKET_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "MISSION": "Mission",
+    "REQUIRED_COMPONENTS": "Required components"
+  },
+  "USER_LIST": {
+    "ID": "Id",
+    "NAME": "Name",
+    "EMAIL": "Email",
+    "ROLE": "Role",
+    "LEVEL_OF_EXPERIENCE": "Level of Experience",
+    "MISSION": "Mission",
+    "MISSION_ACCEPTED": "Mission accepted",
+    "MISSION_EXPLANATION": "Mission explanation"
   },
   "ASTRONAUT_HOME": {
     "CURRENT_MISSION": "Current mission:",

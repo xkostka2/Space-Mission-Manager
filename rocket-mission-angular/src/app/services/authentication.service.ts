@@ -25,7 +25,7 @@ export class AuthenticationService {
         name: "John",
         email: "john@gmail.com",
         password: "tralala123",
-        role: Role.Manager,
+        role: Role.Astronaut,
         levelOfExperience: LevelOfExperience.Rookie,
         mission: {"id": 1,
           name: "Discovering Aliens",

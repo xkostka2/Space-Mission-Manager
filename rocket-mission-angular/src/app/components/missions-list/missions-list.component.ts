@@ -9,16 +9,24 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class MissionsListComponent implements OnChanges {
 
-  constructor() { }
+  @Input() missions: Mission[] = [];
+  @Input() displayedColumns: String[];
 
-  @Input()
-  missions: Mission[] = [];
-
-  displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject'];
   dataSource = new MatTableDataSource<Mission>()
 
   ngOnChanges() {
     this.dataSource = new MatTableDataSource<Mission>(this.missions);
   }
 
+  getUsersList(mission: Mission): string {
+    return mission.users.map(x => x.name).join(", ");
+  }
+
+  getRocketsList(mission: Mission): string {
+    return mission.rockets.map(x => x.name).join(", ");
+  }
+
+  getComponentsList(mission: Mission): string {
+    return mission.components.map(x => x.name).join(", ");
+  }
 }
