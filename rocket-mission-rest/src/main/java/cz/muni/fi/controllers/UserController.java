@@ -17,6 +17,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Rest interface for User entity
+ *
+ * @author Tomas Bouma
+ */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_USERS)
 public class UserController {

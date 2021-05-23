@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Rest interface for Mission entity
+ *
+ * @author Martin Kazimir
+ */
+
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_MISSIONS)
 public class MissionController {
