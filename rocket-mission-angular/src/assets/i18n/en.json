@@ -1,8 +1,6 @@
 {
   "APP_NAME": "Space Mission Manager",
   "LOG_OUT": "Log out",
-  "USERNAME": "Username",
-  "PASSWORD": "Password",
   "MENU_ITEMS": {
     "HOME": "Home",
     "MISSIONS": "Missions",
@@ -59,6 +57,12 @@
   "ASTRONAUT_HOME": {
     "CURRENT_MISSION": "Current mission:",
     "VIEW_DETAIL": "View detail"
+  },
+
+  "LOGIN_PAGE": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "INVALID_LOGIN": "Invalid email or password!"
   },
   "MISSIONS_PAGE": {
     "CREATE": "Create",

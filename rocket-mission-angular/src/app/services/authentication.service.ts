@@ -3,8 +3,8 @@ import {Injectable} from '@angular/core';
 import {Role} from '../models/role';
 import {User} from '../models/user';
 import {Router} from "@angular/router";
-import {LevelOfExperience} from "../models/levelOfExperience";
-import {MissionProgress} from "../models/missionProgress";
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,43 +13,33 @@ export class AuthenticationService {
 
   currentUser: User;
 
+  private REST_API_SERVER = 'http://localhost:8080/pa165/rest';
+
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
-  login(username: string, password: string): boolean {
-    if (true) { // HTTP request
-      this.currentUser = {
-        id: 1,
-        name: "John",
-        email: "john@gmail.com",
-        password: "tralala123",
-        role: Role.Manager,
-        levelOfExperience: LevelOfExperience.Rookie,
-        mission: {"id": 1,
-          name: "Discovering Aliens",
-          destination: "Mars",
-          missionProgress: MissionProgress.InProgress,
-          users: [],
-          rockets: [],
-          components: [],
-          eta: new Date("2021-05-21T01:07:28.469524052+02:00[Europe/Budapest]"),
-          finishedDate: new Date("2021-05-23T01:07:28.450192823+02:00[Europe/Budapest]"),
-          startedDate: new Date("2021-05-19T01:07:28.450170213+02:00[Europe/Budapest]"),
-          result: null
-        },
-        missionAccepted: true,
-        missionExplanation: null
-      }
-      const storedUser = JSON.stringify(this.currentUser);
-      localStorage.setItem('auth:user', storedUser);
-      this.redirectToOriginDestination();
-      return true
+  loginUser(email: string, password: string): Observable<Object> {
+    const authDto = {
+      email: email,
+      password: password
     }
+    console.log(authDto);
+    
+    return this.http.post(`${this.REST_API_SERVER}/auth/login`, authDto)
+      .pipe(
+        catchError(x => {
+          return of(false);
+        })
+    );
+  }
 
-    this.currentUser = null;
-    return false;
+  login(user: User): void {
+    this.currentUser = user;
+    const storedUser = JSON.stringify(this.currentUser);
+    localStorage.setItem('auth:user', storedUser);
+    this.redirectToOriginDestination();
   }
 
   logout(): void {

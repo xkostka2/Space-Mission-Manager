@@ -1,4 +1,14 @@
-.login-form {
+.wrapper {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding-top: 15vh;
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+
+        .submit-button {
+            margin-top: 1rem;
+        }
+    }
 }
