@@ -41,13 +41,13 @@ public class Mission implements Serializable {
     @Enumerated(EnumType.STRING)
     private MissionProgress missionProgress;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Rocket> rockets = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mission")
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> components = new HashSet<>();
 
     private ZonedDateTime eta;

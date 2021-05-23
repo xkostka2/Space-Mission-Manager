@@ -31,6 +31,12 @@ public class RocketDaoImpl implements RocketDao {
         Guard.requireNull(rocket.getId(), "Rocket id is not null");
 
         this.entityManager.persist(rocket);
+
+        for (Component component : rocket.getRequiredComponents()) {
+            component.setRocket(rocket);
+            entityManager.merge(component);
+        }
+
         return rocket;
     }
 
