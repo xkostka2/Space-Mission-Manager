@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .overview-label {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: x-large;
+    }
+
+    .item-label {
+        margin-top: 1rem;
+        font-size: x-large;
+    }
+
+    .item {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}

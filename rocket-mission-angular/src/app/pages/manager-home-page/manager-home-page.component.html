@@ -1,2 +1,49 @@
-<div>
+<div class="wrapper">
+    <div>
+        <label class="overview-label">Overview of the system</label>
+    </div>
+    <div>
+        <label class="item-label">Astronauts:</label>
+    </div>
+    <div class="item">
+        <mat-spinner *ngIf="astronautsLoading" class="me-auto ms-auto"></mat-spinner>
+        <app-users-list
+            *ngIf="!astronautsLoading"
+            [users]="astronauts"
+            [hiddenColumns]="['select', 'id', 'missionExplanation']">
+        </app-users-list>
+    </div>
+    <div>
+        <label class="item-label">Missions:</label>
+    </div>
+    <div class="item">
+        <mat-spinner *ngIf="missionsLoading" class="me-auto ms-auto"></mat-spinner>
+        <app-missions-list
+            *ngIf="!missionsLoading"
+            [missions]="missions"
+            [hiddenColumns]="['acceptReject', 'id']">
+        </app-missions-list>
+    </div>
+    <div>
+        <label class="item-label">Components:</label>
+    </div>
+    <div class="item">
+        <mat-spinner *ngIf="componentsLoading" class="me-auto ms-auto"></mat-spinner>
+        <app-components-list
+            *ngIf="!componentsLoading"
+            [components]="components"
+            [hiddenColumns]="['select', 'id']">
+        </app-components-list>
+    </div>
+    <div>
+        <label class="item-label">Rockets:</label>
+    </div>
+    <div class="item">
+        <mat-spinner *ngIf="rocketsLoading" class="me-auto ms-auto"></mat-spinner>
+        <app-rockets-list
+            *ngIf="!rocketsLoading"
+            [rockets]="rockets"
+            [hiddenColumns]="['select', 'id']">
+        </app-rockets-list>
+    </div>
 </div>
