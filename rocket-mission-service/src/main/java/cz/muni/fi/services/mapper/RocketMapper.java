@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
+@Mapper(componentModel = "spring")
 public interface RocketMapper {
     RocketDTO rocketToRocketDTO(Rocket rocket);
     Rocket rocketDTOToRocket(RocketDTO rocketDTO);

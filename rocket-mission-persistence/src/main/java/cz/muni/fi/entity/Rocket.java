@@ -28,7 +28,7 @@ public class Rocket implements Serializable {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "rocket")
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Component> requiredComponents = new HashSet<>();
 
     public Long getId() {
