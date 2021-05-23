@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="dataSource.filteredData.length">
   <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="id">
@@ -20,42 +20,6 @@
       <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.MISSION_PROGRESS'|translate}}</th>
       <td mat-cell *matCellDef="let mission"> {{mission.missionProgress}} </td>
     </ng-container>
-
-    <ng-container matColumnDef="users">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.USERS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{getUsersList(mission)}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="rockets">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ROCKETS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{getRocketsList(mission)}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="components">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.COMPONENTS'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{getComponentsList(mission)}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="eta">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ETA'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.eta | date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="finishedDate">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.FINISHED_DATE'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.finishedDate | date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="startedDate">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.STARTED_DATE'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.startedDate | date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="result">
-      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.RESULT'|translate}}</th>
-      <td mat-cell *matCellDef="let mission"> {{mission.result}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="acceptReject">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mission">
@@ -64,9 +28,26 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="eta">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.ETA'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.eta | date: 'd.M.y H:mm:ss'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startedDate">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.STARTED_DATE'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.startedDate | date: 'd.M.y H:mm:ss'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="finishedDate">
+      <th mat-header-cell *matHeaderCellDef> {{'MISSION_LIST.FINISHED_DATE'|translate}}</th>
+      <td mat-cell *matCellDef="let mission"> {{mission.finishedDate | date: 'd.M.y H:mm:ss'}} </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+
+<app-alert *ngIf="!dataSource.filteredData.length">{{'MISSION_LIST.NO_MISSIONS' | translate}}</app-alert>
