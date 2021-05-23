@@ -59,7 +59,7 @@ export class CreateRocketDialogComponent implements OnInit {
     }
     this.rocketService.createRocket(rocket).subscribe(() => {
       this.loading = false;
-      this.dialogRef.close()
+      this.dialogRef.close(true)
     })
   }
 
