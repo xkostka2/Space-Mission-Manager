@@ -1,83 +1,83 @@
-<!--<h1 mat-dialog-title>{{'CREATE_MISSION_DIALOG.TITLE' | translate}}</h1>-->
-<!--<mat-spinner *ngIf="loading" class="ms-auto me-auto"></mat-spinner>-->
-<!--<div mat-dialog-content *ngIf="!loading">-->
-<!--  <mat-horizontal-stepper linear="true">-->
-<!--    <mat-step [stepControl]="detailsFormGroup">-->
-<!--      <form [formGroup]="detailsFormGroup" class="display-flex">-->
-<!--        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP1'| translate}}</ng-template>-->
-<!--        <mat-form-field>-->
-<!--          <mat-label>{{'CREATE_MISSION_DIALOG.NAME'| translate}}</mat-label>-->
-<!--          <input matInput formControlName="nameCtrl" required>-->
-<!--        </mat-form-field>-->
-<!--        <mat-form-field>-->
-<!--          <mat-label>{{'CREATE_MISSION_DIALOG.DESTINATION'| translate}}</mat-label>-->
-<!--          <input matInput formControlName="destinationCtrl" required>-->
-<!--        </mat-form-field>-->
-<!--        <mat-form-field>-->
-<!--          <mat-label>{{'CREATE_MISSION_DIALOG.ETA'| translate}}</mat-label>-->
-<!--          <input matInput formControlName="etaCtrl" required>-->
-<!--        </mat-form-field>-->
-<!--        <div>-->
-<!--          <button mat-button matStepperNext [disabled]="detailsFormGroup.invalid">{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </mat-step>-->
-<!--    <mat-step>-->
-<!--      <form>-->
-<!--        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP2'| translate}}</ng-template>-->
-<!--        <app-rockets-list-->
-<!--          [rockets]="rockets"-->
-<!--          [selection]="rocketSelection"-->
-<!--          [hiddenColumns]="['id', 'mission']"></app-rockets-list>-->
-<!--        <div>-->
-<!--          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>-->
-<!--          <button mat-button matStepperNext [disabled]="!rocketSelection.selected.length">{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </mat-step>-->
-<!--    <mat-step>-->
-<!--      <form>-->
-<!--        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP3'| translate}}</ng-template>-->
-<!--          <app-components-list-->
-<!--            [components]="components"-->
-<!--            [hiddenColumns]="['id', 'mission', 'readyDate', 'rocket']"-->
-<!--            [selection]="componentSelection"></app-components-list>-->
-<!--        <div>-->
-<!--          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>-->
-<!--          <button mat-button matStepperNext>{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </mat-step>-->
-<!--    <mat-step>-->
-<!--      <form>-->
-<!--        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP4'| translate}}</ng-template>-->
-<!--          <app-users-list-->
-<!--            [users]="astronauts"-->
-<!--            [selection]="astronautSelection"-->
-<!--            [hiddenColumns]="['id', 'mission', 'missionExplanation']"></app-users-list>-->
-<!--        <div>-->
-<!--          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK' | translate}}</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </mat-step>-->
-<!--  </mat-horizontal-stepper>-->
+<h1 mat-dialog-title>{{'CREATE_MISSION_DIALOG.TITLE' | translate}}</h1>
+<mat-spinner *ngIf="loading" class="ms-auto me-auto"></mat-spinner>
+<div mat-dialog-content *ngIf="!loading">
+  <mat-horizontal-stepper linear="true">
+    <mat-step [stepControl]="detailsFormGroup">
+      <form [formGroup]="detailsFormGroup" class="display-flex">
+        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP1'| translate}}</ng-template>
+        <mat-form-field>
+          <mat-label>{{'CREATE_MISSION_DIALOG.NAME'| translate}}</mat-label>
+          <input matInput formControlName="nameCtrl" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{'CREATE_MISSION_DIALOG.DESTINATION'| translate}}</mat-label>
+          <input matInput formControlName="destinationCtrl" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{'CREATE_MISSION_DIALOG.ETA'| translate}}</mat-label>
+          <input matInput formControlName="etaCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext [disabled]="detailsFormGroup.invalid">{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP2'| translate}}</ng-template>
+        <app-rockets-list
+          [rockets]="rockets"
+          [selection]="rocketSelection"
+          [hiddenColumns]="['id', 'mission']"></app-rockets-list>
+        <div>
+          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>
+          <button mat-button matStepperNext [disabled]="!rocketSelection.selected.length">{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP3'| translate}}</ng-template>
+          <app-components-list
+            [components]="components"
+            [hiddenColumns]="['id', 'mission', 'readyDate', 'rocket']"
+            [selection]="componentSelection"></app-components-list>
+        <div>
+          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>
+          <button mat-button matStepperNext>{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>{{'CREATE_MISSION_DIALOG.STEP4'| translate}}</ng-template>
+          <app-users-list
+            [users]="astronauts"
+            [selection]="astronautSelection"
+            [hiddenColumns]="['id', 'mission', 'missionExplanation']"></app-users-list>
+        <div>
+          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK' | translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 
 
-<!--</div>-->
-<!--<div mat-dialog-actions>-->
-<!--  <button-->
-<!--    mat-flat-button-->
-<!--    class="ms-auto"-->
-<!--    (click)="onCancel()">-->
-<!--    {{'CREATE_MISSION_DIALOG.CANCEL' | translate}}-->
-<!--  </button>-->
-<!--  <button-->
-<!--    mat-flat-button-->
-<!--    class="ms-2"-->
-<!--    color="accent"-->
-<!--    [disabled]="detailsFormGroup.invalid || !rocketSelection.selected.length || loading"-->
-<!--    (click)="onAdd()">-->
-<!--    {{'CREATE_MISSION_DIALOG.CREATE' | translate}}-->
-<!--  </button>-->
-<!--</div>-->
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-flat-button
+    class="ms-auto"
+    (click)="onCancel()">
+    {{'CREATE_MISSION_DIALOG.CANCEL' | translate}}
+  </button>
+  <button
+    mat-flat-button
+    class="ms-2"
+    color="accent"
+    [disabled]="detailsFormGroup.invalid || !rocketSelection.selected.length || loading"
+    (click)="onAdd()">
+    {{'CREATE_MISSION_DIALOG.CREATE' | translate}}
+  </button>
+</div>
 

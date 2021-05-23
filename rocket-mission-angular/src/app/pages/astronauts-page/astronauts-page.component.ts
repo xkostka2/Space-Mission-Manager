@@ -21,24 +21,7 @@ export class AstronautsPageComponent implements OnInit {
   loadData(){
     this.loading = true;
     this.userService.findAllAstronauts().subscribe(astronauts => {
-      //
-      // astronauts.forEach((astronaut, index) => {
-      //   if (astronaut.id == undefined) {
-      //     console.log(typeof astronaut)
-      //     if (typeof astronaut == "number") {
-      //       this.userService.findUserById(astronaut).subscribe(ast => {
-      //         astronauts[index] = ast
-      //       })
-      //     }
-      //   }
-      // }, astronauts)
-
       this.astronauts = astronauts
-
-      // this.astronauts.forEach((astronaut) => {
-      //   console.log(astronaut)
-      // })
-
       this.loading = false;
     })
   }
