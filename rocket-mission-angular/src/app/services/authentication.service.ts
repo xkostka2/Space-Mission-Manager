@@ -26,7 +26,7 @@ export class AuthenticationService {
       password: password
     }
     console.log(authDto);
-    
+
     return this.http.post(`${this.REST_API_SERVER}/auth/login`, authDto)
       .pipe(
         catchError(x => {
