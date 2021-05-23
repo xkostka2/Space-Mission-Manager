@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 /**
  * @author Martin Kazimir
+ *
+ * Main controller for rest interface
  */
 @RestController
 public class MainController {
