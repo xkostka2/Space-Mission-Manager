@@ -18,14 +18,14 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface UserMapper {
-    UserDTO userToUserDTO(User user, @Context CycleAvoidingMappingContext context);
-    User userDTOToUser(UserDTO userDTO, @Context CycleAvoidingMappingContext context);
+    UserDTO userToUserDTO(User user);
+    User userDTOToUser(UserDTO userDTO);
 
-    CreateUserDTO userToCreateUserDTO(User user, @Context CycleAvoidingMappingContext context);
-    User createUserDTOToUser(CreateUserDTO createUserDTO, @Context CycleAvoidingMappingContext context);
+    CreateUserDTO userToCreateUserDTO(User user);
+    User createUserDTOToUser(CreateUserDTO createUserDTO);
 
-    UpdateUserDTO userToUpdateUserDTO(User user, @Context CycleAvoidingMappingContext context);
-    User updateUserDTOToUser(UpdateUserDTO updateUserDTO, @Context CycleAvoidingMappingContext context);
+    UpdateUserDTO userToUpdateUserDTO(User user);
+    User updateUserDTOToUser(UpdateUserDTO updateUserDTO);
 
-    List<UserDTO> usersToUserDTOs(List<User> users, @Context CycleAvoidingMappingContext context);
+    List<UserDTO> usersToUserDTOs(List<User> users);
 }

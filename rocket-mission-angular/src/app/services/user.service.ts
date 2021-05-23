@@ -9,6 +9,7 @@ import { User } from "../models/user";
 export class UserService {
 
     private REST_API_SERVER = 'http://localhost:8080/pa165/rest';
+    private astr: Observable<User[]>;
 
     constructor(
         private http: HttpClient,
@@ -19,7 +20,26 @@ export class UserService {
     }
 
     findAllAstronauts(): Observable<User[]> {
-        return this.http.get(`${this.REST_API_SERVER}/users/astronauts`) as Observable<User[]>;
+      // this.astr = this.http.get(`${this.REST_API_SERVER}/users/astronauts`) as Observable<User[]>
+      //
+      // this.astr.forEach((astronauts) => {
+      //
+      //   astronauts.forEach((astronaut, index) => {
+      //     if (astronaut.id == undefined) {
+      //       console.log(typeof astronaut)
+      //       if (typeof astronaut == "number") {
+      //
+      //           this.astr[index] = this.findUserById(astronaut)
+      //       }
+      //     }
+      //   })
+      // })
+      //
+      // this.astr.forEach((astronaut) => {
+      //   console.log(astronaut)
+      // })
+
+       return this.http.get(`${this.REST_API_SERVER}/users/astronauts`) as Observable<User[]>;
     }
 
     findAllAvailableAstronauts(): Observable<User[]> {

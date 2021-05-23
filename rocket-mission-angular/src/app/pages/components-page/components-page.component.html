@@ -1,7 +1,5 @@
-<div *ngFor="let comp of components">
-    <div>{{ comp.id }}</div>
-    <div>{{ comp.name }}</div>
-    <div>{{ comp.componentType }}</div>
-    <div>{{ comp.readyToUse }}</div>
-    <div>{{ comp.readyDate }}</div>
-</div>
+<mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
+<app-components-list
+  *ngIf="!loading"
+  [components]="components"
+></app-components-list>

@@ -1,4 +1,5 @@
-package cz.muni.fi.services.mapper;
+package cz.muni.fi.services
+        .mapper;
 
 import cz.muni.fi.dto.component.ComponentDTO;
 import cz.muni.fi.dto.component.CreateComponentDTO;
@@ -18,14 +19,14 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface ComponentMapper {
-    ComponentDTO componentToComponentDTO(Component component, @Context CycleAvoidingMappingContext context);
-    Component componentDTOToComponent(ComponentDTO componentDTO,  @Context CycleAvoidingMappingContext context);
+    ComponentDTO componentToComponentDTO(Component component);
+    Component componentDTOToComponent(ComponentDTO componentDTO);
 
-    CreateComponentDTO componentToCreateComponentDTO(Component component, @Context CycleAvoidingMappingContext context);
-    Component createComponentDTOToComponent(CreateComponentDTO createComponentDTO, @Context CycleAvoidingMappingContext context);
-    Component mapToEntity(CreateComponentDTO createComponentDTO, @Context CycleAvoidingMappingContext context);
-    UpdateComponentDTO componentToUpdateComponentDTO(Component component, @Context CycleAvoidingMappingContext context);
-    Component updateComponentDTOToComponent(UpdateComponentDTO updateComponentDTO, @Context CycleAvoidingMappingContext context);
+    CreateComponentDTO componentToCreateComponentDTO(Component component);
+    Component createComponentDTOToComponent(CreateComponentDTO createComponentDTO);
+    Component mapToEntity(CreateComponentDTO createComponentDTO);
+    UpdateComponentDTO componentToUpdateComponentDTO(Component component);
+    Component updateComponentDTOToComponent(UpdateComponentDTO updateComponentDTO);
 
-    List<ComponentDTO> componentsToComponentDTOs(List<Component> components, @Context CycleAvoidingMappingContext context);
+    List<ComponentDTO> componentsToComponentDTOs(List<Component> components);
 }
