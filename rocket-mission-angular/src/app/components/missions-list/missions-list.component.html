@@ -63,6 +63,20 @@
       <td mat-cell *matCellDef="let mission"> {{mission.finishedDate | date: 'd.M.y H:mm:ss'}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="archive">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let mission">
+        <button mat-flat-button color="primary" (click)="archive(mission)">{{'MISSION_LIST.ARCHIVE' | translate}}</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isArchived">
+      <th mat-header-cell *matHeaderCellDef>{{'MISSION_LIST.IS_ARCHIVED'|translate}}</th>
+      <td mat-cell *matCellDef="let mission">
+        {{mission.result ? 'true' : 'false'}}
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let mission; columns: displayedColumns;" [routerLink]="[mission.id]"></tr>
   </table>

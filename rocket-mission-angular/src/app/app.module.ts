@@ -44,6 +44,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import {RocketsListComponent} from "./components/rockets-list/rockets-list.component";
 import {RocketsPageComponent} from "./pages/rockets-page/rockets-page.component";
 import {CreateRocketDialogComponent} from "./components/create-rocket-dialog/create-rocket-dialog.component";
+import { ArchiveMissionDialogComponent } from './components/archive-mission-dialog/archive-mission-dialog.component';
 import {CreateComponentDialogComponent} from "./components/create-component-dialog/create-component-dialog.component";
 
 export function createTranslateLoader(http: HttpClient) {
@@ -54,6 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
   entryComponents: [
     CreateMissionDialogComponent,
     CreateRocketDialogComponent,
+    ArchiveMissionDialogComponent,
     CreateComponentDialogComponent
   ],
   declarations: [
@@ -78,8 +80,9 @@ export function createTranslateLoader(http: HttpClient) {
     RocketsListComponent,
     CreateMissionDialogComponent,
     CreateRocketDialogComponent,
-    CreateComponentDialogComponent,
-    AlertComponent
+    AlertComponent,
+    ArchiveMissionDialogComponent,
+    CreateComponentDialogComponent
   ],
   imports: [
     BrowserModule,
