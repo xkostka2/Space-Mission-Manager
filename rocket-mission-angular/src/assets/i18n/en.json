@@ -79,7 +79,7 @@
     "NAME": "Mission name",
     "DESTINATION": "Destination",
     "ETA": "Estimated time of arrival",
-    "ETA_FORMAT": "Time has to be in format \"XXXX-XX-XXTXX:XX:XXZ\"",
+    "ETA_FORMAT": "Date has to be in format \"yyyy-mm-ddThh:mm:ssZ\" : 2021-08-21T20:51:00Z",
     "NEXT": "Next",
     "BACK": "Back",
     "STEP2": "Rocket/s",
