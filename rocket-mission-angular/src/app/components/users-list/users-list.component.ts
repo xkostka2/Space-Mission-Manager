@@ -24,7 +24,7 @@ export class UsersListComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.displayedColumns = this.displayedColumns.filter(x => !this.hiddenColumns.includes(x));
-      this.dataSource = new MatTableDataSource<User>(this.users);
+    this.dataSource = new MatTableDataSource<User>(this.users);
   }
 
   isAllSelected() {

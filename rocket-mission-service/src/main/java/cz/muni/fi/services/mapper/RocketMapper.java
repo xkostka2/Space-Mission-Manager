@@ -18,14 +18,14 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface RocketMapper {
-    RocketDTO rocketToRocketDTO(Rocket rocket, @Context CycleAvoidingMappingContext context);
-    Rocket rocketDTOToRocket(RocketDTO rocketDTO, @Context CycleAvoidingMappingContext context);
+    RocketDTO rocketToRocketDTO(Rocket rocket);
+    Rocket rocketDTOToRocket(RocketDTO rocketDTO);
 
-    CreateRocketDTO rocketToCreateRocketDTO(Rocket rocket, @Context CycleAvoidingMappingContext context);
-    Rocket createRocketDTOToRocket(CreateRocketDTO createRocketDTO, @Context CycleAvoidingMappingContext context);
+    CreateRocketDTO rocketToCreateRocketDTO(Rocket rocket);
+    Rocket createRocketDTOToRocket(CreateRocketDTO createRocketDTO);
 
-    UpdateRocketDTO rocketToUpdateRocketDTO(Rocket rocket, @Context CycleAvoidingMappingContext context);
-    Rocket updateRocketDTOToRocket(UpdateRocketDTO updateRocketDTO, @Context CycleAvoidingMappingContext context);
+    UpdateRocketDTO rocketToUpdateRocketDTO(Rocket rocket);
+    Rocket updateRocketDTOToRocket(UpdateRocketDTO updateRocketDTO);
 
-    List<RocketDTO> rocketsToRocketDTOs(List<Rocket> rockets, @Context CycleAvoidingMappingContext context);
+    List<RocketDTO> rocketsToRocketDTOs(List<Rocket> rockets);
 }
