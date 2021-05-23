@@ -93,7 +93,6 @@
         <module>rocket-mission-sample-data</module>
         <module>rocket-mission-manager</module>
         <module>rocket-mission-angular</module>
-        <module>angular</module>
     </modules>
 
     <dependencyManagement>
