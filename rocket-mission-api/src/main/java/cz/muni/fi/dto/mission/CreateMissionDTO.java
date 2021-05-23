@@ -41,11 +41,9 @@ public class CreateMissionDTO {
     @Size(min = 1)
     private Set<RocketDTO> rockets = new HashSet<>();
 
-    @NotNull
     private Set<ComponentDTO> components = new HashSet<>();
 
     @NotNull
-    @Future
     @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime eta;
