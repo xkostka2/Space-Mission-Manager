@@ -1,13 +1,15 @@
-<div>
+<div class="wrapper">
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-            <mat-label>{{'USERNAME' | translate}}</mat-label>
-            <input matInput [formControl]="loginForm.get('username')" />
+            <mat-label>{{'LOGIN_PAGE.EMAIL' | translate}}</mat-label>
+            <input matInput [formControl]="loginForm.get('email')" />
+            <mat-error *ngIf="loginForm.get('email').invalid"></mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>{{'PASSWORD' | translate}}</mat-label>
+            <mat-label>{{'LOGIN_PAGE.PASSWORD' | translate}}</mat-label>
             <input matInput type="password" [formControl]="loginForm.get('password')" />
+            <mat-error *ngIf="loginForm.get('password').invalid">{{'LOGIN_PAGE.INVALID_LOGIN' | translate}}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Log In</button>
+        <button class="submit-button" mat-raised-button color="primary" type="submit">Log In</button>
     </form>
 </div>
