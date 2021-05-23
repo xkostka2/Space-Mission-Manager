@@ -22,7 +22,7 @@ Class diagram can be see in `class_diagram.png`
 
 Use case diagram can be see in `Use Case Diagram.png`
 
-The Swagger documentation of REST API is available at [http://localhost:8080/pa165/rest/swagger-ui.html](http://localhost:8080/pa165/rest/swagger-ui.html)
+The Swagger documentation of REST API is available at [http://localhost:8080/pa165/swagger-ui.html#/](http://localhost:8080/pa165/swagger-ui.html#/)
 
 Modules of the app are: 
 * rocket-mission-angular -> UI of the app
