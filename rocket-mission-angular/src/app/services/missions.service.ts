@@ -32,7 +32,7 @@ export class MissionsService {
     return this.http.delete(`${this.apiUrl}/missions/${id}`);
   }
 
-  archiveMission(id: number): Observable<any>{
-    return this.http.get(`${this.apiUrl}/missions/${id}/archive`);
+  archiveMission(id: number, comment: string): Observable<any>{
+    return this.http.post(`${this.apiUrl}/missions/${id}/archive`, {value:comment});
   }
 }

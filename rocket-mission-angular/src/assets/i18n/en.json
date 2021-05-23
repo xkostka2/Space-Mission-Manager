@@ -35,7 +35,9 @@
     "FINISHED_DATE": "Finished Date",
     "STARTED_DATE": "Started Date",
     "RESULT": "Result",
-    "NO_MISSIONS": "No pending missions"
+    "NO_MISSIONS": "No pending missions",
+    "ARCHIVE": "Archive",
+    "IS_ARCHIVED": "Archived"
   },
   "ROCKET_LIST": {
     "ID": "Id",
@@ -94,5 +96,11 @@
     "STEP3": "Rocket component/s",
     "CANCEL": "Cancel",
     "CREATE": "Create"
+  },
+  "ARCHIVE_DIALOG": {
+    "TITLE": "Archive mission",
+    "INFO": "Give final comment on the mission's result",
+    "CLOSE": "Close",
+    "ARCHIVE": "Archive"
   }
 }

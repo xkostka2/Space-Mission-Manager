@@ -1,0 +1,25 @@
+<h5 mat-dialog-title>{{'ARCHIVE_DIALOG.TITLE'| translate}}</h5>
+<mat-spinner *ngIf="loading" class="ms-auto me-auto"></mat-spinner>
+<div mat-dialog-content *ngIf="!loading">
+  <p>{{'ARCHIVE_DIALOG.INFO'|translate}}</p>
+  <mat-form-field>
+    <input matInput [formControl]="commentControl" required>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-flat-button
+    class="ms-auto"
+    (click)="onClose()">
+    {{'ARCHIVE_DIALOG.CLOSE' | translate}}
+  </button>
+  <button
+    mat-flat-button
+    class="ms-2"
+    color="accent"
+    [disabled]="commentControl.invalid || loading"
+    (click)="onArchive()">
+    {{'ARCHIVE_DIALOG.ARCHIVE' | translate}}
+  </button>
+</div>

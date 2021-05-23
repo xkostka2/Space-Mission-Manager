@@ -44,6 +44,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import {RocketsListComponent} from "./components/rockets-list/rockets-list.component";
 import {RocketsPageComponent} from "./pages/rockets-page/rockets-page.component";
 import {CreateRocketDialogComponent} from "./components/create-rocket-dialog/create-rocket-dialog.component";
+import { ArchiveMissionDialogComponent } from './components/archive-mission-dialog/archive-mission-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +53,8 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   entryComponents: [
     CreateMissionDialogComponent,
-    CreateRocketDialogComponent
+    CreateRocketDialogComponent,
+    ArchiveMissionDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -76,7 +78,8 @@ export function createTranslateLoader(http: HttpClient) {
     RocketsListComponent,
     CreateMissionDialogComponent,
     CreateRocketDialogComponent,
-    AlertComponent
+    AlertComponent,
+    ArchiveMissionDialogComponent
   ],
   imports: [
     BrowserModule,
