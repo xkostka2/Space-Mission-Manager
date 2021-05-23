@@ -31,7 +31,8 @@ export class CreateRocketDialogComponent implements OnInit {
   missions: Mission[] = [];
 
   componentSelection = new SelectionModel<MissionComponent>(true, []);
-  missionSelection = new SelectionModel<Mission>(true, []);
+
+  missionSelection = new SelectionModel<Mission>(false, []);
 
   loading: boolean;
 
