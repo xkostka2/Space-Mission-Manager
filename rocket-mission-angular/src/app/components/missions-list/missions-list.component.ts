@@ -20,7 +20,7 @@ export class MissionsListComponent implements OnChanges {
   }
 
   @Input()
-  selection = new SelectionModel<MissionComponent>(true, []);
+  selection = new SelectionModel<MissionComponent>(false, []);
 
   @Input()
   missions: Mission[] = [];
@@ -29,6 +29,7 @@ export class MissionsListComponent implements OnChanges {
   hiddenColumns = [];
 
   displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject', 'eta','startedDate', 'finishedDate', 'isArchived'];
+
   dataSource = new MatTableDataSource<Mission>()
 
   ngOnChanges() {

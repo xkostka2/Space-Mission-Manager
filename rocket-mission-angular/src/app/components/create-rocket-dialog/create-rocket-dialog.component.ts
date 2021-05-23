@@ -31,7 +31,8 @@ export class CreateRocketDialogComponent implements OnInit {
   missions: Mission[] = [];
 
   componentSelection = new SelectionModel<MissionComponent>(true, []);
-  missionSelection = new SelectionModel<Mission>(true, []);
+
+  missionSelection = new SelectionModel<Mission>(false, []);
 
   loading: boolean;
 
@@ -58,7 +59,7 @@ export class CreateRocketDialogComponent implements OnInit {
     }
     this.rocketService.createRocket(rocket).subscribe(() => {
       this.loading = false;
-      this.dialogRef.close()
+      this.dialogRef.close(true)
     })
   }
 

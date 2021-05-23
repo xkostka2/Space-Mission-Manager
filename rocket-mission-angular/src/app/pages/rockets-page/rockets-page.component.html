@@ -6,4 +6,5 @@
 <app-rockets-list
   *ngIf="!loading"
   [rockets]="rockets"
+  [hiddenColumns]="['select']"
 ></app-rockets-list>

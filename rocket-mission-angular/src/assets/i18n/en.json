@@ -71,13 +71,17 @@
     "CREATE": "Create",
     "DELETE": "Delete"
   },
+  "COMPONENTS_PAGE": {
+    "CREATE": "Create",
+    "DELETE": "Delete"
+  },
   "CREATE_MISSION_DIALOG": {
     "TITLE": "Create mission",
     "STEP1": "Mission details",
     "NAME": "Mission name",
     "DESTINATION": "Destination",
     "ETA": "Estimated time of arrival",
-    "ETA_FORMAT": "Time has to be in format \"XXXX-XX-XXTXX:XX:XXZ\"",
+    "ETA_FORMAT": "Date has to be in format \"yyyy-mm-ddThh:mm:ssZ\" : 2021-08-21T20:51:00Z",
     "NEXT": "Next",
     "BACK": "Back",
     "STEP2": "Rocket/s",
@@ -102,5 +106,17 @@
     "INFO": "Give final comment on the mission's result",
     "CLOSE": "Close",
     "ARCHIVE": "Archive"
+  },
+  "CREATE_COMPONENT_DIALOG": {
+    "TITLE": "Create component",
+    "STEP1": "Component details",
+    "NAME": "Component name",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "CANCEL": "Cancel",
+    "CREATE": "Create",
+    "COMPONENT_TYPE": "Component type",
+    "READY_DATE": "Ready date",
+    "VALID_TYPES": "Valid types: mission, rocket"
   }
 }

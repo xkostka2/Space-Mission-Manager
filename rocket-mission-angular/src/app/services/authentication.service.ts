@@ -75,7 +75,7 @@ export class AuthenticationService {
     let redirectUrl = sessionStorage.getItem('auth:redirect');
     sessionStorage.removeItem('auth:redirect')
 
-    if (!redirectUrl || redirectUrl === '') {
+    if (!redirectUrl || redirectUrl === '' || redirectUrl === 'pa165') {
       redirectUrl = this.getRole() === Role.Astronaut ? '/astronaut' : '/manager';
     }
     if(redirectUrl.startsWith('/astronaut') && this.getRole() !== Role.Astronaut){
