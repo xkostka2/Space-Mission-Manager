@@ -14,6 +14,7 @@ import { MissionsPageComponent } from './pages/missions-page/missions-page.compo
 import {MyMissionsPageComponent} from "./pages/my-missions-page/my-missions-page.component";
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import {HomePageComponent} from "./components/home-page/home-page.component";
+import {RocketsPageComponent} from "./pages/rockets-page/rockets-page.component";
 
 
 const routes: Routes = [
@@ -128,6 +129,15 @@ const routes: Routes = [
         data: {
           role: Role.Manager,
           breadcrumb: 'Components'
+        }
+      },
+      {
+        path: 'rockets',
+        component: RocketsPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'Rockets'
         }
       },
     ]

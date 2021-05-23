@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>{{'CREATE_ROCKET_DIALOG.TITLE' | translate}}</h1>
+<mat-spinner *ngIf="loading" class="ms-auto me-auto"></mat-spinner>
+<div mat-dialog-content *ngIf="!loading">
+  <mat-horizontal-stepper linear="true">
+    <mat-step [stepControl]="detailsFormGroup">
+      <form [formGroup]="detailsFormGroup" class="display-flex">
+        <ng-template matStepLabel>{{'CREATE_ROCKET_DIALOG.STEP1'| translate}}</ng-template>
+        <mat-form-field>
+          <mat-label>{{'CREATE_ROCKET_DIALOG.NAME'| translate}}</mat-label>
+          <input matInput formControlName="nameCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext [disabled]="detailsFormGroup.invalid">{{'CREATE_ROCKET_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>{{'CREATE_ROCKET_DIALOG.STEP2'| translate}}</ng-template>
+        <app-missions-list
+          [missions]="missions"
+          [selection]="missionSelection"
+          [hiddenColumns]="['id', 'mission', 'acceptReject']"></app-missions-list>
+        <div>
+          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>
+          <button mat-button matStepperNext [disabled]="!missionSelection.selected.length">{{'CREATE_ROCKET_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>{{'CREATE_ROCKET_DIALOG.STEP3'| translate}}</ng-template>
+          <app-components-list
+            [components]="components"
+            [hiddenColumns]="['id', 'mission', 'readyDate', 'rocket']"
+            [selection]="componentSelection"></app-components-list>
+        <div>
+          <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>
+          <button mat-button matStepperNext>{{'CREATE_MISSION_DIALOG.NEXT'| translate}}</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-flat-button
+    class="ms-auto"
+    (click)="onCancel()">
+    {{'CREATE_MISSION_DIALOG.CANCEL' | translate}}
+  </button>
+  <button
+    mat-flat-button
+    class="ms-2"
+    color="accent"
+    [disabled]="detailsFormGroup.invalid || !missionSelection.selected.length || loading"
+    (click)="onAdd()">
+    {{'CREATE_MISSION_DIALOG.CREATE' | translate}}
+  </button>
+</div>
+

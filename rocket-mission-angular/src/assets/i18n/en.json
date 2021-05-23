@@ -5,6 +5,7 @@
     "HOME": "Home",
     "MISSIONS": "Missions",
     "COMPONENTS": "Components",
+    "ROCKETS": "Rockets",
     "ASTRONAUTS": "Astronauts",
     "MY_MISSIONS": "My missions",
     "MISSION_DETAIL": "Mission detail",
@@ -79,6 +80,17 @@
     "STEP2": "Rocket/s",
     "STEP3": "Mission component/s",
     "STEP4": "Astronaut/s",
+    "CANCEL": "Cancel",
+    "CREATE": "Create"
+  },
+  "CREATE_ROCKET_DIALOG": {
+    "TITLE": "Create rocket",
+    "STEP1": "Rocket details",
+    "NAME": "Rocket name",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "STEP2": "Missions/s",
+    "STEP3": "Rocket component/s",
     "CANCEL": "Cancel",
     "CREATE": "Create"
   }
