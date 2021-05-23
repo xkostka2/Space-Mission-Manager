@@ -1,0 +1,10 @@
+<div class="mb-3">
+  <button mat-flat-button (click)="createRocket()" color="accent">{{'MISSIONS_PAGE.CREATE' | translate}}</button>
+</div>
+
+<mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
+<app-rockets-list
+  *ngIf="!loading"
+  [rockets]="rockets"
+  [hiddenColumns]="['select']"
+></app-rockets-list>

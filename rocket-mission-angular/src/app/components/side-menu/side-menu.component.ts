@@ -78,7 +78,13 @@ export class SideMenuComponent implements OnChanges {
         label: 'MENU_ITEMS.COMPONENTS',
         url: `${prefix}/components`,
         activeRegex: `^${prefix}/components`
-    });
+      },
+      {
+      label: 'MENU_ITEMS.ROCKETS',
+        url: `${prefix}/rockets`,
+        activeRegex: `^${prefix}/rockets`
+      },
+    );
   }
 }
 
