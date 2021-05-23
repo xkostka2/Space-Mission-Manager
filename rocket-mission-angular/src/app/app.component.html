@@ -21,7 +21,10 @@
   <mat-sidenav-content id="content">
     <div [ngStyle]="{'min-height': 'calc(100vh - 64px - 100px)'}" id="content-wrap">
       <breadcrumbs *ngIf="authenticationService.currentUser"></breadcrumbs>
-      <router-outlet></router-outlet>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+
     </div>
     <footer [ngStyle]="{'background': footerColor}" class="footer-content align-bottom">
       © {{currentYear}} Copyright: Martin Kostka, Martin Hořelka, Martin Kažimír, Tomáš Bouma

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mission } from 'src/app/models/mission';
 import { User } from 'src/app/models/user';
-import { Component as Comp } from 'src/app/models/component';
+import { MissionComponent } from 'src/app/models/component';
 import { ComponentService } from 'src/app/services/component.service';
 import { MissionsService } from 'src/app/services/missions.service';
 import { RocketService } from 'src/app/services/rocket.service';
@@ -18,7 +18,7 @@ export class ManagerHomePageComponent implements OnInit {
 
   astronauts: User[];
   missions: Mission[];
-  components: Comp[];
+  components: MissionComponent[];
   rockets: Rocket[];
 
   astronautsDataSource = new MatTableDataSource<User>();
