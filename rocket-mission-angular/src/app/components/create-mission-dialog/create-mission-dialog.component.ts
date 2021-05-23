@@ -70,7 +70,6 @@ export class CreateMissionDialogComponent implements OnInit {
     this.missionsService.createMission(mission).subscribe(() => {
       this.loading = false;
       this.dialogRef.close(true)
-      window.location.reload();
     })
   }
 

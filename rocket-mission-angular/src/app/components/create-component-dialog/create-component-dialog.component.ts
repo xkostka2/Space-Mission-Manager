@@ -39,8 +39,7 @@ export class CreateComponentDialogComponent implements OnInit {
     }
     this.componentService.createComponent(component).subscribe(() => {
       this.loading = false;
-      this.dialogRef.close()
-      window.location.reload();
+      this.dialogRef.close(true)
     })
   }
 
