@@ -69,6 +69,10 @@
     "CREATE": "Create",
     "DELETE": "Delete"
   },
+  "COMPONENTS_PAGE": {
+    "CREATE": "Create",
+    "DELETE": "Delete"
+  },
   "CREATE_MISSION_DIALOG": {
     "TITLE": "Create mission",
     "STEP1": "Mission details",
@@ -94,5 +98,17 @@
     "STEP3": "Rocket component/s",
     "CANCEL": "Cancel",
     "CREATE": "Create"
+  },
+  "CREATE_COMPONENT_DIALOG": {
+    "TITLE": "Create component",
+    "STEP1": "Component details",
+    "NAME": "Component name",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "CANCEL": "Cancel",
+    "CREATE": "Create",
+    "COMPONENT_TYPE": "Component type",
+    "READY_DATE": "Ready date",
+    "VALID_TYPES": "Valid types: mission, rocket"
   }
 }

@@ -1,5 +1,11 @@
+<div class="mb-3">
+  <button mat-flat-button (click)="createComponent()" color="accent">{{'COMPONENTS_PAGE.CREATE' | translate}}</button>
+  <!--  <button mat-flat-button (click)="deleteMission()" class="ms-2" color="warn">{{'MISSIONS_PAGE.DELETE' | translate}}</button>-->
+</div>
+
 <mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
 <app-components-list
   *ngIf="!loading"
   [components]="components"
+  [hiddenColumns]="'select'"
 ></app-components-list>

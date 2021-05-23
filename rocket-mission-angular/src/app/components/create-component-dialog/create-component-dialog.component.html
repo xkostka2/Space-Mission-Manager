@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>{{'CREATE_COMPONENT_DIALOG.TITLE' | translate}}</h1>
+<mat-spinner *ngIf="loading" class="ms-auto me-auto"></mat-spinner>
+<div mat-dialog-content *ngIf="!loading">
+  <mat-horizontal-stepper linear="true">
+
+    <mat-step [stepControl]="detailsFormGroup">
+      <form [formGroup]="detailsFormGroup" class="display-flex">
+        <ng-template matStepLabel>{{'CREATE_COMPONENT_DIALOG.STEP1'| translate}}</ng-template>
+        <mat-form-field>
+          <mat-label>{{'CREATE_COMPONENT_DIALOG.NAME'| translate}}</mat-label>
+          <input matInput formControlName="nameCtrl" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{'CREATE_COMPONENT_DIALOG.COMPONENT_TYPE'| translate}}</mat-label>
+          <input matInput formControlName="typeCtrl" required>
+        </mat-form-field>
+        <p>{{'CREATE_COMPONENT_DIALOG.VALID_TYPES'|translate}}</p>
+        <mat-form-field>
+          <mat-label>{{'CREATE_COMPONENT_DIALOG.READY_DATE'| translate}}</mat-label>
+          <input matInput formControlName="readyDateCtrl" required>
+        </mat-form-field>
+        <p>{{'CREATE_MISSION_DIALOG.ETA_FORMAT'|translate}}</p>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-flat-button
+    class="ms-auto"
+    (click)="onCancel()">
+    {{'CREATE_COMPONENT_DIALOG.CANCEL' | translate}}
+  </button>
+  <button
+    mat-flat-button
+    class="ms-2"
+    color="accent"
+    [disabled]="detailsFormGroup.invalid || loading"
+    (click)="onAdd()">
+    {{'CREATE_COMPONENT_DIALOG.CREATE' | translate}}
+  </button>
+</div>
+
