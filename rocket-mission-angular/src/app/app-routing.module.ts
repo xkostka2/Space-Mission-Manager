@@ -142,6 +142,10 @@ const routes: Routes = [
       },
     ]
   },
+  { // bug fix
+    path: 'pa165',
+    redirectTo: 'astronaut',
+  },
   {
     path: '**',
     component: NotFoundPageComponent
