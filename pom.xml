@@ -91,6 +91,8 @@
         <module>rocket-mission-api</module>
         <module>rocket-mission-rest</module>
         <module>rocket-mission-sample-data</module>
+        <module>rocket-mission-manager</module>
+        <module>rocket-mission-angular</module>
     </modules>
 
     <dependencyManagement>

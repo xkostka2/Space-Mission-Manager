@@ -8,6 +8,7 @@ import cz.muni.fi.exceptions.ResourceAlreadyExistsException;
 import cz.muni.fi.exceptions.ResourceNotFoundException;
 import cz.muni.fi.facade.MissionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class MissionController {
         this.missionFacade = missionFacade;
     }
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MissionDTO> createMission(@RequestBody CreateMissionDTO missionCreateDTO) {
 
