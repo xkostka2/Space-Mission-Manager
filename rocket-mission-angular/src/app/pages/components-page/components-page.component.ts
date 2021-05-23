@@ -9,15 +9,17 @@ import { ComponentService } from 'src/app/services/component.service';
 export class ComponentsPageComponent implements OnInit {
 
   components: Component[] = []
+  loading: boolean;
 
   constructor(
     private componentService: ComponentService,
   ) { }
 
   ngOnInit() {
+    this.loading = true
     this.componentService.findAllComponents().subscribe((data: any[]) => {
       this.components = data;
+      this.loading = false
     });
   }
-
 }

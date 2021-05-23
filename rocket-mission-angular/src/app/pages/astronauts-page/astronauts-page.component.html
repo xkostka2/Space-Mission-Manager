@@ -1,1 +1,5 @@
-<p>astronauts-page works!</p>
+<mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
+<app-users-list
+  *ngIf="!loading"
+  [users]="astronauts"
+></app-users-list>

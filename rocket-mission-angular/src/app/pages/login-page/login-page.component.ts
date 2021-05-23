@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -19,18 +20,29 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl(null),
+    email: new FormControl(null),
     password: new FormControl(null),
   })
 
   onSubmit(): void {
+    this.loginForm.get('email').setErrors(null);
+    this.loginForm.get('password').setErrors(null);
     this.loginForm.updateValueAndValidity();
 
     if (this.loginForm.valid) {
-      const username = this.loginForm.get('username').value;
+      const email = this.loginForm.get('email').value;
       const password = this.loginForm.get('password').value;
 
-      this.authenticationService.login(username, password);
+      this.authenticationService.loginUser(email, password).subscribe(
+        user => {
+          if (user) {
+            this.authenticationService.login(user as User);
+            return;
+          }
+          this.loginForm.get('email').setErrors({'incorrect': true});
+          this.loginForm.get('password').setErrors({'incorrect': true});
+        }
+      );
     }
   }
 }

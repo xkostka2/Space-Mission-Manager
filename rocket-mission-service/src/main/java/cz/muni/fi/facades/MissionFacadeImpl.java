@@ -6,9 +6,8 @@ import cz.muni.fi.dto.mission.UpdateMissionDTO;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.enums.MissionProgress;
 import cz.muni.fi.facade.MissionFacade;
+import cz.muni.fi.services.config.BeanMappingService;
 import cz.muni.fi.services.MissionService;
-import cz.muni.fi.services.mapper.CycleAvoidingMappingContext;
-import cz.muni.fi.services.mapper.MissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,46 +23,41 @@ import java.util.List;
 @Service
 @Transactional
 public class MissionFacadeImpl implements MissionFacade {
-
-    private CycleAvoidingMappingContext cycleAvoidingMappingContext;
-    private final MissionMapper missionMapper;
-    private final MissionService missionService;
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    public MissionFacadeImpl(MissionService missionService, MissionMapper missionMapper) {
-        this.missionMapper = missionMapper;
-        this.missionService = missionService;
-        this.cycleAvoidingMappingContext = new CycleAvoidingMappingContext();
-    }
+    private MissionService missionService;
 
     @Override
     public MissionDTO addMission(CreateMissionDTO mission) {
-        Mission mappedMission = missionMapper.createMissionDTOToMission(mission, cycleAvoidingMappingContext);
-        return missionMapper.missionToMissionDTO(missionService.addMission(mappedMission), cycleAvoidingMappingContext);
+        Mission mappedMission = beanMappingService.mapTo(mission, Mission.class);
+        return beanMappingService.mapTo(missionService.addMission(mappedMission), MissionDTO.class);
+
     }
 
     @Override
     public MissionDTO updateMission(UpdateMissionDTO mission) {
-        Mission mappedMission = missionMapper.updateMissionDTOToMission(mission, cycleAvoidingMappingContext);
-        return missionMapper.missionToMissionDTO(missionService.updateMission(mappedMission), cycleAvoidingMappingContext);
+        Mission mappedMission = beanMappingService.mapTo(mission, Mission.class);
+        return beanMappingService.mapTo(missionService.updateMission(mappedMission), MissionDTO.class);
     }
 
     @Override
     public void deleteMission(MissionDTO mission) {
-        Mission mappedMission = missionMapper.missionDTOToMission(mission, cycleAvoidingMappingContext);
+        Mission mappedMission = beanMappingService.mapTo(mission, Mission.class);
         missionService.deleteMission(mappedMission);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<MissionDTO> findAllMissions() {
-        return missionMapper.missionsToMissionDTOs(missionService.findAllMissions(), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(missionService.findAllMissions(), MissionDTO.class);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<MissionDTO> findAllMissions(MissionProgress progress) {
-        return missionMapper.missionsToMissionDTOs(missionService.findAllMissions(progress), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(missionService.findAllMissions(progress), MissionDTO.class);
     }
 
     @Override
@@ -73,11 +67,11 @@ public class MissionFacadeImpl implements MissionFacade {
         if (mission == null) {
             return null;
         }
-        return missionMapper.missionToMissionDTO(mission, cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(mission, MissionDTO.class);
     }
 
     @Override
     public void archive(MissionDTO mission, ZonedDateTime endDate, String archiveComment) {
-        missionService.archive(missionMapper.missionDTOToMission(mission, cycleAvoidingMappingContext), endDate, archiveComment);
+        missionService.archive(beanMappingService.mapTo(mission, Mission.class), endDate, archiveComment);
     }
 }

@@ -35,12 +35,22 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { CreateMissionDialogComponent } from './components/create-mission-dialog/create-mission-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatStepperModule} from "@angular/material/stepper";
+import {ComponentsListComponent} from "./components/components-list/components-list.component";
+import {UsersListComponent} from "./components/users-list/users-list.component";
+import { AlertComponent } from './components/alert/alert.component';
+import {RocketsListComponent} from "./components/rockets-list/rockets-list.component";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
+  entryComponents: [
+    CreateMissionDialogComponent
+  ],
   declarations: [
     AppComponent,
     AstronautHomePageComponent,
@@ -56,7 +66,12 @@ export function createTranslateLoader(http: HttpClient) {
     BreadcrumbsComponent,
     HomePageComponent,
     SideMenuComponent,
-    MissionsListComponent
+    MissionsListComponent,
+    ComponentsListComponent,
+    UsersListComponent,
+    RocketsListComponent,
+    CreateMissionDialogComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +99,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatSortModule,
     MatTableModule,
     MatCheckboxModule,
+    MatDialogModule,
+    MatStepperModule,
   ],
   providers: [
     AuthenticationService,

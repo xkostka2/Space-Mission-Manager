@@ -1,8 +1,6 @@
 {
   "APP_NAME": "Space Mission Manager",
   "LOG_OUT": "Log out",
-  "USERNAME": "Username",
-  "PASSWORD": "Password",
   "MENU_ITEMS": {
     "HOME": "Home",
     "MISSIONS": "Missions",
@@ -19,7 +17,8 @@
     "READY_DATE": "Ready Date",
     "READY_TO_USE": "Ready to use",
     "ROCKET": "Rocket",
-    "COMPONENT_TYPE": "Component type"
+    "COMPONENT_TYPE": "Component type",
+    "NO_COMPONENTS": "No components available."
   },
   "MISSION_LIST": {
     "ID": "Id",
@@ -34,13 +33,15 @@
     "ETA": "Estimated time of arrival",
     "FINISHED_DATE": "Finished Date",
     "STARTED_DATE": "Started Date",
-    "RESULT": "Result"
+    "RESULT": "Result",
+    "NO_MISSIONS": "No pending missions"
   },
   "ROCKET_LIST": {
     "ID": "Id",
     "NAME": "Name",
     "MISSION": "Mission",
-    "REQUIRED_COMPONENTS": "Required components"
+    "REQUIRED_COMPONENTS": "Required components",
+    "NO_ROCKETS": "No rockets available."
   },
   "USER_LIST": {
     "ID": "Id",
@@ -50,10 +51,35 @@
     "LEVEL_OF_EXPERIENCE": "Level of Experience",
     "MISSION": "Mission",
     "MISSION_ACCEPTED": "Mission accepted",
-    "MISSION_EXPLANATION": "Mission explanation"
+    "MISSION_EXPLANATION": "Mission explanation",
+    "NO_ASTRONAUTS": "No available astronauts"
   },
   "ASTRONAUT_HOME": {
     "CURRENT_MISSION": "Current mission:",
     "VIEW_DETAIL": "View detail"
+  },
+
+  "LOGIN_PAGE": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "INVALID_LOGIN": "Invalid email or password!"
+  },
+  "MISSIONS_PAGE": {
+    "CREATE": "Create",
+    "DELETE": "Delete"
+  },
+  "CREATE_MISSION_DIALOG": {
+    "TITLE": "Create mission",
+    "STEP1": "Mission details",
+    "NAME": "Mission name",
+    "DESTINATION": "Destination",
+    "ETA": "Estimated time of arrival",
+    "NEXT": "Next",
+    "BACK": "Back",
+    "STEP2": "Rocket/s",
+    "STEP3": "Mission component/s",
+    "STEP4": "Astronaut/s",
+    "CANCEL": "Cancel",
+    "CREATE": "Create"
   }
 }

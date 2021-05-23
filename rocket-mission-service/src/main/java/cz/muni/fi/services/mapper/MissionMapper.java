@@ -18,14 +18,14 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
 public interface MissionMapper {
-    MissionDTO missionToMissionDTO(Mission mission, @Context CycleAvoidingMappingContext context);
-    Mission missionDTOToMission(MissionDTO missionDTO, @Context CycleAvoidingMappingContext context);
+    MissionDTO missionToMissionDTO(Mission mission);
+    Mission missionDTOToMission(MissionDTO missionDTO);
 
-    CreateMissionDTO missionToCreateMissionDTO(Mission mission, @Context CycleAvoidingMappingContext context);
-    Mission createMissionDTOToMission(CreateMissionDTO createMissionDTO, @Context CycleAvoidingMappingContext context);
+    CreateMissionDTO missionToCreateMissionDTO(Mission mission);
+    Mission createMissionDTOToMission(CreateMissionDTO createMissionDTO);
 
-    UpdateMissionDTO missionToUpdateMissionDTO(Mission mission, @Context CycleAvoidingMappingContext context);
-    Mission updateMissionDTOToMission(UpdateMissionDTO updateMissionDTO, @Context CycleAvoidingMappingContext context);
+    UpdateMissionDTO missionToUpdateMissionDTO(Mission mission);
+    Mission updateMissionDTOToMission(UpdateMissionDTO updateMissionDTO);
 
-    List<MissionDTO> missionsToMissionDTOs(List<Mission> missions, @Context CycleAvoidingMappingContext context);
+    List<MissionDTO> missionsToMissionDTOs(List<Mission> missions);
 }

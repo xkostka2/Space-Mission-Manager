@@ -1,49 +1,71 @@
-<div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
-  
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.ID' | translate}} </th>
-        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.NAME' | translate}} </th>
-        <td mat-cell *matCellDef="let user"> {{user.name}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.EMAIL' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.ROLE' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.role}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="levelOfExperience">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.LEVEL_OF_EXPERIENCE' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.levelOfExperience}} </td>
-      </ng-container>
+<div class="mat-elevation-z8" *ngIf="dataSource.filteredData.length">
+  <table mat-table [dataSource]="dataSource">
 
-      <ng-container matColumnDef="mission">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.mission.name}} </td>
-      </ng-container>
+    <ng-container matColumnDef="select">
+      <th *matHeaderCellDef mat-header-cell>
+        <mat-checkbox *ngIf="selection.isMultipleSelection()"
+                      (change)="$event ? masterToggle() : null"
+                      [aria-label]="checkboxLabel()"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      color="primary">
+        </mat-checkbox>
+      </th>
+      <td *matCellDef="let row" class="static-column-size" mat-cell>
+        <mat-checkbox (change)="$event ? selection.toggle(row) : null"
+                      (click)="$event.stopPropagation()"
+                      [aria-label]="checkboxLabel(row)"
+                      [checked]="selection.isSelected(row)"
+                      color="primary">
+        </mat-checkbox>
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="missionAccepted">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION_ACCEPTED' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.missionAccepted}} </td>
-      </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.ID' | translate}} </th>
+      <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="missionExplanation">
-        <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION_EXPLANATION' | translate}}</th>
-        <td mat-cell *matCellDef="let user"> {{user.missionExplanation}} </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  </div>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.NAME' | translate}} </th>
+      <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.EMAIL' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.ROLE' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="levelOfExperience">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.LEVEL_OF_EXPERIENCE' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.levelOfExperience}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mission">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.mission ? user.mission.name : ''}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="missionAccepted">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION_ACCEPTED' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.missionAccepted}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="missionExplanation">
+      <th mat-header-cell *matHeaderCellDef> {{'USER_LIST.MISSION_EXPLANATION' | translate}}</th>
+      <td mat-cell *matCellDef="let user"> {{user.missionExplanation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<app-alert *ngIf="!dataSource.filteredData.length">{{'USER_LIST.NO_ASTRONAUTS' | translate}}</app-alert>

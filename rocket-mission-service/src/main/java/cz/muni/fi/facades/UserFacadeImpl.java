@@ -6,9 +6,8 @@ import cz.muni.fi.dto.user.UpdateUserDTO;
 import cz.muni.fi.dto.user.UserDTO;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.facade.UserFacade;
+import cz.muni.fi.services.config.BeanMappingService;
 import cz.muni.fi.services.UserService;
-import cz.muni.fi.services.mapper.CycleAvoidingMappingContext;
-import cz.muni.fi.services.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,45 +22,40 @@ import java.util.List;
 @Service
 @Transactional
 public class UserFacadeImpl implements UserFacade {
-    private CycleAvoidingMappingContext cycleAvoidingMappingContext;
-    private final UserMapper userMapper;
-    private final UserService userService;
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Autowired
-    public UserFacadeImpl(UserService userService, UserMapper userMapper) {
-        this.userMapper = userMapper;
-        this.userService = userService;
-        this.cycleAvoidingMappingContext = new CycleAvoidingMappingContext();
-    }
+    private UserService userService;
 
     @Override
     public UserDTO addUser(CreateUserDTO user) {
-        User mappedUser = userMapper.createUserDTOToUser(user, cycleAvoidingMappingContext);
-        return userMapper.userToUserDTO(userService.addUser(mappedUser), cycleAvoidingMappingContext);
+        User mappedUser = beanMappingService.mapTo(user, User.class);
+        return beanMappingService.mapTo(userService.addUser(mappedUser), UserDTO.class);
     }
 
     @Override
     public UserDTO updateUser(UpdateUserDTO user) {
-        User mappedUser = userMapper.updateUserDTOToUser(user, cycleAvoidingMappingContext);
-        return userMapper.userToUserDTO(userService.updateUser(mappedUser), cycleAvoidingMappingContext);
+        User mappedUser = beanMappingService.mapTo(user, User.class);
+        return beanMappingService.mapTo(userService.updateUser(mappedUser), UserDTO.class);
     }
 
     @Override
     public void deleteUser(UserDTO user) {
-        User mappedUser = userMapper.userDTOToUser(user, cycleAvoidingMappingContext);
+        User mappedUser = beanMappingService.mapTo(user, User.class);
         userService.deleteUser(mappedUser);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllUsers() {
-        return userMapper.usersToUserDTOs(userService.findAllUsers(), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(userService.findAllUsers(), UserDTO.class);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllAstronauts() {
-        return userMapper.usersToUserDTOs(userService.findAllAstronauts(), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(userService.findAllAstronauts(), UserDTO.class);
     }
 
     @Override
@@ -71,13 +65,13 @@ public class UserFacadeImpl implements UserFacade {
         if (user == null) {
             return null;
         }
-        return userMapper.userToUserDTO(user, cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(user, UserDTO.class);
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<UserDTO> findAllAvailableAstronauts() {
-        return userMapper.usersToUserDTOs(userService.findAllAvailableAstronauts(), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(userService.findAllAvailableAstronauts(), UserDTO.class);
     }
 
     @Override
@@ -87,21 +81,21 @@ public class UserFacadeImpl implements UserFacade {
         if (user == null) {
             return null;
         }
-        return userMapper.userToUserDTO(user, cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(user, UserDTO.class);
     }
 
     @Override
     public void acceptAssignedMission(UserDTO user) {
-        userService.acceptAssignedMission(userMapper.userDTOToUser(user, cycleAvoidingMappingContext));
+        userService.acceptAssignedMission(beanMappingService.mapTo(user, User.class));
     }
 
     @Override
     public void rejectAssignedMission(UserDTO user, String explanation) {
-        userService.rejectAssignedMission(userMapper.userDTOToUser(user, cycleAvoidingMappingContext), explanation);
+        userService.rejectAssignedMission(beanMappingService.mapTo(user, User.class), explanation);
     }
 
     @Override
     public UserDTO login(AuthUserDTO user) {
-        return userMapper.userToUserDTO(userService.login(user.getEmail(), user.getPassword()), cycleAvoidingMappingContext);
+        return beanMappingService.mapTo(userService.login(user.getEmail(), user.getPassword()), UserDTO.class);
     }
 }
