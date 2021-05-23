@@ -18,6 +18,8 @@ import javax.validation.Valid;
 import java.util.logging.Logger;
 
 /**
+ * Rest interface for User-Auth
+ *
  * @author Tomas Bouma
  */
 @RestController

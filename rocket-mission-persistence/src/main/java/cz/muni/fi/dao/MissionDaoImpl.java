@@ -32,6 +32,22 @@ public class MissionDaoImpl implements MissionDao {
         Guard.requireNull(mission.getId(), "Mission id is not null");
 
         entityManager.persist(mission);
+
+        for (User user : mission.getUsers()) {
+            user.setMission(mission);
+            entityManager.merge(user);
+        }
+
+        for (Component component : mission.getComponents()) {
+            component.setMission(mission);
+            entityManager.merge(component);
+        }
+
+        for (Rocket rocket : mission.getRockets()) {
+            rocket.setMission(mission);
+            entityManager.merge(rocket);
+        }
+
         return mission;
     }
 

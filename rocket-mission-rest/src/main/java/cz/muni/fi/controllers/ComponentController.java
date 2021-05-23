@@ -22,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Rest interface for Component entity
+ *
  * @author Martin Kazimir
  */
 

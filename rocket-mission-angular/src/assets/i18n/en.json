@@ -75,6 +75,7 @@
     "NAME": "Mission name",
     "DESTINATION": "Destination",
     "ETA": "Estimated time of arrival",
+    "ETA_FORMAT": "Time has to be in format \"XXXX-XX-XXTXX:XX:XXZ\"",
     "NEXT": "Next",
     "BACK": "Back",
     "STEP2": "Rocket/s",

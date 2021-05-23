@@ -27,6 +27,9 @@ public class MissionDaoImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private MissionDao missionDao;
 
+    @Autowired
+    private UserDao userDao;
+
     private Mission marsMission;
     private Mission jupyterMission;
 
@@ -95,7 +98,7 @@ public class MissionDaoImplTest extends AbstractTestNGSpringContextTests {
     public void testFindAllMissionsByProgress() {
         List<Mission> plannedMissions = missionDao.findAllMissions(MissionProgress.PLANNED);
 
-        assertThat(plannedMissions.size()).isEqualTo(1);
+        assertThat(plannedMissions.size()).isEqualTo(2);
         assertThat(plannedMissions.contains(marsMission)).isTrue();
     }
 
@@ -158,6 +161,30 @@ public class MissionDaoImplTest extends AbstractTestNGSpringContextTests {
         mission.setName("shield");
         mission.setId(101L);
         missionDao.removeMission(mission);
+    }
+
+    @Test
+    public void testCreateMissionWithUser() {
+
+        User astronaut = new User();
+        astronaut.setName("Astronaut");
+        astronaut.setRole(Role.ASTRONAUT);
+        astronaut.setLevelOfExperience(LevelOfExperience.KING_OF_GALAXY);
+        astronaut.setEmail("astronaut@space-mission.com");
+        astronaut.setPassword("AstrOnAUt");
+        userDao.addUser(astronaut);
+
+        Mission marsMission2 = new Mission();
+        marsMission2.setName("Missionsss to Mars");
+        marsMission2.setDestination("Mars");
+        marsMission2.setMissionProgress(MissionProgress.PLANNED);
+        marsMission2.addUser(astronaut);
+
+        missionDao.addMission(marsMission2);
+
+        assertThat(missionDao.findMissionById(marsMission2.getId()).getUsers().size()).isEqualTo(1);
+        assertThat(userDao.findUserById(astronaut.getId()).getMission()).isEqualTo(marsMission2);
+
     }
 
 }

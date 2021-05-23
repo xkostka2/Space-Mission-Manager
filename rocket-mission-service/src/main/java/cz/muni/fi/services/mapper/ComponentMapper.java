@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Martin Hořelka (469003)
  */
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE)
+@Mapper(componentModel = "spring")
 public interface ComponentMapper {
     ComponentDTO componentToComponentDTO(Component component);
     Component componentDTOToComponent(ComponentDTO componentDTO);

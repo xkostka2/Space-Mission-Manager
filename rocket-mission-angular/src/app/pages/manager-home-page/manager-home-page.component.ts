@@ -8,6 +8,7 @@ import { RocketService } from 'src/app/services/rocket.service';
 import { UserService } from 'src/app/services/user.service';
 import { Rocket } from 'src/app/models/rocket';
 import { MatTableDataSource } from '@angular/material';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-manager-home-page',
@@ -21,6 +22,11 @@ export class ManagerHomePageComponent implements OnInit {
   components: MissionComponent[];
   rockets: Rocket[];
 
+  astronautsLoading: boolean;
+  missionsLoading: boolean;
+  componentsLoading: boolean;
+  rocketsLoading: boolean;
+
   astronautsDataSource = new MatTableDataSource<User>();
 
   constructor(
@@ -30,21 +36,42 @@ export class ManagerHomePageComponent implements OnInit {
     private missionService: MissionsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.loadAstronauts();
+    this.loadMissions();
+    this.loadComponents();
+    this.loadRockets();
+  }
+
+  private loadAstronauts(): void {
+    this.astronautsLoading = true;
     this.userService.findAllAstronauts().subscribe(data => {
       this.astronauts = data;
+      this.astronautsLoading = false;
     });
+  }
 
+  private loadMissions(): void {
+    this.missionsLoading = true;
     this.missionService.findAllMissions().subscribe(data => {
       this.missions = data;
+      this.missionsLoading = false;
     });
+  }
 
+  private loadComponents(): void {
+    this.componentsLoading = true;
     this.componentService.findAllComponents().subscribe(data => {
       this.components = data;
+      this.componentsLoading = false;
     });
+  }
 
+  private loadRockets(): void {
+    this.rocketsLoading = true;
     this.rocketService.findAllRockets().subscribe(data => {
       this.rockets = data;
+      this.rocketsLoading = false;
     });
   }
 }

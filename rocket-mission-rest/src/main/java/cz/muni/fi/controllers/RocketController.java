@@ -18,6 +18,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Rest interface for Rocket entity
+ *
+ * @author Tomas Bouma
+ */
+
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_ROCKETS)
 public class RocketController {

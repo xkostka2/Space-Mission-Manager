@@ -1,0 +1,137 @@
+Components Rest testing curl commands
+
+Test findAll:
+curl -X GET \
+  http://localhost:8080/pa165/rest/components/ \
+  -H 'cache-control: no-cache' 
+  
+
+Test findById:
+curl -X GET \
+  http://localhost:8080/pa165/rest/components/{id} \
+  -H 'cache-control: no-cache' \
+  
+
+Test create:
+curl --location --request POST 'http://localhost:8080/pa165/rest/components' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "1111111111111111a"
+}'
+
+Test DELETE:
+curl --location --request DELETE 'http://localhost:8080/pa165/rest/components/1' 
+
+User Rest testing curl commands
+
+Test findAll:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/ \
+  -H 'cache-control: no-cache' \
+
+Test findById:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/{id} \
+  -H 'cache-control: no-cache' \
+
+
+Test delete:
+curl -X DELETE \
+  http://localhost:8080/pa165/rest/users/{id} \
+  -H 'cache-control: no-cache' \
+
+
+Test findAllAvailableAstronauts:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/astronauts/available \
+  -H 'cache-control: no-cache' \
+
+
+Test findAllAstronauts:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/astronauts \
+  -H 'cache-control: no-cache' \
+
+
+Test acceptMission:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/astronauts/{id}/acceptMission \
+  -H 'authorization: Basic QURNSU46QURNSU4=' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 42d714f1-97b9-99a9-c75d-4cf71bc0d5a8'
+
+Test rejectMission:
+curl -X POST \
+  http://localhost:8080/pa165/rest/users/astronauts/{id}/rejectMission \
+  -H 'authorization: Basic QURNSU46QURNSU4=' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 42d714f1-97b9-99a9-c75d-4cf71bc0d5a8'
+  -d '{"explanation": "explanation"}'
+
+
+Test findByEmail:
+curl -X GET \
+  http://localhost:8080/pa165/rest/users/email \
+  -H 'authorization: Basic QURNSU46QURNSU4=' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 42d714f1-97b9-99a9-c75d-4cf71bc0d5a8'
+  -d '{"email": "example@example.com"}'
+
+
+Rockets
+  
+
+  Test findAll:
+curl -X GET \
+  http://localhost:8080/pa165/rest/rockets/ \
+  -H 'cache-control: no-cache' \
+
+Test findById:
+curl -X GET \
+  http://localhost:8080/pa165/rest/rockets/{id} \
+  -H 'cache-control: no-cache' \
+
+Test create
+curl --location --request POST 'http://localhost:8080/pa165/rest/rockets' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"asdasd"
+}'
+
+Test delete:
+curl -X DELETE \
+  http://localhost:8080/pa165/rest/rockets/{id} \
+  -H 'authorization: Basic QURNSU46QURNSU4=' \
+  
+Test missions
+
+  Test findAll:
+curl -X GET \
+  http://localhost:8080/pa165/rest/missions/ \
+  -H 'cache-control: no-cache' \
+
+Test findById:
+curl -X GET \
+  http://localhost:8080/pa165/rest/missions/{id} \
+  -H 'cache-control: no-cache' \
+
+Test create:
+curl --location --request POST 'http://localhost:8080/pa165/rest/missions' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"asdasd"
+}'
+
+Test delete:
+curl -X DELETE \
+  http://localhost:8080/pa165/rest/missions/{id} \
+
+  -H 'cache-control: no-cache' \
+
+
+Test archive
+curl --location --request POST 'http://localhost:8080/pa165/rest/missions/1/archive' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"asdasd"
+}'
