@@ -1,1 +1,46 @@
-<p>mission-detail-page works!</p>
+<div class="wrapper">
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.NAME' | translate }}:</span>
+        <span>{{ mission?.name }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.destination">
+        <span class="item-label">{{ 'MISSION_LIST.DESTINATION' | translate }}:</span>
+        <span>{{ mission?.destination }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.missionProgress">
+        <span class="item-label">{{ 'MISSION_LIST.MISSION_PROGRESS' | translate }}:</span>
+        <span>{{ mission?.missionProgress }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.users">
+        <span class="item-label">{{ 'MISSION_LIST.USERS' | translate }}:</span>
+        <span>{{ getUsersList(mission?.users) }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.rockets">
+        <span class="item-label">{{ 'MISSION_LIST.ROCKETS' | translate }}:</span>
+        <span>{{ getRocketsList(mission?.rockets) }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.components">
+        <span class="item-label">{{ 'MISSION_LIST.COMPONENTS' | translate }}:</span>
+        <span>{{ getComponentsList(mission?.components) }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.eta">
+        <span class="item-label">{{ 'MISSION_LIST.ETA' | translate }}:</span>
+        <span>{{ mission?.eta }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.finishedDate">
+        <span class="item-label">{{ 'MISSION_LIST.FINISHED_DATE' | translate }}:</span>
+        <span>{{ mission?.finishedDate }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.startedDate">
+        <span class="item-label">{{ 'MISSION_LIST.STARTED_DATE' | translate }}:</span>
+        <span>{{ mission?.startedDate }}</span>
+    </div>
+    <div class="item" *ngIf="mission?.result">
+        <span class="item-label">{{ 'MISSION_LIST.RESULT' | translate }}:</span>
+        <span>{{ mission?.result }}</span>
+    </div>
+    <div class="item" *ngIf="astronautLogged">
+        <button mat-flat-button color="primary">{{'MISSION_LIST.ACCEPT'|translate}}</button>
+        <button mat-flat-button class="ms-2" color="warn">{{'MISSION_LIST.REJECT'|translate}}</button>
+    </div>
+</div>
