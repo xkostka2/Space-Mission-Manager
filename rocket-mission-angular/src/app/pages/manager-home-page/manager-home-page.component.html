@@ -21,7 +21,7 @@
         <app-missions-list
             *ngIf="!missionsLoading"
             [missions]="missions"
-            [hiddenColumns]="['acceptReject', 'id']">
+            [hiddenColumns]="['select','startedDate', 'finishedDate', 'archive','isArchived', 'acceptReject']">
         </app-missions-list>
     </div>
     <div>
