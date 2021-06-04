@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginRedirectGuard } from './guards/login-redirect.guard';
 import { Role } from './models/role';
@@ -144,7 +144,7 @@ const routes: Routes = [
   },
   { // bug fix
     path: 'pa165',
-    redirectTo: 'astronaut',
+    redirectTo: '',
   },
   {
     path: '**',
@@ -153,7 +153,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -20,7 +20,8 @@
         <app-missions-list
           [missions]="missions"
           [selection]="missionSelection"
-          [hiddenColumns]="['id', 'mission', 'acceptReject']"></app-missions-list>
+          [disableRouting]="true"
+          [hiddenColumns]="['acceptReject', 'archive', 'isArchived', 'startedDate', 'finishedDate']"></app-missions-list>
         <div>
           <button mat-button matStepperPrevious>{{'CREATE_MISSION_DIALOG.BACK'| translate}}</button>
           <button mat-button matStepperNext [disabled]="!missionSelection.selected.length">{{'CREATE_ROCKET_DIALOG.NEXT'| translate}}</button>

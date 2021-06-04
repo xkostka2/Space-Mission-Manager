@@ -7,5 +7,6 @@
 <app-missions-list
   *ngIf="!loading"
   [missions]="missions"
-  [hiddenColumns]="['acceptReject']"
+  (refreshPage)="loadData()"
+  [hiddenColumns]="['select','acceptReject']"
 ></app-missions-list>

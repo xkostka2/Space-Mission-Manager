@@ -5,5 +5,8 @@
 
 <mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>
 <app-missions-list *ngIf="!loading"
-                   [missions]="missions">
+                   [missions]="missions"
+                   [hiddenColumns]="['select', 'id','startedDate', 'finishedDate', 'isArchived']"
+                   [disableRouting]="true"
+>
 </app-missions-list>

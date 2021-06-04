@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Mission} from "../../models/mission";
 import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
@@ -28,13 +28,22 @@ export class MissionsListComponent implements OnChanges {
   @Input()
   hiddenColumns = [];
 
-  displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject', 'eta','startedDate', 'finishedDate', 'isArchived'];
+  @Input()
+  disableRouting = false;
+
+  @Output()
+  refreshPage = new EventEmitter<boolean>();
+
+  displayedColumns: string[] = ['select', 'id', 'name', 'destination', 'missionProgress', 'eta','startedDate', 'finishedDate', 'isArchived', 'acceptReject'];
 
   dataSource = new MatTableDataSource<Mission>()
+
+  isManager: boolean;
 
   ngOnChanges() {
     if(this.authenticationService.getRole() === Role.Manager){
       this.displayedColumns.push('archive')
+      this.isManager = true;
     }
 
     this.displayedColumns = this.displayedColumns.filter(x => !this.hiddenColumns.includes(x));
@@ -67,6 +76,11 @@ export class MissionsListComponent implements OnChanges {
     config.width = '450px';
     config.data = mission.id;
 
-    this.dialog.open(ArchiveMissionDialogComponent, config);
+    const dialogRef = this.dialog.open(ArchiveMissionDialogComponent, config);
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+       this.refreshPage.emit(true);
+      }
+    })
   }
 }
