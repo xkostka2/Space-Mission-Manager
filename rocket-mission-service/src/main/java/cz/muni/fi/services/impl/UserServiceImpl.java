@@ -34,8 +34,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public static final PasswordEncoder encoder = new Argon2PasswordEncoder();
-
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
     public User addUser(User user) {
