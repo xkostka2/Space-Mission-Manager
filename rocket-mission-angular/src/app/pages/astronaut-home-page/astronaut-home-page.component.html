@@ -1,6 +1,6 @@
 <div class="mb-4">
-  {{'ASTRONAUT_HOME.CURRENT_MISSION'|translate}} {{user.mission ? user.mission.name : '-'}}
-  <button mat-flat-button *ngIf="user.mission" color="primary" [routerLink]="['my-missions',this.user.mission.id.toString()]">{{'ASTRONAUT_HOME.VIEW_DETAIL'|translate}}</button>
+  {{'ASTRONAUT_HOME.CURRENT_MISSION'|translate}} {{user.mission && user.missionAccepted ? user.mission.name : 'ASTRONAUT_HOME.NO_MISSION'|translate}}
+  <button mat-flat-button *ngIf="user.mission && user.missionAccepted" color="primary" [routerLink]="['my-missions',this.user.mission.id.toString()]">{{'ASTRONAUT_HOME.VIEW_DETAIL'|translate}}</button>
 </div>
 
 <mat-spinner *ngIf="loading" class="me-auto ms-auto"></mat-spinner>

@@ -7,6 +7,10 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {Role} from "../../models/role";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {ArchiveMissionDialogComponent} from "../archive-mission-dialog/archive-mission-dialog.component";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
+import {AstronautHomePageComponent} from "../../pages/astronaut-home-page/astronaut-home-page.component";
+import {RejectMissionDialogComponent} from "../reject-mission-dialog/reject-mission-dialog.component";
 
 @Component({
   selector: 'app-missions-list',
@@ -16,7 +20,9 @@ import {ArchiveMissionDialogComponent} from "../archive-mission-dialog/archive-m
 export class MissionsListComponent implements OnChanges {
 
   constructor(private authenticationService:AuthenticationService,
-              private dialog: MatDialog) {
+              private userService:UserService,
+              private dialog: MatDialog,
+              private astronautHomePageComp: AstronautHomePageComponent) {
   }
 
   @Input()
@@ -28,9 +34,15 @@ export class MissionsListComponent implements OnChanges {
   @Input()
   hiddenColumns = [];
 
+  user: User;
+
   displayedColumns: string[] = ['id', 'name', 'destination', 'missionProgress', 'acceptReject', 'eta','startedDate', 'finishedDate', 'isArchived'];
 
   dataSource = new MatTableDataSource<Mission>()
+
+  ngOnInit() {
+    this.user = this.authenticationService.currentUser;
+  }
 
   ngOnChanges() {
     if(this.authenticationService.getRole() === Role.Manager){
@@ -68,5 +80,20 @@ export class MissionsListComponent implements OnChanges {
     config.data = mission.id;
 
     this.dialog.open(ArchiveMissionDialogComponent, config);
+  }
+
+  accept() {
+    this.astronautHomePageComp.acceptMission()
+  }
+
+  reject() {
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = false;
+    config.width = '450px';
+    config.data = this.user.id
+
+    this.dialog.open(RejectMissionDialogComponent, config);
+
   }
 }

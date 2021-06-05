@@ -127,6 +127,7 @@ public class MissionServiceImpl implements MissionService {
         mission.getUsers().forEach(u -> {
             sb.append("\n").append(u.getName()).append(": ").append(u.getRole());
             u.setMission(null);
+            u.setMissionAccepted(false);
             userDao.updateUser(u);
         });
         mission.removeAllUsers();

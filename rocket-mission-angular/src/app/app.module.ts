@@ -46,6 +46,7 @@ import {RocketsPageComponent} from "./pages/rockets-page/rockets-page.component"
 import {CreateRocketDialogComponent} from "./components/create-rocket-dialog/create-rocket-dialog.component";
 import { ArchiveMissionDialogComponent } from './components/archive-mission-dialog/archive-mission-dialog.component';
 import {CreateComponentDialogComponent} from "./components/create-component-dialog/create-component-dialog.component";
+import {RejectMissionDialogComponent} from "./components/reject-mission-dialog/reject-mission-dialog.component";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -56,7 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
     CreateMissionDialogComponent,
     CreateRocketDialogComponent,
     ArchiveMissionDialogComponent,
-    CreateComponentDialogComponent
+    CreateComponentDialogComponent,
+    RejectMissionDialogComponent
   ],
   declarations: [
     AppComponent,
@@ -82,6 +84,7 @@ export function createTranslateLoader(http: HttpClient) {
     CreateRocketDialogComponent,
     AlertComponent,
     ArchiveMissionDialogComponent,
+    RejectMissionDialogComponent,
     CreateComponentDialogComponent
   ],
   imports: [

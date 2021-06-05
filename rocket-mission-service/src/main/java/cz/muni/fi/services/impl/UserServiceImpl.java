@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Explanation must not be null");
         }
         if (user.missionStatusPending()) {
-            user.setMissionRejectedExplanation(explanation);
+            user.setMissionExplanation(explanation);
             user.setMission(null);
         } else {
             throw new IllegalArgumentException("User does not have pending mission status");

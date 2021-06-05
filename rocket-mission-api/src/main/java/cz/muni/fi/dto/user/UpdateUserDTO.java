@@ -92,8 +92,8 @@ public class UpdateUserDTO {
         return missionExplanation;
     }
 
-    public void setMissionRejectedExplanation(String missionRejectedExplanation) {
-        this.missionExplanation = missionRejectedExplanation;
+    public void setMissionExplanation(String missionExplanation) {
+        this.missionExplanation = missionExplanation;
     }
 
     @Override

@@ -266,8 +266,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         user1.setMissionAccepted(false);
         user2.setMissionAccepted(true);
-        user3.setMissionAccepted(true);
-        user4.setMissionAccepted(true);
+        user3.setMissionAccepted(false);
+        user4.setMissionAccepted(false);
 
         rocket1.setRequiredComponents(new HashSet(Arrays.asList(component1, component2)));
         rocket2.setRequiredComponents(new HashSet(Arrays.asList(component3)));

@@ -45,6 +45,7 @@ public class User implements Serializable {
     private Mission mission;
 
     private boolean missionAccepted;
+
     private String missionExplanation;
 
     public Long getId() {
@@ -115,8 +116,8 @@ public class User implements Serializable {
         return missionExplanation;
     }
 
-    public void setMissionRejectedExplanation(String missionRejectedExplanation) {
-        this.missionExplanation = missionRejectedExplanation;
+    public void setMissionExplanation(String missionExplanation) {
+        this.missionExplanation = missionExplanation;
     }
 
     public boolean missionStatusPending() {

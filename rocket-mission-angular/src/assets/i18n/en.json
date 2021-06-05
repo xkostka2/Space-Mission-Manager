@@ -59,7 +59,8 @@
   },
   "ASTRONAUT_HOME": {
     "CURRENT_MISSION": "Current mission:",
-    "VIEW_DETAIL": "View detail"
+    "VIEW_DETAIL": "View detail",
+    "NO_MISSION": "None "
   },
 
   "LOGIN_PAGE": {
@@ -106,6 +107,12 @@
     "INFO": "Give final comment on the mission's result",
     "CLOSE": "Close",
     "ARCHIVE": "Archive"
+  },
+  "REJECT_DIALOG": {
+    "TITLE": "Reject mission",
+    "INFO": "Give explanation why you want to reject mission",
+    "CLOSE": "Close",
+    "REJECT": "Reject"
   },
   "CREATE_COMPONENT_DIALOG": {
     "TITLE": "Create component",
