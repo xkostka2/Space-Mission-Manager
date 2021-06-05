@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MissionComponent } from 'src/app/models/component';
 import { Mission } from 'src/app/models/mission';
+import { MissionProgress } from 'src/app/models/missionProgress';
 import { Rocket } from 'src/app/models/rocket';
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
@@ -18,12 +19,15 @@ export class MissionDetailPageComponent implements OnInit {
   private mission_id: number;
 
   mission: Mission;
+  plannedMission: boolean;
   astronautLogged: boolean;
+  currentUserMission: Mission;
 
   constructor(
     private route: ActivatedRoute,
     private missionService: MissionsService,
     private authenticationService: AuthenticationService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -33,20 +37,21 @@ export class MissionDetailPageComponent implements OnInit {
 
     this.missionService.findMissionById(this.mission_id).subscribe(x => {
       this.mission = x;
-    })
+
+      this.plannedMission = this.mission.missionProgress === MissionProgress.Planned;
+    });
 
     this.astronautLogged = this.authenticationService.getRole() === Role.Astronaut;
+    this.currentUserMission = this.authenticationService.currentUser.mission;
   }
 
-  getUsersList(users: User[]): string {
-    return users.length === 0 ? "None" : users.map(x => x.name).join(", ");
-  }
+  startMission(): void {
+    const updateMission = this.mission;
+    updateMission.missionProgress = MissionProgress.InProgress;
 
-  getRocketsList(rockets: Rocket[]): string {
-    return rockets.length === 0 ? "None" : rockets.map(x => x.name).join(", ");
-  }
-
-  getComponentsList(components: MissionComponent[]): string {
-    return components.length === 0 ? "None" : components.map(x => x.name).join(", ");
+    this.missionService.updateMission(updateMission).subscribe(x => {
+      this.mission = x;
+    });
+    this.cd.detectChanges();
   }
 }
