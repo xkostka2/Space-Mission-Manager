@@ -50,18 +50,16 @@ const routes: Routes = [
           role: Role.Astronaut,
           breadcrumb: 'My missions'
         },
-        children: [
-          {
-            path: ':id',
-            component: MissionDetailPageComponent,
-            canActivate: [AuthGuard],
-            data: {
-              role: Role.Astronaut,
-              breadcrumb: 'Mission detail'
-            }
-          }
-        ]
       },
+      {
+        path: 'my-missions/:id',
+        component: MissionDetailPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Astronaut,
+          breadcrumb: 'Mission detail'
+        }
+      }
     ]
   },
   {
@@ -89,18 +87,16 @@ const routes: Routes = [
         data: {
           role: Role.Manager,
           breadcrumb: 'Missions'
-        },
-        children: [
-          {
-            path: ':id',
-            component: MissionDetailPageComponent,
-            canActivate: [AuthGuard],
-            data: {
-              role: Role.Manager,
-              breadcrumb: 'Mission detail'
-            }
-          }
-        ]
+        }
+      },
+      {
+        path: 'missions/:id',
+        component: MissionDetailPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'Mission detail'
+        }
       },
       {
         path: 'astronauts',
