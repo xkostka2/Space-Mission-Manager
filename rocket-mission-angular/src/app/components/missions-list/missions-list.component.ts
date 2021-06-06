@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Mission} from "../../models/mission";
 import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
@@ -7,15 +7,19 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {Role} from "../../models/role";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {ArchiveMissionDialogComponent} from "../archive-mission-dialog/archive-mission-dialog.component";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
+import {RejectMissionDialogComponent} from "../reject-mission-dialog/reject-mission-dialog.component";
 
 @Component({
   selector: 'app-missions-list',
   templateUrl: './missions-list.component.html',
   styleUrls: ['./missions-list.component.scss']
 })
-export class MissionsListComponent implements OnChanges {
+export class MissionsListComponent implements OnChanges, OnInit {
 
   constructor(private authenticationService:AuthenticationService,
+              private userService:UserService,
               private dialog: MatDialog) {
   }
 
@@ -28,6 +32,8 @@ export class MissionsListComponent implements OnChanges {
   @Input()
   hiddenColumns = [];
 
+  user: User;
+
   @Input()
   disableRouting = false;
 
@@ -37,6 +43,10 @@ export class MissionsListComponent implements OnChanges {
   displayedColumns: string[] = ['select', 'id', 'name', 'destination', 'missionProgress', 'eta','startedDate', 'finishedDate', 'isArchived', 'acceptReject'];
 
   dataSource = new MatTableDataSource<Mission>()
+
+  ngOnInit() {
+    this.user = this.authenticationService.currentUser;
+  }
 
   isManager: boolean;
 
@@ -82,5 +92,26 @@ export class MissionsListComponent implements OnChanges {
        this.refreshPage.emit(true);
       }
     })
+  }
+
+  accept() {
+    this.userService.acceptMission(this.user.id).subscribe(user => {
+
+      this.user = user
+      this.user.missionAccepted = true
+      this.authenticationService.currentUser.missionAccepted = true
+      this.missions = []
+    })
+  }
+
+  reject() {
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = false;
+    config.width = '450px';
+    config.data = this.user.id
+
+    this.dialog.open(RejectMissionDialogComponent, config);
+
   }
 }

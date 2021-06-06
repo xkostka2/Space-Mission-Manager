@@ -34,8 +34,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public static final PasswordEncoder encoder = new Argon2PasswordEncoder();
-
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
     public User addUser(User user) {
@@ -147,7 +145,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Explanation must not be null");
         }
         if (user.missionStatusPending()) {
-            user.setMissionRejectedExplanation(explanation);
+            user.setMissionExplanation(explanation);
             user.setMission(null);
         } else {
             throw new IllegalArgumentException("User does not have pending mission status");

@@ -113,6 +113,10 @@ public class Mission implements Serializable {
         user.setMission(null);
     }
 
+    public void removeAllUsers() {
+        this.users.clear();
+    }
+
     public Set<Rocket> getRockets() {
         return Collections.unmodifiableSet(rockets);
     }
@@ -129,6 +133,10 @@ public class Mission implements Serializable {
         rocket.setMission(null);
     }
 
+    public void removeAllRockets() {
+        this.rockets.clear();
+    }
+
     public Set<Component> getComponents() {
         return Collections.unmodifiableSet(components);
     }
@@ -143,6 +151,10 @@ public class Mission implements Serializable {
     public void removeComponent(Component component) {
         components.remove(component);
         component.setMission(null);
+    }
+
+    public void removeAllComponents() {
+        this.components.clear();
     }
 
     public ZonedDateTime getEta() {

@@ -1,6 +1,9 @@
 package cz.muni.fi.services.impl;
 
+import cz.muni.fi.dao.ComponentDao;
 import cz.muni.fi.dao.MissionDao;
+import cz.muni.fi.dao.RocketDao;
+import cz.muni.fi.dao.UserDao;
 import cz.muni.fi.entity.Mission;
 import cz.muni.fi.entity.User;
 import cz.muni.fi.enums.MissionProgress;
@@ -28,6 +31,15 @@ public class MissionServiceImpl implements MissionService {
 
     @Autowired
     private MissionDao missionDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private RocketDao rocketDao;
+
+    @Autowired
+    private ComponentDao componentDao;
 
     @Override
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -114,21 +126,26 @@ public class MissionServiceImpl implements MissionService {
         sb.append("\nMembers: ");
         mission.getUsers().forEach(u -> {
             sb.append("\n").append(u.getName()).append(": ").append(u.getRole());
+            u.setMission(null);
+            u.setMissionAccepted(false);
+            userDao.updateUser(u);
         });
-        new ArrayList<>(mission.getUsers()).forEach(mission::removeUser);
+        mission.removeAllUsers();
 
 
         sb.append("\nRockets: ");
         mission.getRockets().forEach(r -> {
             sb.append("\n").append(r.getName());
+            rocketDao.updateRocket(r);
         });
-        new ArrayList<>(mission.getRockets()).forEach(mission::removeRocket);
+        mission.removeAllRockets();
 
         sb.append("\nComponents: ");
         mission.getComponents().forEach(c -> {
             sb.append("\n").append(c.getName());
+            componentDao.updateComponent(c);
         });
-        new ArrayList<>(mission.getComponents()).forEach(mission::removeComponent);
+        mission.removeAllComponents();
 
         sb.append("\nArchive comment: ").append(archiveComment);
 

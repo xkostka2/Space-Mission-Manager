@@ -1,11 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MissionComponent } from 'src/app/models/component';
 import { Mission } from 'src/app/models/mission';
 import { MissionProgress } from 'src/app/models/missionProgress';
-import { Rocket } from 'src/app/models/rocket';
 import { Role } from 'src/app/models/role';
-import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { MissionsService } from 'src/app/services/missions.service';
 
