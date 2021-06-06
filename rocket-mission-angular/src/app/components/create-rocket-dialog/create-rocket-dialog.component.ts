@@ -10,6 +10,7 @@ import {Mission} from "../../models/mission";
 import {MissionProgress} from "../../models/missionProgress";
 import {Rocket} from "../../models/rocket";
 import {RocketService} from "../../services/rocket.service";
+import {ComponentType} from "../../models/componentType";
 
 @Component({
   selector: 'app-create-mission-dialog',
@@ -42,16 +43,17 @@ export class CreateRocketDialogComponent implements OnInit {
     });
 
     this.componentService.getAvailableComponents().subscribe(components => {
-      this.components = components;
+      this.components = components.filter(component => component.readyToUse && component.type == ComponentType.Mission && component.rocket == null);
     });
 
     this.missionsService.findAllMissions().subscribe(missions => {
-      this.missions = missions.filter(mission => mission.missionProgress != MissionProgress.Finished)
+      this.missions = missions.filter(mission => mission.missionProgress != MissionProgress.Finished && mission.rockets.length == 0)
     })
   }
 
   onAdd() {
     this.loading = true;
+
     const rocket: Rocket = {
       name: this.detailsFormGroup.get('nameCtrl').value,
       mission: this.missionSelection.selected[0],

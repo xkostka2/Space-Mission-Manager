@@ -11,6 +11,7 @@ import {Mission} from "../../models/mission";
 import {MissionProgress} from "../../models/missionProgress";
 import {Rocket} from "../../models/rocket";
 import {RocketService} from "../../services/rocket.service";
+import {ComponentType} from "../../models/componentType";
 
 @Component({
   selector: 'app-create-mission-dialog',
@@ -46,7 +47,7 @@ export class CreateMissionDialogComponent implements OnInit {
     });
 
     this.componentService.getAvailableComponents().subscribe(components => {
-      this.components = components;
+      this.components = components.filter(component => component.readyToUse && component.mission == null && component.type == ComponentType.Rocket)
     });
     this.userService.findAllAvailableAstronauts().subscribe(astronauts => {
       this.astronauts = astronauts;
