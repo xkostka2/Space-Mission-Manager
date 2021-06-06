@@ -1,7 +1,8 @@
-import {Component, Input, OnChanges} from "@angular/core";
+import {Component, Input, OnChanges, ViewChild} from "@angular/core";
 import {MatTableDataSource} from "@angular/material";
 import {MissionComponent} from "src/app/models/component";
 import {SelectionModel} from "@angular/cdk/collections";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-components-list',
@@ -18,6 +19,12 @@ export class ComponentsListComponent implements OnChanges {
   @Input()
   selection = new SelectionModel<MissionComponent>(true, []);
 
+  @ViewChild(MatPaginator, { static: true }) set matPaginator(pg: MatPaginator) {
+    this.paginator = pg;
+  }
+
+  private paginator: MatPaginator;
+
   displayedColumns = ['select', 'id', 'name', 'mission', 'readyDate', 'readyToUse', 'rocket', 'type'];
 
   dataSource = new MatTableDataSource<MissionComponent>();
@@ -25,6 +32,7 @@ export class ComponentsListComponent implements OnChanges {
   ngOnChanges(): void {
     this.displayedColumns = this.displayedColumns.filter(x => !this.hiddenColumns.includes(x));
     this.dataSource = new MatTableDataSource<MissionComponent>(this.components);
+    this.dataSource.paginator = this.paginator;
   }
 
   isAllSelected() {

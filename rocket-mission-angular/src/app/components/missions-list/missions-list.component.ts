@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {Mission} from "../../models/mission";
 import {MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
@@ -10,6 +10,7 @@ import {ArchiveMissionDialogComponent} from "../archive-mission-dialog/archive-m
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {RejectMissionDialogComponent} from "../reject-mission-dialog/reject-mission-dialog.component";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-missions-list',
@@ -40,6 +41,13 @@ export class MissionsListComponent implements OnChanges, OnInit {
   @Output()
   refreshPage = new EventEmitter<boolean>();
 
+  @ViewChild(MatPaginator, { static: true }) set matPaginator(pg: MatPaginator) {
+    this.paginator = pg;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  private paginator: MatPaginator;
+
   displayedColumns: string[] = ['select', 'id', 'name', 'destination', 'missionProgress', 'eta','startedDate', 'finishedDate', 'isArchived', 'acceptReject'];
 
   dataSource = new MatTableDataSource<Mission>()
@@ -58,6 +66,7 @@ export class MissionsListComponent implements OnChanges, OnInit {
 
     this.displayedColumns = this.displayedColumns.filter(x => !this.hiddenColumns.includes(x));
     this.dataSource = new MatTableDataSource<Mission>(this.missions);
+    this.dataSource.paginator = this.paginator;
   }
 
   isAllSelected() {

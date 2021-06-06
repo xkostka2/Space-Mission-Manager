@@ -54,12 +54,12 @@ export class SideMenuComponent implements OnChanges {
     ];
 
     if (this.userRole === Role.Astronaut) {
-      this.items.push(
-        {
-          label: 'MENU_ITEMS.MY_MISSIONS',
-          url: `${prefix}/my-missions`,
-          activeRegex: `^${prefix}/my-missions$`
-      });
+      // this.items.push(
+      //   {
+      //     label: 'MENU_ITEMS.MY_MISSIONS',
+      //     url: `${prefix}/my-missions`,
+      //     activeRegex: `^${prefix}/my-missions$`
+      // });
       return;
     }
 

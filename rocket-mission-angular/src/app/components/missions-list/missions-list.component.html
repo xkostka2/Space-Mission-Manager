@@ -83,7 +83,7 @@
         [routerLink]="disableRouting ? null : (isManager ? ['/manager','missions', mission.id] : ['/astronaut','my-missions', mission.id] )"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="5" [length]="dataSource.data.length" showFirstLastButtons></mat-paginator>
 </div>
 
 <app-alert *ngIf="!dataSource.filteredData.length">{{'MISSION_LIST.NO_MISSIONS' | translate}}</app-alert>
