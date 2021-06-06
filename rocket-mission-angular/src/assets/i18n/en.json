@@ -31,7 +31,7 @@
     "USERS": "Users",
     "ROCKETS": "Rockets",
     "COMPONENTS": "Components",
-    "ETA": "Estimated time of arrival",
+    "ETA": "ETA",
     "FINISHED_DATE": "Finished Date",
     "STARTED_DATE": "Started Date",
     "RESULT": "Result",
@@ -62,7 +62,6 @@
     "VIEW_DETAIL": "View detail",
     "NO_MISSION": "None "
   },
-
   "LOGIN_PAGE": {
     "EMAIL": "Email",
     "PASSWORD": "Password",
@@ -75,6 +74,10 @@
   "COMPONENTS_PAGE": {
     "CREATE": "Create",
     "DELETE": "Delete"
+  },
+  "MISSION_DETAIL_PAGE": {
+    "ASTRONAUTS": "Astronauts",
+    "START_MISSION": "Start mission"
   },
   "CREATE_MISSION_DIALOG": {
     "TITLE": "Create mission",

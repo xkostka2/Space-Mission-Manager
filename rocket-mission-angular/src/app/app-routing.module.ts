@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginRedirectGuard } from './guards/login-redirect.guard';
 import { Role } from './models/role';
@@ -50,18 +50,16 @@ const routes: Routes = [
           role: Role.Astronaut,
           breadcrumb: 'My missions'
         },
-        children: [
-          {
-            path: ':id',
-            component: MissionDetailPageComponent,
-            canActivate: [AuthGuard],
-            data: {
-              role: Role.Astronaut,
-              breadcrumb: 'Mission detail'
-            }
-          }
-        ]
       },
+      {
+        path: 'my-missions/:id',
+        component: MissionDetailPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Astronaut,
+          breadcrumb: 'Mission detail'
+        }
+      }
     ]
   },
   {
@@ -89,18 +87,16 @@ const routes: Routes = [
         data: {
           role: Role.Manager,
           breadcrumb: 'Missions'
-        },
-        children: [
-          {
-            path: ':id',
-            component: MissionDetailPageComponent,
-            canActivate: [AuthGuard],
-            data: {
-              role: Role.Manager,
-              breadcrumb: 'Mission detail'
-            }
-          }
-        ]
+        }
+      },
+      {
+        path: 'missions/:id',
+        component: MissionDetailPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Manager,
+          breadcrumb: 'Mission detail'
+        }
       },
       {
         path: 'astronauts',
@@ -144,7 +140,7 @@ const routes: Routes = [
   },
   { // bug fix
     path: 'pa165',
-    redirectTo: 'astronaut',
+    redirectTo: '',
   },
   {
     path: '**',
@@ -153,7 +149,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,1 +1,61 @@
-<p>mission-detail-page works!</p>
+<div class="wrapper">
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.NAME' | translate }}:</span>
+        <span>{{ mission?.name }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.DESTINATION' | translate }}:</span>
+        <span>{{ mission?.destination ? mission?.destination : "-" }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.MISSION_PROGRESS' | translate }}:</span>
+        <span>{{ mission?.missionProgress ? mission?.missionProgress : "-" }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_DETAIL_PAGE.ASTRONAUTS' | translate }}:</span>
+        <app-users-list *ngIf = "mission?.users && mission?.users.length !== 0; else elseBlock"
+            [users]="mission?.users"
+            [hiddenColumns]="['select', 'id', 'missionExplanation']">
+        </app-users-list>
+        <ng-template #elseBlock>-</ng-template>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.ROCKETS' | translate }}:</span>
+        <app-rockets-list *ngIf = "mission?.rockets && mission?.rockets.length !== 0; else elseBlock"
+            [rockets]="mission?.rockets"
+            [hiddenColumns]="['select', 'id']">
+        </app-rockets-list>
+        <ng-template #elseBlock>-</ng-template>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.COMPONENTS' | translate }}:</span>
+        <app-components-list *ngIf = "mission?.components && mission?.components.length !== 0; else elseBlock"
+            [components]="mission?.components"
+            [hiddenColumns]="['select', 'id']">
+        </app-components-list>
+        <ng-template #elseBlock>-</ng-template>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.ETA' | translate }}:</span>
+        <span>{{ mission?.eta ? mission?.eta : "-" }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.FINISHED_DATE' | translate }}:</span>
+        <span>{{ mission?.finishedDate ? mission?.finishedDate : "-" }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.STARTED_DATE' | translate }}:</span>
+        <span>{{ mission?.startedDate ? mission?.startedDate : "-" }}</span>
+    </div>
+    <div class="item">
+        <span class="item-label">{{ 'MISSION_LIST.RESULT' | translate }}:</span>
+        <span>{{ mission?.result ? mission?.result : "-" }}</span>
+    </div>
+    <div class="item" *ngIf="astronautLogged && currentUserMission?.id !== mission?.id">
+        <button mat-flat-button color="primary">{{'MISSION_LIST.ACCEPT'|translate}}</button>
+        <button mat-flat-button class="ms-2" color="warn">{{'MISSION_LIST.REJECT'|translate}}</button>
+    </div>
+    <div class="item" *ngIf="!astronautLogged && plannedMission">
+        <button mat-flat-button color="primary" (click)="startMission()">{{'MISSION_DETAIL_PAGE.START_MISSION'|translate}}</button>
+    </div>
+</div>
