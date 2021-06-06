@@ -5,6 +5,7 @@ import {User} from '../models/user';
 import {Router} from "@angular/router";
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import {MissionComponent} from "../models/component";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,6 @@ export class AuthenticationService {
       email: email,
       password: password
     }
-    console.log(authDto);
 
     return this.http.post(`${this.REST_API_SERVER}/auth/login`, authDto)
       .pipe(
@@ -40,6 +40,10 @@ export class AuthenticationService {
     const storedUser = JSON.stringify(this.currentUser);
     localStorage.setItem('auth:user', storedUser);
     this.redirectToOriginDestination();
+  }
+
+  refreshUser():  Observable<User> {
+    return this.http.get(`${this.REST_API_SERVER}/users/${this.currentUser.id}`) as Observable<User>;
   }
 
   logout(): void {

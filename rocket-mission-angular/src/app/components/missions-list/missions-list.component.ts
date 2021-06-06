@@ -111,7 +111,13 @@ export class MissionsListComponent implements OnChanges, OnInit {
     config.width = '450px';
     config.data = this.user.id
 
-    this.dialog.open(RejectMissionDialogComponent, config);
+    const dialogRef = this.dialog.open(RejectMissionDialogComponent, config);
 
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(this.authenticationService.currentUser)
+      this.user = this.authenticationService.currentUser
+      this.missions = []
+      this.refreshPage.emit(true);
+    })
   }
 }

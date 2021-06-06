@@ -55,7 +55,7 @@
     mat-flat-button
     class="ms-2"
     color="accent"
-    [disabled]="detailsFormGroup.invalid || !missionSelection.selected.length || loading"
+    [disabled]="detailsFormGroup.invalid || loading"
     (click)="onAdd()">
     {{'CREATE_MISSION_DIALOG.CREATE' | translate}}
   </button>

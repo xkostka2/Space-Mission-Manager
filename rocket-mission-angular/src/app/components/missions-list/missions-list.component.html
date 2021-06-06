@@ -44,7 +44,7 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mission">
         <button mat-flat-button color="primary" (click)="accept()" >{{'MISSION_LIST.ACCEPT'|translate}}</button>
-        <button mat-flat-button class="ms-2" (click)="reject()" color="warn">{{'MISSION_LIST.REJECT'|translate}}</button>
+        <button mat-flat-button class="ms-2" (click)="reject()" (mouseleave)="disableRouting=false" (mouseenter)="disableRouting=true" color="warn">{{'MISSION_LIST.REJECT'|translate}}</button>
       </td>
     </ng-container>
 
@@ -66,7 +66,7 @@
     <ng-container matColumnDef="archive">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let mission">
-        <button mat-flat-button color="primary" *ngIf="!mission.result" (click)="archive(mission)">{{'MISSION_LIST.ARCHIVE' | translate}}</button>
+        <button mat-flat-button color="primary" *ngIf="!mission.result" (mouseenter)="disableRouting=true" (mouseleave)="disableRouting=false" (click)="archive(mission)">{{'MISSION_LIST.ARCHIVE' | translate}}</button>
       </td>
     </ng-container>
 

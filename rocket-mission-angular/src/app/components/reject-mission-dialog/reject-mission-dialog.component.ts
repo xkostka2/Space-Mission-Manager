@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {AuthenticationService} from "../../services/authentication.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-reject-mission-dialog',
@@ -27,11 +28,15 @@ export class RejectMissionDialogComponent {
   onReject(){
     this.loading = true;
     this.userService.rejectMission(this.data,this.commentControl.value).subscribe(res => {
-      console.log("mission rejected", res);
-      this.authenticationService.currentUser.mission = null
-      this.authenticationService.currentUser.missionExplanation = this.commentControl.value
-      this.loading = false
-      this.dialogRef.close(true)
+      this.authenticationService.refreshUser().subscribe(
+        user => {
+          if (user) {
+            this.authenticationService.login(user as User);
+          }
+          this.dialogRef.close(true)
+          this.loading = false
+        }
+      );
     })
 
   }

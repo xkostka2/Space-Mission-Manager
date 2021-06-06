@@ -25,7 +25,6 @@ export class ArchiveMissionDialogComponent {
   onArchive(){
     this.loading = true;
     this.missionsService.archiveMission(this.data,this.commentControl.value).subscribe(res => {
-      console.log("mission archived", res);
       this.loading = false;
       this.dialogRef.close(true)
     })
